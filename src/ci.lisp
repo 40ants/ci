@@ -45,3 +45,7 @@
                    {% endifequal %}
 
                    github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal")))
+
+
+(defun foo ()
+  (bar))
