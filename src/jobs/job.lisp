@@ -78,11 +78,19 @@
               steps))))
 
 
+(defgeneric make-runs-on (job)
+  (:method ((job job))
+    (if (> (length (os job)) 1)
+        "${{ matrix.os }}"
+        (first (os job)))))
+
+
 (defmethod 40ants-ci/github:prepare-data ((job job))
   (append 
    (when (use-matrix-p job)
      `(("strategy" . (("fail-fast" . :false)
                       ("matrix" . ,(make-matrix job))))))
 
-   `(("env" . ,(make-env job))
+   `(("runs-on" . ,(make-runs-on job))
+     ("env" . ,(make-env job))
      ("steps" . ,(make-steps job)))))
