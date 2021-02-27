@@ -1,9 +1,15 @@
 (defpackage #:40ants-ci/utils
   (:use #:cl)
+  (:import-from #:40ants-ci/vars)
+  (:import-from #:str
+                #:join
+                #:split)
   (:export
    #:to-json
    #:ensure-primary-system
-   #:system-packages))
+   #:system-packages
+   #:current-system-name
+   #:dedent))
 (in-package 40ants-ci/utils)
 
 
@@ -80,3 +86,87 @@ builder uses it to find documentation sections.
                                                0 prefix-name-length)
                                        prefix-name))
                       collect package)))))
+
+
+(defun current-system-name ()
+  (asdf:component-name
+   40ants-ci/vars:*current-system*))
+
+
+(defun count-leading-spaces (line)
+  (loop for char across line
+        while (char-equal char #\Space)
+        summing 1))
+
+(defun empty-line (line)
+  (loop for char across line
+        always (char-equal char #\Space)))
+
+
+(defun dedent (text)
+  "Removes common leading whitespace from each string.
+
+A few examples:
+
+```
+(dedent \"Hello
+          World
+          and all Lispers!\")
+
+\"Hello
+World
+and all Lispers!\"
+```
+
+```
+(dedent \"
+    Hello
+    World
+    and all Lispers!\")
+
+\"Hello
+World
+and all Lispers!\"
+```
+
+```
+(dedent \"This is a code:
+
+              (symbol-name :hello-world)
+
+          it will output HELLO-WORLD.\")
+
+\"This is a code:
+
+    (symbol-name :hello-world)
+
+it will output HELLO-WORLD.\"
+```
+
+
+"
+  (let* ((lines (split #\Newline text))
+         (common-ident
+           (loop for line in lines
+                 for line-idx upfrom 0
+                 for leading-spaces = (count-leading-spaces line)
+                 unless (or (empty-line line)
+                            ;; If first line has no leading spaces
+                            ;; spaces we should treat it specially
+                            (and (zerop line-idx)
+                                 (zerop leading-spaces)))
+                   minimizing leading-spaces))
+         (trimmed-lines
+           (loop for line in lines
+                 for line-idx upfrom 0
+                 for ident = (if (and (zerop line-idx)
+                                      (zerop (count-leading-spaces line)))
+                                 0
+                                 common-ident)
+                 collect
+                 (subseq line
+                         (min ident
+                              (length line))
+                         (length line)))))
+    (join #\Newline
+          trimmed-lines)))

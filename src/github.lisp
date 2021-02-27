@@ -3,16 +3,13 @@
   (:import-from #:40ants-ci/utils
                 #:system-packages
                 #:ensure-primary-system)
+  (:import-from #:40ants-ci/vars
+                #:*current-system*)
   (:export
    #:generate
    #:prepare-data
    #:*current-system*))
 (in-package 40ants-ci/github)
-
-
-(defvar *current-system*)
-(setf (documentation '*current-system* 'variable)
-      "When workflow is generated for ASDF system, this variable will contain a primary ASDF system.")
 
 
 (defgeneric generate (obj path))

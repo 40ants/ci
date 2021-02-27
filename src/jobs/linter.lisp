@@ -2,7 +2,7 @@
   (:use #:cl)
   (:import-from #:40ants-ci/steps/sh
                 #:sh)
-  (:import-from #:40ants-ci/jobs/job)
+  (:import-from #:40ants-ci/jobs/lisp-job)
   (:export
    #:linter))
 (in-package 40ants-ci/jobs/linter)
@@ -16,7 +16,7 @@
   (make-instance 'linter))
 
 
-(defmethod 40ants-ci/jobs/job:steps ((linter linter))
+(defmethod 40ants-ci/jobs/job:steps ((job linter))
   (append
    (call-next-method)
    (list

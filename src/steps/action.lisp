@@ -25,6 +25,7 @@
    `(("uses" . ,(step-name action)))
    (when (action-args action)
      `(("with" . ,(loop for (name value) on (action-args action) by #'cddr
-                        collect (cons (string-downcase
-                                       (symbol-name name))
-                                      value)))))))
+                        when value
+                          collect (cons (string-downcase
+                                         (symbol-name name))
+                                        value)))))))
