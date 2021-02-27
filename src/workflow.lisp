@@ -119,7 +119,7 @@
                         for job-name = (string-downcase
                                         (class-name (class-of job)))
                         for job-data = (40ants-ci/github:prepare-data job)
-                        collect `((,job-name . ,job-data)))))))))
+                        collect `(,job-name . ,job-data))))))))
 
 
 (defmethod 40ants-ci/github:generate ((package package) path)
