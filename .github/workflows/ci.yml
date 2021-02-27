@@ -38,7 +38,7 @@
         },
         {
           "name": "Run Linter",
-          "run": "qlot exec sblint *.asd",
+          "run": "qlot exec sblint 40ants-ci-test.asd 40ants-ci.asd",
           "shell": "bash"
         }
       ]
