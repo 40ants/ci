@@ -4,7 +4,8 @@
                 #:sh)
   (:import-from #:40ants-ci/steps/action
                 #:action)
-  (:import-from #:40ants-ci/jobs/lisp-job)
+  (:import-from #:40ants-ci/jobs/lisp-job
+                #:asd-system)
   (:import-from #:40ants-ci/utils
                 #:dedent
                 #:current-system-name)
@@ -15,10 +16,11 @@
 
 (defclass run-tests (40ants-ci/jobs/lisp-job:lisp-job)
   ((coverage :initarg :coverage
+             :initform nil
              :reader coverage)))
 
 
-(defun run-tests (&rest rest &key coverage qlfile os quicklisp lisp)
+(defun run-tests (&rest rest &key coverage qlfile os quicklisp lisp asd-system)
   (declare (ignore coverage qlfile os quicklisp lisp))
   (apply #'make-instance 'run-tests
          rest))
@@ -29,7 +31,8 @@
    (call-next-method)
    (list
     (action "40ants/run-tests@v2"
-            :asdf-system (current-system-name)
+            :asdf-system (or (asd-system job)
+                             (current-system-name))
             :coveralls-token (when (coverage job)
                                (dedent
                                 (if (40ants-ci/jobs/job:use-matrix-p job)
