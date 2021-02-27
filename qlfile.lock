@@ -1,0 +1,16 @@
+("quicklisp" .
+ (:class qlot/source/dist:source-dist
+  :initargs (:distribution "http://beta.quicklisp.org/dist/quicklisp.txt" :%version :latest)
+  :version "2021-01-24"))
+("ultralisp" .
+ (:class qlot/source/dist:source-dist
+  :initargs (:distribution "http://dist.ultralisp.org" :%version :latest)
+  :version "20210225103501"))
+("bordeaux-threads" .
+ (:class qlot/source/github:source-github
+  :initargs (:repos "svetlyak40wt/bordeaux-threads" :ref nil :branch "fix-apiv2-for-no-threads" :tag nil)
+  :version "github-c5ed58df63356d7e2892b54cbd9dd7da"))
+("mgl-pax" .
+ (:class qlot/source/github:source-github
+  :initargs (:repos "svetlyak40wt/mgl-pax" :ref nil :branch "mgl-pax-minimal" :tag nil)
+  :version "github-6c4eecc1be34466756e6096d1c5071f5"))
