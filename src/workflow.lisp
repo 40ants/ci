@@ -92,7 +92,7 @@
   (:method ((workflow workflow))
     (append
      (when (on-push-to workflow)
-       `(("push" . ,(on-push-to workflow))))
+       `(("push" . (("branches" . ,(on-push-to workflow))))))
      (when (on-pull-request workflow)
        '(("pull_request" . :null)))
      

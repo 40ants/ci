@@ -1,9 +1,11 @@
 {
   "name": "CI",
   "on": {
-    "push": [
-      "master"
-    ],
+    "push": {
+      "branches": [
+        "master"
+      ]
+    },
     "pull_request": null,
     "schedule": [
       {
