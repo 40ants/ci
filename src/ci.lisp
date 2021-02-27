@@ -27,10 +27,12 @@
           :os ("ubuntu-latest"
                "macos-latest")
           :quicklisp ("quicklisp"
-                      "ultralisp")
+                      ;; "ultralisp"
+                      )
           :lisp ("sbcl-bin"
-                 "ccl-bin"
-                 "allegro")
+                 ;; "ccl-bin"
+                 ;; "allegro"
+                 )
           ;; :exclude-from-matrix (;; Seems allegro is does not support 64bit OSX.
           ;;                       ;; Unable to install it using Roswell:
           ;;                       ;; alisp is not executable. Missing 32bit glibc?

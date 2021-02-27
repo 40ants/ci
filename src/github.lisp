@@ -33,8 +33,8 @@
                                      ".github"
                                      "workflows"))))))
     (loop for package in (system-packages system)
-          do (generate package
-                       path))))
+          appending (generate package
+                              path))))
 
 
 (defgeneric prepare-data (obj))

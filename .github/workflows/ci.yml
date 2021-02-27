@@ -32,6 +32,12 @@
           }
         },
         {
+          "name": "Install SBLint",
+          "run": "qlot exec ros install cxxxr/sblint",
+          "shell": "bash"
+        },
+        {
+          "name": "Run Linter",
           "run": "qlot exec sblint *.asd",
           "shell": "bash"
         }
@@ -44,23 +50,14 @@
           "os": [
             "ubuntu-latest",
             "macos-latest"
-          ],
-          "quicklisp-dist": [
-            "quicklisp",
-            "ultralisp"
-          ],
-          "lisp": [
-            "sbcl-bin",
-            "ccl-bin",
-            "allegro"
           ]
         }
       },
       "runs-on": "${{ matrix.os }}",
       "env": {
         "OS": "${{ matrix.os }}",
-        "QUICKLISP_DIST": "${{ matrix.quicklisp-dist }}",
-        "LISP": "${{ matrix.lisp }}"
+        "QUICKLISP_DIST": "quicklisp",
+        "LISP": "sbcl-bin"
       },
       "steps": [
         {

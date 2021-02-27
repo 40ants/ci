@@ -132,8 +132,8 @@
                                                     (name workflow)))
                                             :type "yml")
                              path)
-        do (40ants-ci/github:generate workflow
-                                      workflow-path)))
+        appending (40ants-ci/github:generate workflow
+                                             workflow-path)))
 
 
 (defmethod 40ants-ci/github:generate ((workflow workflow) path)
@@ -144,4 +144,5 @@
 
     (ensure-directories-exist path)
     (alexandria:with-output-to-file (output path :if-exists :supersede)
-      (write-string json output))))
+      (write-string json output)
+      (list path))))

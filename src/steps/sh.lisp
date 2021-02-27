@@ -19,10 +19,9 @@
           :reader shell)))
 
 
-(defun sh (command &key
-                     id
-                     name
-                     (shell *default-shell*))
+(defun sh (name command &key
+                          id
+                          (shell *default-shell*))
   (make-instance 'sh
                  :name name
                  :command command

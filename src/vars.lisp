@@ -10,3 +10,6 @@
       "When workflow is generated for ASDF system, this variable will contain a primary ASDF system.")
 
 
+;; (defvar *written-files*)
+;; (setf (documentation '*written-files* 'variable)
+;;       "For collecting filenames and output them from 40ants-ci:generate.")

@@ -20,4 +20,7 @@
   (append
    (call-next-method)
    (list
-    (sh "qlot exec sblint *.asd"))))
+    (sh "Install SBLint"
+        "qlot exec ros install cxxxr/sblint")
+    (sh "Run Linter"
+        "qlot exec sblint *.asd"))))
