@@ -65,10 +65,10 @@
          `(("OS" . "${{ matrix.os }}")))
      (if (= (length (quicklisp job)) 1)
          `(("QUICKLISP_DIST" . ,(first (quicklisp job))))
-         `(("QUICKLISP_DIST" . "${{ matrix.quicklisp-dist}}")))
+         `(("QUICKLISP_DIST" . "${{ matrix.quicklisp-dist }}")))
      (if (= (length (lisp job)) 1)
          `(("LISP" . ,(first (lisp job))))
-         `(("LISP" . "${{ matrix.lisp }}}"))))))
+         `(("LISP" . "${{ matrix.lisp }}"))))))
 
 
 (defgeneric make-steps (job)

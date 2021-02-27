@@ -59,8 +59,8 @@
       "runs-on": "${{ matrix.os }}",
       "env": {
         "OS": "${{ matrix.os }}",
-        "QUICKLISP_DIST": "${{ matrix.quicklisp-dist}}",
-        "LISP": "${{ matrix.lisp }}}"
+        "QUICKLISP_DIST": "${{ matrix.quicklisp-dist }}",
+        "LISP": "${{ matrix.lisp }}"
       },
       "steps": [
         {
