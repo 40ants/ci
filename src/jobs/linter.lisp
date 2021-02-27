@@ -23,4 +23,4 @@
     (sh "Install SBLint"
         "qlot exec ros install cxxxr/sblint")
     (sh "Run Linter"
-        "qlot exec sblint 40ants-ci.asd"))))
+        "qlot exec sblint *.asd"))))
