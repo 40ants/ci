@@ -4,6 +4,7 @@
   (:import-from #:str
                 #:join
                 #:split)
+  (:import-from #:jonathan)
   (:export
    #:to-json
    #:ensure-primary-system

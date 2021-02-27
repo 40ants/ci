@@ -1,8 +1,12 @@
 (defpackage #:40ants-ci/ci
   (:use #:cl)
-  (:import-from #:40ants-ci/jobs/linter)
-  (:import-from #:40ants-ci/jobs/run-tests)
-  (:import-from #:40ants-ci/jobs/docs))
+  (:import-from #:40ants-ci/jobs/linter
+                #:linter)
+  (:import-from #:40ants-ci/jobs/run-tests
+                #:run-tests)
+  (:import-from #:40ants-ci/jobs/docs)
+  (:import-from #:40ants-ci/workflow
+                #:defworkflow))
 (in-package 40ants-ci/ci)
 
 
@@ -13,13 +17,13 @@
 ;;   :jobs ((40ants-ci/jobs/docs:build-docs)))
 
 
-(40ants-ci/workflow:defworkflow ci
+(defworkflow ci
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :on-pull-request t
   :cache t
-  :jobs ((40ants-ci/jobs/linter:linter)
-         (40ants-ci/jobs/run-tests:run-tests
+  :jobs ((linter)
+         (run-tests
           :os ("ubuntu-latest"
                "macos-latest")
           :quicklisp ("quicklisp"
