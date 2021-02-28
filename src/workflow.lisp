@@ -46,7 +46,9 @@
   (let* ((name (uiop:ensure-list name))
          (symbol (car name))
          (args (cdr name)))
-    (apply symbol args)))
+    (if (fboundp symbol)
+        (apply symbol args)
+        (apply #'make-instance symbol args))))
 
 
 (defun register-workflow (workflow &key (package *package*))
@@ -71,21 +73,25 @@
             collect workflow))))
 
 
-(defmacro defworkflow (name &rest params)
-  (destructuring-bind (&rest rest &key jobs &allow-other-keys)
-      params
-    (alexandria:remove-from-plistf rest :jobs)
-    
-    `(progn
-       (defclass ,name (workflow)
-         ())
-       (let* ((jobs (mapcar #'make-job ',jobs))
-              (workflow (make-instance ',name
-                                       :name ',name
-                                       :jobs jobs
-                                       ,@rest)))
-         (register-workflow workflow)
-         workflow))))
+(defmacro defworkflow (name &key
+                              on-push-to
+                              by-cron
+                              on-pull-request
+                              cache
+                              jobs)
+  `(progn
+     (defclass ,name (workflow)
+       ())
+     (let* ((jobs (mapcar #'make-job ',jobs))
+            (workflow (make-instance ',name
+                                     :name ',name
+                                     :jobs jobs
+                                     :on-push-to ',(uiop:ensure-list on-push-to)
+                                     :by-cron ',(uiop:ensure-list by-cron)
+                                     :on-pull-request ,on-pull-request
+                                     :cache ,cache)))
+       (register-workflow workflow)
+       workflow)))
 
 
 (defgeneric make-triggers (workflow)

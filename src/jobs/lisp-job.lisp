@@ -35,7 +35,7 @@
       (current-system-name)))
 
 
-;; ${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp-dist }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}
+;; ${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}
 
 
 (defgeneric make-cache-key (job)
@@ -49,7 +49,7 @@
       (let ((quicklisp (quicklisp job)))
         (if (single quicklisp)
             (format s "~A-" (first quicklisp))
-            (write-string "${{ matrix.quicklisp-dist }}-" s)))
+            (write-string "${{ matrix.quicklisp }}-" s)))
       (let ((lisp (lisp job)))
         (if (single lisp)
             (format s "~A-" (first lisp))

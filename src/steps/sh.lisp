@@ -3,8 +3,11 @@
   (:import-from #:40ants-ci/steps/step)
   (:import-from #:alexandria
                 #:remove-from-plistf)
+  (:import-from #:40ants-ci/utils
+                #:dedent)
   (:export
-   #:sh))
+   #:sh
+   #:sections))
 (in-package 40ants-ci/steps/sh)
 
 
@@ -38,3 +41,45 @@
 (defmethod 40ants-ci/github:prepare-data ((sh sh))
   `(("run" . ,(command sh))
     ("shell" . , (shell sh))))
+
+
+(defmacro sections (&body body)
+  "Returns a string with a bash script where some parts are grouped.
+
+   In this example we have 3 sections:
+
+   ```lisp
+   (sections
+         (\"Help Argument\"
+          \"qlot exec cl-info --help\")
+         (\"Version Argument\"
+          \"qlot exec cl-info --version\")
+         (\"Lisp Systems Info\"
+          \"qlot exec cl-info\"
+          \"qlot exec cl-info cl-info defmain\"))
+   ```
+
+   It will be compiled into:
+
+   ```bash
+   echo ::group::Help Argument
+   qlot exec cl-info --help
+   echo ::endgroup::
+   echo ::group::Version Argument
+   qlot exec cl-info --version
+   echo ::endgroup::
+   echo ::group::Lisp Systems Info
+   qlot exec cl-info
+   qlot exec cl-info cl-info defmain
+   echo ::endgroup::
+   ```
+
+
+"
+  (with-output-to-string (s)
+    (loop for (group-name . commands) in body
+          do (format s "echo ::group::~A~%" group-name)
+             (loop for command in commands
+                   do (format s "~A~%"
+                              (dedent command)))
+             (format s "echo ::endgroup::~%"))))

@@ -42,6 +42,6 @@
                                     "
                                     ${{ matrix.lisp == 'sbcl-bin' &&
                                         matrix.os == 'ubuntu-latest' &&
-                                        matrix.quicklisp-dist == 'ultralisp' &&
+                                        matrix.quicklisp == 'ultralisp' &&
                                         secrets.github_token }}"
                                     "${{ secrets.github_token }}")))))))

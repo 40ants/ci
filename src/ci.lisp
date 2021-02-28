@@ -7,7 +7,10 @@
   (:import-from #:40ants-ci/jobs/docs
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
-                #:defworkflow))
+                #:defworkflow)
+  (:import-from #:40ants-ci/steps/sh
+                #:sections
+                #:sh))
 (in-package 40ants-ci/ci)
 
 
