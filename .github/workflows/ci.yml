@@ -114,8 +114,7 @@
           "name": "Setup Common Lisp Environment",
           "uses": "40ants/setup-lisp@v1",
           "with": {
-            "asdf-system": "40ants-ci",
-            "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}\n\ngithub mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
+            "asdf-system": "40ants-ci"
           },
           "if": "steps.cache.outputs.cache-hit != 'true'"
         },
@@ -124,7 +123,7 @@
           "uses": "40ants/run-tests@v2",
           "with": {
             "asdf-system": "40ants-ci",
-            "coveralls-token": "${{ secrets.github_token }}"
+            "run-tests": "(ERROR \"This run should fail!\")"
           }
         }
       ]
