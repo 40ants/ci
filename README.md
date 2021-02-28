@@ -307,7 +307,7 @@ modified   .github/workflows/docs.yml
          },
 +        {
 +          "name": "Grant All Perms to Make Cache Restoring Possible",
-+          "run": "sudo mkdir -p /usr/local/etc/roswelln                 sudo chown \"${USER}\" /usr/local/etc/roswelln                 # Here the ros binary will be restored:n                 sudo chown \"${USER}\" /usr/local/bin",
++          "run": "sudo mkdir -p /usr/local/etc/roswell\n                 sudo chown \"${USER}\" /usr/local/etc/roswell\n                 # Here the ros binary will be restored:\n                 sudo chown \"${USER}\" /usr/local/bin",
 +          "shell": "bash"
 +        },
 +        {
@@ -321,13 +321,13 @@ modified   .github/workflows/docs.yml
 +          "id": "cache",
 +          "uses": "actions/cache@v2",
 +          "with": {
-+            "path": "qlfilen                           qlfile.lockn                           /usr/local/bin/rosn                           ~/.cache/common-lisp/n                           ~/.roswelln                           /usr/local/etc/roswelln                           .qlot",
++            "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
 +            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-ubuntu-latest-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
 +          }
 +        },
 +        {
 +          "name": "Restore Path To Cached Files",
-+          "run": "echo $HOME/.roswell/bin >> $GITHUB_PATHn                 echo .qlot/bin >> $GITHUB_PATH",
++          "run": "echo $HOME/.roswell/bin >> $GITHUB_PATH\n                 echo .qlot/bin >> $GITHUB_PATH",
 +          "shell": "bash",
 +          "if": "steps.cache.outputs.cache-hit == 'true'"
 +        },
