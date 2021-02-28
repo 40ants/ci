@@ -4,13 +4,14 @@
 
 ## Table of Contents
 
-- [1 Quickstart][5508]
-    - [1.1 Job Types][f10f]
-        - [1.1.1 Linter][5655]
-        - [1.1.2 Running Tests][6c8b]
-        - [1.1.3 Building Docs][052f]
-    - [1.2 Caching][a9d1]
-- [2 Details][c536]
+- [1 Reasons to Use][4a44]
+- [2 Quickstart][5508]
+    - [2.1 Job Types][f10f]
+        - [2.1.1 Linter][5655]
+        - [2.1.2 Running Tests][6c8b]
+        - [2.1.3 Building Docs][052f]
+    - [2.2 Caching][a9d1]
+- [3 Details][c536]
 
 ###### \[in package 40ANTS-CI with nicknames 40ANTS-CI/CORE\]
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
@@ -22,9 +23,22 @@ It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
 actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
 
+<a id='x-2840ANTS-CI-3A-40REASONS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+
+## 1 Reasons to Use
+
+- This system hides all entrails related to caching.
+
+- Includes a few ready to use job types.
+
+- Custom job types can be defined and distributed as separate `ASDF` systems.
+
+- You don't have to write YAML anymore!
+
+
 <a id='x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-## 1 Quickstart
+## 2 Quickstart
 
 This system allows you to define workflows in the lisp code. The best way is to make these
 definitions a part of your `ASDF` system. This way `40ANTS-CI` will be able to
@@ -51,11 +65,11 @@ of the package inferred `ASDF` system `EXAMPLE/CI`. A file should have the follo
 
 <a id='x-2840ANTS-CI-3A-40JOB-TYPES-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-### 1.1 Job Types
+### 2.1 Job Types
 
 <a id='x-2840ANTS-CI-3A-40LINTER-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-#### 1.1.1 Linter
+#### 2.1.1 Linter
 
 The simplest job type is linter. It loads a
 
@@ -126,7 +140,7 @@ Another interesting thing is that this workflow automatically uses `ubuntu-lates
 
 <a id='x-2840ANTS-CI-3A-40RUN-TESTS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-#### 1.1.2 Running Tests
+#### 2.1.2 Running Tests
 
 Another interesting job type is `RUN-TESTS`.
 
@@ -214,7 +228,7 @@ report will be uploaded to [Coveralls.io](https://coveralls.io/) automatically.
 
 <a id='x-2840ANTS-CI-3A-40BUILD-DOCS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-#### 1.1.3 Building Docs
+#### 2.1.3 Building Docs
 
 Third predefined job type is `BUILD-DOCS`. It uses [40ants/build-docs](https://40ants.com/run-tests/)
 action and will work only if your `ASDF` system uses a documentation builder supported by
@@ -281,7 +295,7 @@ It will generate `.github/workflows/docs.yml` with following content:
 
 <a id='x-2840ANTS-CI-3A-40CACHING-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-### 1.2 Caching
+### 2.2 Caching
 
 ```lisp
 
@@ -348,12 +362,13 @@ modified   .github/workflows/docs.yml
 
 <a id='x-2840ANTS-CI-3A-40DETAILS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-## 2 Details
+## 3 Details
 
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
 
   [052f]: #x-2840ANTS-CI-3A-40BUILD-DOCS-20MGL-PAX-MINIMAL-3ASECTION-29 "Building Docs"
+  [4a44]: #x-2840ANTS-CI-3A-40REASONS-20MGL-PAX-MINIMAL-3ASECTION-29 "Reasons to Use"
   [5508]: #x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29 "Quickstart"
   [5655]: #x-2840ANTS-CI-3A-40LINTER-20MGL-PAX-MINIMAL-3ASECTION-29 "Linter"
   [6c8b]: #x-2840ANTS-CI-3A-40RUN-TESTS-20MGL-PAX-MINIMAL-3ASECTION-29 "Running Tests"
