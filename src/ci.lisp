@@ -1,7 +1,6 @@
 (defpackage #:40ants-ci/ci
   (:use #:cl)
-  (:import-from #:40ants-ci/jobs/linter
-                #:linter)
+  (:import-from #:40ants-ci/jobs/linter)
   (:import-from #:40ants-ci/jobs/run-tests
                 #:run-tests)
   (:import-from #:40ants-ci/jobs/docs
@@ -18,7 +17,7 @@
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :cache t
-  :jobs ((build-docs)))
+  :jobs ((40ants-ci/jobs/docs:build-docs)))
 
 
 (defworkflow ci
@@ -26,7 +25,7 @@
   :by-cron "0 10 * * 1"
   :on-pull-request t
   :cache t
-  :jobs ((linter)
+  :jobs ((40ants-ci/jobs/linter:linter)
          ;; (run-tests
          ;;  :custom (error "This run should fail!"))
          (run-tests
@@ -43,4 +42,5 @@
                    {% endifequal %}
 
                    github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal")))
+
 
