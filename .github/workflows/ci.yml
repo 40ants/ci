@@ -58,7 +58,7 @@
           "with": {
             "asdf-system": "40ants-ci"
           },
-          "if": "if: steps.cache.outputs.cache-hit != 'true'"
+          "if": "steps.cache.outputs.cache-hit != 'true'"
         },
         {
           "name": "Install SBLint",
@@ -126,7 +126,7 @@
             "asdf-system": "40ants-ci",
             "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}\n\ngithub mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
           },
-          "if": "if: steps.cache.outputs.cache-hit != 'true'"
+          "if": "steps.cache.outputs.cache-hit != 'true'"
         },
         {
           "name": "Run Tests",

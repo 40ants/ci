@@ -97,5 +97,5 @@
                    :qlfile-template (when (qlfile job)
                                       (dedent (qlfile job)))
                    :if (when *use-cache*
-                         "if: steps.cache.outputs.cache-hit != 'true'")))
+                         "steps.cache.outputs.cache-hit != 'true'")))
           (call-next-method)))
