@@ -73,11 +73,28 @@
       ]
     },
     "run-tests": {
-      "runs-on": "ubuntu-latest",
+      "strategy": {
+        "fail-fast": false,
+        "matrix": {
+          "os": [
+            "ubuntu-latest",
+            "macos-latest"
+          ],
+          "quicklisp": [
+            "quicklisp",
+            "ultralisp"
+          ],
+          "lisp": [
+            "sbcl-bin",
+            "ccl-bin"
+          ]
+        }
+      },
+      "runs-on": "${{ matrix.os }}",
       "env": {
-        "OS": "ubuntu-latest",
-        "QUICKLISP_DIST": "quicklisp",
-        "LISP": "sbcl-bin"
+        "OS": "${{ matrix.os }}",
+        "QUICKLISP_DIST": "${{ matrix.quicklisp }}",
+        "LISP": "${{ matrix.lisp }}"
       },
       "steps": [
         {
@@ -101,7 +118,7 @@
           "uses": "actions/cache@v2",
           "with": {
             "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
-            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-ubuntu-latest-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
+            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}"
           }
         },
         {
@@ -114,7 +131,8 @@
           "name": "Setup Common Lisp Environment",
           "uses": "40ants/setup-lisp@v1",
           "with": {
-            "asdf-system": "40ants-ci"
+            "asdf-system": "40ants-ci",
+            "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}\n\ngithub mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
           },
           "if": "steps.cache.outputs.cache-hit != 'true'"
         },
@@ -123,7 +141,7 @@
           "uses": "40ants/run-tests@v2",
           "with": {
             "asdf-system": "40ants-ci",
-            "run-tests": "(ERROR \"This run should fail!\")"
+            "coveralls-token": "\n${{ matrix.lisp == 'sbcl-bin' &&\n    matrix.os == 'ubuntu-latest' &&\n    matrix.quicklisp == 'ultralisp' &&\n    secrets.github_token }}"
           }
         }
       ]

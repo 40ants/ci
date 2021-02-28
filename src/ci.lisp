@@ -27,26 +27,20 @@
   :on-pull-request t
   :cache t
   :jobs ((linter)
-         (run-tests
-          :custom (error "This run should fail!"))
          ;; (run-tests
-         ;;  :os ("ubuntu-latest"
-         ;;       ;; "macos-latest"
-         ;;       )
-         ;;  :quicklisp ("quicklisp"
-         ;;              ;; "ultralisp"
-         ;;              )
-         ;;  :lisp ("sbcl-bin"
-         ;;         ;; "ccl-bin"
-         ;;         ;; "allegro"
-         ;;         )
-         ;;  ;; :exclude (:os "macos-latest" :lisp "allegro")
+         ;;  :custom (error "This run should fail!"))
+         (run-tests
+          :os ("ubuntu-latest"
+               "macos-latest")
+          :quicklisp ("quicklisp"
+                      "ultralisp")
+          :lisp ("sbcl-bin"
+                 "ccl-bin")
           
-         ;;  :coverage t
-         ;;  :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
-         ;;           dist ultralisp http://dist.ultralisp.org
-         ;;           {% endifequal %}
+          :coverage t
+          :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
+                   dist ultralisp http://dist.ultralisp.org
+                   {% endifequal %}
 
-         ;;           github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal")
-         ))
+                   github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal")))
 
