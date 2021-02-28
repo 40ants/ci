@@ -29,7 +29,7 @@
 
 (defmethod 40ants-ci/github:prepare-data ((action action))
   (append
-   `(("uses" . ,(step-name action)))
+   `(("uses" . ,(uses action)))
    (when (action-args action)
      `(("with" . ,(loop for (name value) on (action-args action) by #'cddr
                         when value
