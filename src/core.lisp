@@ -21,9 +21,19 @@ It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
 actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
 "
+  (@reasons section)
   (@quickstart section)
   (@details section))
 
+
+
+(defsection @reasons (:title "Reasons to Use")
+  "
+- This system hides all entrails related to caching.
+- Includes a few ready to use job types.
+- Custom job types can be defined and distributed as separate ASDF systems.
+- You don't have to write YAML anymore!
+")
 
 
 (defsection @quickstart (:title "Quickstart")
