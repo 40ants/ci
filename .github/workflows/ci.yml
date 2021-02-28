@@ -73,35 +73,11 @@
       ]
     },
     "run-tests": {
-      "strategy": {
-        "fail-fast": false,
-        "matrix": {
-          "os": [
-            "ubuntu-latest",
-            "macos-latest"
-          ],
-          "quicklisp-dist": [
-            "quicklisp",
-            "ultralisp"
-          ],
-          "lisp": [
-            "sbcl-bin",
-            "ccl-bin",
-            "allegro"
-          ],
-          "exclude": [
-            {
-              "lisp": "allegro",
-              "os": "macos-latest"
-            }
-          ]
-        }
-      },
-      "runs-on": "${{ matrix.os }}",
+      "runs-on": "ubuntu-latest",
       "env": {
-        "OS": "${{ matrix.os }}",
-        "QUICKLISP_DIST": "${{ matrix.quicklisp-dist }}",
-        "LISP": "${{ matrix.lisp }}"
+        "OS": "ubuntu-latest",
+        "QUICKLISP_DIST": "quicklisp",
+        "LISP": "sbcl-bin"
       },
       "steps": [
         {
@@ -125,7 +101,7 @@
           "uses": "actions/cache@v2",
           "with": {
             "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
-            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp-dist }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}"
+            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-ubuntu-latest-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
           }
         },
         {
@@ -148,7 +124,7 @@
           "uses": "40ants/run-tests@v2",
           "with": {
             "asdf-system": "40ants-ci",
-            "coveralls-token": "\n${{ matrix.lisp == 'sbcl-bin' &&\n    matrix.os == 'ubuntu-latest' &&\n    matrix.quicklisp-dist == 'ultralisp' &&\n    secrets.github_token }}"
+            "coveralls-token": "${{ secrets.github_token }}"
           }
         }
       ]
