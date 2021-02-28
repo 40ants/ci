@@ -79,14 +79,23 @@
           "os": [
             "ubuntu-latest",
             "macos-latest"
+          ],
+          "quicklisp-dist": [
+            "quicklisp",
+            "ultralisp"
+          ],
+          "lisp": [
+            "sbcl-bin",
+            "ccl-bin",
+            "allegro"
           ]
         }
       },
       "runs-on": "${{ matrix.os }}",
       "env": {
         "OS": "${{ matrix.os }}",
-        "QUICKLISP_DIST": "quicklisp",
-        "LISP": "sbcl-bin"
+        "QUICKLISP_DIST": "${{ matrix.quicklisp-dist }}",
+        "LISP": "${{ matrix.lisp }}"
       },
       "steps": [
         {
@@ -110,7 +119,7 @@
           "uses": "actions/cache@v2",
           "with": {
             "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
-            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
+            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp-dist }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}"
           }
         },
         {
