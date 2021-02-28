@@ -15,7 +15,10 @@
 
 
 (defun build-docs ()
-  (make-instance 'build-docs))
+  (make-instance 'build-docs
+                 ;; We need this until this pull will be merged:
+                 ;; https://github.com/melisgl/mgl-pax/pull/8
+                 :qlfile "github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job build-docs))
