@@ -20,8 +20,10 @@
              :reader coverage)))
 
 
-(defun run-tests (&rest rest &key coverage qlfile asd-system os quicklisp lisp)
-  (declare (ignore coverage qlfile os quicklisp lisp asd-system))
+(defun run-tests (&rest rest &key coverage qlfile asd-system
+                               os quicklisp lisp
+                               exclude)
+  (declare (ignore coverage qlfile os quicklisp lisp asd-system exclude))
   (apply #'make-instance 'run-tests
          rest))
 

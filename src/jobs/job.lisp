@@ -1,5 +1,7 @@
 (defpackage #:40ants-ci/jobs/job
   (:use #:cl)
+  (:import-from #:40ants-ci/utils
+                #:ensure-list-of-plists)
   (:export
    #:job
    #:use-matrix-p
@@ -20,6 +22,10 @@
    (lisp :initform "sbcl-bin"
          :initarg :lisp
          :reader lisp)
+   (exclude :initform nil
+            :initarg :exclude
+            :reader exclude
+            :documentation "A list of plists denoting matrix combinations to be excluded.")
    (steps :initform nil
           :initarg :steps
           :reader steps)))
@@ -41,6 +47,10 @@
   (uiop:ensure-list
    (call-next-method)))
 
+(defmethod exclude :around ((job job))
+  (ensure-list-of-plists
+   (call-next-method)))
+
 
 (defgeneric use-matrix-p (job)
   (:method ((job job))
@@ -57,7 +67,11 @@
      (when (> (length (quicklisp job)) 1)
        `(("quicklisp-dist" . ,(quicklisp job))))
      (when (> (length (lisp job)) 1)
-       `(("lisp" . ,(lisp job)))))))
+       `(("lisp" . ,(lisp job))))
+     (when (exclude job)
+       `(("exclude" .
+                    ,(mapcar #'40ants-ci/utils:plist-to-alist
+                             (exclude job))))))))
 
 
 (defgeneric make-env (job)

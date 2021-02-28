@@ -13,7 +13,9 @@
    #:dedent
    #:single
    #:plistp
-   #:alistp))
+   #:alistp
+   #:plist-to-alist
+   #:ensure-list-of-plists))
 (in-package 40ants-ci/utils)
 
 
@@ -194,3 +196,33 @@ it will output HELLO-WORLD.\"
 (defun alistp (list)
   "Test wheather LIST is a properly formed alist."
   (and (listp list) (every #'consp list)))
+
+
+(defun ensure-list-of-plists (data)
+  (cond
+    ((plistp data)
+     (list data))
+    ((and (listp data)
+          (every #'plistp data))
+     data)
+    (t
+     (error "~A is not a plist a list of plists"
+            data))))
+
+
+(defun plist-to-alist (plist &key (string-keys t)
+                               (lowercase t))
+  "Make an alist from a plist PLIST.
+
+   By default, transforms keys to lowercased strings"
+  (flet ((transform-key (key)
+           (let* ((result (if string-keys
+                              (symbol-name key)
+                              key))
+                  (result (if lowercase
+                              (string-downcase key)
+                              result)))
+             result)))
+    (loop for (key value) on plist by #'cddr
+          collect (cons (transform-key key)
+                        value))))

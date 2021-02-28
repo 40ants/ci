@@ -31,6 +31,7 @@
           :lisp ("sbcl-bin"
                  "ccl-bin"
                  "allegro")
+          :exclude (:lisp "allegro" :os "macos-latest")
           ;; :exclude-from-matrix (;; Seems allegro is does not support 64bit OSX.
           ;;                       ;; Unable to install it using Roswell:
           ;;                       ;; alisp is not executable. Missing 32bit glibc?
