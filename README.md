@@ -23,7 +23,7 @@ This will generate two files, `.github/workflows/ci.yml` and
 ```
 (ql:quickload :40ants-ci)
 
-(40ants-ci:generate)
+(40ants-ci:generate :my-system)
 ```
 
 By default, utility searches for `*.asd` files in the current directory
