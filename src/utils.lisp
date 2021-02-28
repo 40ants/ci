@@ -15,7 +15,8 @@
    #:plistp
    #:alistp
    #:plist-to-alist
-   #:ensure-list-of-plists))
+   #:ensure-list-of-plists
+   #:make-github-workflows-path))
 (in-package 40ants-ci/utils)
 
 
@@ -226,3 +227,12 @@ it will output HELLO-WORLD.\"
     (loop for (key value) on plist by #'cddr
           collect (cons (transform-key key)
                         value))))
+
+
+(defun make-github-workflows-path (system)
+  (asdf:system-relative-pathname
+   system
+   (make-pathname :directory
+                  '(:relative
+                    ".github"
+                    "workflows"))))

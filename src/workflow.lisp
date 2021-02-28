@@ -1,5 +1,9 @@
 (defpackage #:40ants-ci/workflow
   (:use #:cl)
+  (:import-from #:40ants-ci/github
+                #:*current-system*)
+  (:import-from #:40ants-ci/utils
+                #:ensure-primary-system)
   (:export
    #:defworkflow))
 (in-package 40ants-ci/workflow)
@@ -91,6 +95,7 @@
                                      :on-pull-request ,on-pull-request
                                      :cache ,cache)))
        (register-workflow workflow)
+       (on-workflow-redefinition workflow)
        workflow)))
 
 
@@ -129,16 +134,20 @@
                         collect `(,job-name . ,job-data))))))))
 
 
+(defun make-workflow-path (base-path workflow)
+  (uiop:merge-pathnames*
+   (make-pathname :name (string-downcase
+                         (symbol-name
+                          (name workflow)))
+                  :type "yml")
+   base-path))
+
+
 (defmethod 40ants-ci/github:generate ((package package) path)
   ;; For system, we try to find all system packages
   ;; and execute generate for each of them:
   (loop for workflow in (package-workflows package)
-        for workflow-path = (uiop:merge-pathnames*
-                             (make-pathname :name (string-downcase
-                                                   (symbol-name
-                                                    (name workflow)))
-                                            :type "yml")
-                             path)
+        for workflow-path = (make-workflow-path path workflow)
         appending (40ants-ci/github:generate workflow
                                              workflow-path)))
 
@@ -153,3 +162,25 @@
     (alexandria:with-output-to-file (output path :if-exists :supersede)
       (write-string json output)
       (list path))))
+
+
+(defgeneric on-workflow-redefinition (workflow)
+  (:documentation "This hook can be redefine by user.
+                   It will be called each time when
+                   you eval defworkflow either because file compilation
+                   or manually by hitting C-c C-c in the Emacs.
+
+                   Default behaviour is to generate a new
+                   output for this workflow. Current system is set
+                   to the primary system with same package name
+                   as a package where defworkflow is used.")
+  (:method ((workflow workflow))
+    (let* ((system-name (string-downcase
+                         (package-name *package*)))
+           (*current-system*
+             (ensure-primary-system
+              (asdf:find-system system-name)))
+           (system-path (40ants-ci/utils:make-github-workflows-path *current-system*))
+           (workflow-path (make-workflow-path system-path
+                                              workflow)))
+      (40ants-ci/github:generate workflow workflow-path))))

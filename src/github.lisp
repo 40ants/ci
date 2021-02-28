@@ -1,6 +1,7 @@
 (defpackage #:40ants-ci/github
   (:use #:cl)
   (:import-from #:40ants-ci/utils
+                #:make-github-workflows-path
                 #:system-packages
                 #:ensure-primary-system)
   (:import-from #:40ants-ci/vars
@@ -26,12 +27,7 @@
   ;; and execute generate for each of them: 
   (let* ((*current-system* system)
          (path (or path
-                   (asdf:system-relative-pathname
-                    system
-                    (make-pathname :directory
-                                   '(:relative
-                                     ".github"
-                                     "workflows"))))))
+                   (make-github-workflows-path system))))
     (loop for package in (system-packages system)
           appending (generate package
                               path))))
