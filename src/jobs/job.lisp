@@ -14,12 +14,12 @@
   ((os :initform "ubuntu-latest"
        :initarg :os
        :reader os)
-   (lisp :initform "sbcl-bin"
-         :initarg :lisp
-         :reader lisp)
    (quicklisp :initform "quicklisp"
               :initarg :quicklisp
               :reader quicklisp)
+   (lisp :initform "sbcl-bin"
+         :initarg :lisp
+         :reader lisp)
    (steps :initform nil
           :initarg :steps
           :reader steps)))
