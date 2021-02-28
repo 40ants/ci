@@ -103,9 +103,10 @@
 
 
 (defmethod 40ants-ci/github:prepare-data ((workflow workflow))
-  (let ((triggers (make-triggers workflow))
-        (jobs (uiop:ensure-list
-               (jobs workflow))))
+  (let* ((40ants-ci/vars:*use-cache* (cache-p workflow))
+         (triggers (make-triggers workflow))
+         (jobs (uiop:ensure-list
+                (jobs workflow))))
 
     (append
      `(("name" . ,(name workflow)))

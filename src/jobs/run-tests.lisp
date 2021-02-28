@@ -30,7 +30,8 @@
   (append
    (call-next-method)
    (list
-    (action "40ants/run-tests@v2"
+    (action "Run Tests"
+            "40ants/run-tests@v2"
             :asdf-system (or (asd-system job)
                              (current-system-name))
             :coveralls-token (when (coverage job)

@@ -10,7 +10,10 @@
    #:ensure-primary-system
    #:system-packages
    #:current-system-name
-   #:dedent))
+   #:dedent
+   #:single
+   #:plistp
+   #:alistp))
 (in-package 40ants-ci/utils)
 
 
@@ -171,3 +174,23 @@ it will output HELLO-WORLD.\"
                          (length line)))))
     (join #\Newline
           trimmed-lines)))
+
+
+(defun single (list)
+  "Test wheather LIST contains exactly 1 element."
+  (and (consp list) (not (cdr list))))
+
+
+(defun plistp (list)
+  "Test wheather LIST is a properly formed plist."
+  (when (listp list)
+    (loop for rest on list by #'cddr
+          unless (and (keywordp (car rest))
+                      (cdr rest))
+            do (return nil)
+          finally (return list))))
+
+
+(defun alistp (list)
+  "Test wheather LIST is a properly formed alist."
+  (and (listp list) (every #'consp list)))

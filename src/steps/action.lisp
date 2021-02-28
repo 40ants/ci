@@ -1,23 +1,30 @@
 (defpackage #:40ants-ci/steps/action
   (:use #:cl)
-  (:import-from #:40ants-ci/steps/step
-                #:step-name
-                #:step-id)
+  (:import-from #:40ants-ci/steps/step)
   (:import-from #:40ants-ci/github)
+  (:import-from #:alexandria
+                #:remove-from-plistf)
   (:export #:action))
 (in-package 40ants-ci/steps/action)
 
 
 (defclass action (40ants-ci/steps/step:step)
-  ((action-args :initarg :args
+  ((uses :initarg :uses
+         :reader uses)
+   (action-args :initarg :args
                 :reader action-args
                 :documentation "A plist to be passed as \"with\" dictionary to the action.")))
 
 
-(defun action (name &rest args)
+(defun action (name uses &rest args &key id if env &allow-other-keys)
+  (remove-from-plistf args :id :if :env)
   (make-instance 'action
+                 :id id
                  :name name
-                 :args args))
+                 :uses uses
+                 :args args
+                 :env env
+                 :if if))
 
 
 (defmethod 40ants-ci/github:prepare-data ((action action))

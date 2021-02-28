@@ -3,7 +3,10 @@
   (:export
    #:job
    #:use-matrix-p
-   #:steps))
+   #:steps
+   #:os
+   #:lisp
+   #:quicklisp))
 (in-package 40ants-ci/jobs/job)
 
 

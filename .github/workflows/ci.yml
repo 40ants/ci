@@ -23,13 +23,42 @@
       },
       "steps": [
         {
-          "uses": "actions/checkout@v1"
+          "name": "Checkout Code",
+          "uses": "Checkout Code"
         },
         {
-          "uses": "40ants/setup-lisp@v1",
+          "name": "Grant All Perms to Make Cache Restoring Possible",
+          "run": "sudo mkdir -p /usr/local/etc/roswell\n                 sudo chown \"${USER}\" /usr/local/etc/roswell\n                 # Here the ros binary will be restored:\n                 sudo chown \"${USER}\" /usr/local/bin",
+          "shell": "bash"
+        },
+        {
+          "name": "Get Current Month",
+          "id": "current-month",
+          "run": "echo \"::set-output name=value::$(date -u \"+%Y-%m\")\"",
+          "shell": "bash"
+        },
+        {
+          "name": "Cache Roswell Setup",
+          "id": "cache",
+          "uses": "Cache Roswell Setup",
+          "with": {
+            "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
+            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-ubuntu-latest-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
+          }
+        },
+        {
+          "name": "Restore Path To Cached Files",
+          "run": "echo $HOME/.roswell/bin >> $GITHUB_PATH\n                 echo .qlot/bin >> $GITHUB_PATH",
+          "shell": "bash",
+          "if": "steps.cache.outputs.cache-hit == 'true'"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "Setup Common Lisp Environment",
           "with": {
             "asdf-system": "40ants-ci"
-          }
+          },
+          "if": "if: steps.cache.outputs.cache-hit != 'true'"
         },
         {
           "name": "Install SBLint",
@@ -38,7 +67,7 @@
         },
         {
           "name": "Run Linter",
-          "run": "qlot exec sblint 40ants-ci-test.asd 40ants-ci.asd",
+          "run": "qlot exec sblint 40ants-ci.asd",
           "shell": "bash"
         }
       ]
@@ -61,17 +90,47 @@
       },
       "steps": [
         {
-          "uses": "actions/checkout@v1"
+          "name": "Checkout Code",
+          "uses": "Checkout Code"
         },
         {
-          "uses": "40ants/setup-lisp@v1",
+          "name": "Grant All Perms to Make Cache Restoring Possible",
+          "run": "sudo mkdir -p /usr/local/etc/roswell\n                 sudo chown \"${USER}\" /usr/local/etc/roswell\n                 # Here the ros binary will be restored:\n                 sudo chown \"${USER}\" /usr/local/bin",
+          "shell": "bash"
+        },
+        {
+          "name": "Get Current Month",
+          "id": "current-month",
+          "run": "echo \"::set-output name=value::$(date -u \"+%Y-%m\")\"",
+          "shell": "bash"
+        },
+        {
+          "name": "Cache Roswell Setup",
+          "id": "cache",
+          "uses": "Cache Roswell Setup",
           "with": {
-            "asdf-system": "40ants-ci",
-            "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}\n\ngithub mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
+            "path": "qlfile\n                           qlfile.lock\n                           /usr/local/bin/ros\n                           ~/.cache/common-lisp/\n                           ~/.roswell\n                           /usr/local/etc/roswell\n                           .qlot",
+            "key": "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}"
           }
         },
         {
-          "uses": "40ants/run-tests@v2",
+          "name": "Restore Path To Cached Files",
+          "run": "echo $HOME/.roswell/bin >> $GITHUB_PATH\n                 echo .qlot/bin >> $GITHUB_PATH",
+          "shell": "bash",
+          "if": "steps.cache.outputs.cache-hit == 'true'"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "Setup Common Lisp Environment",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}\n\ngithub mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
+          },
+          "if": "if: steps.cache.outputs.cache-hit != 'true'"
+        },
+        {
+          "name": "Run Tests",
+          "uses": "Run Tests",
           "with": {
             "asdf-system": "40ants-ci",
             "coveralls-token": "\n${{ matrix.lisp == 'sbcl-bin' &&\n    matrix.os == 'ubuntu-latest' &&\n    matrix.quicklisp-dist == 'ultralisp' &&\n    secrets.github_token }}"

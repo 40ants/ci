@@ -1,7 +1,8 @@
 (defpackage #:40ants-ci/vars
   (:use #:cl)
   (:export
-   #:*current-system*))
+   #:*current-system*
+   #:*use-cache*))
 (in-package 40ants-ci/vars)
 
 
@@ -10,6 +11,6 @@
       "When workflow is generated for ASDF system, this variable will contain a primary ASDF system.")
 
 
-;; (defvar *written-files*)
-;; (setf (documentation '*written-files* 'variable)
-;;       "For collecting filenames and output them from 40ants-ci:generate.")
+(defvar *use-cache*)
+(setf (documentation '*use-cache* 'variable)
+      "Workflow will set this variable when preparing the data or YAML generation.")
