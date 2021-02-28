@@ -21,11 +21,12 @@ It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
 actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
 "
-  (@usage section))
+  (@quickstart section)
+  (@details section))
 
 
 
-(defsection @usage (:title "Usage")
+(defsection @quickstart (:title "Quickstart")
   "
 This system allows you to define workflows in the lisp code. The best way is to make these
 definitions a part of your ASDF system. This way 40ANTS-CI will be able to
@@ -347,6 +348,13 @@ modified   .github/workflows/docs.yml
          {
 ```
 
+")
+
+
+(defsection @details (:title "Details")
+  "
+TODO: I have to write a few chapters with details on additional job's parameters
+and a way how to create new job types.
 ")
 
 
