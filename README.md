@@ -4,12 +4,13 @@
 
 ## Table of Contents
 
-- [1 Usage][cedc]
+- [1 Quickstart][5508]
     - [1.1 Job Types][f10f]
         - [1.1.1 Linter][5655]
         - [1.1.2 Running Tests][6c8b]
         - [1.1.3 Building Docs][052f]
     - [1.2 Caching][a9d1]
+- [2 Details][c536]
 
 ###### \[in package 40ANTS-CI with nicknames 40ANTS-CI/CORE\]
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
@@ -21,9 +22,9 @@ It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
 actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
 
-<a id='x-2840ANTS-CI-3A-40USAGE-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
 
-## 1 Usage
+## 1 Quickstart
 
 This system allows you to define workflows in the lisp code. The best way is to make these
 definitions a part of your `ASDF` system. This way `40ANTS-CI` will be able to
@@ -345,11 +346,19 @@ modified   .github/workflows/docs.yml
 ```
 
 
+<a id='x-2840ANTS-CI-3A-40DETAILS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+
+## 2 Details
+
+TODO: I have to write a few chapters with details on additional job's parameters
+and a way how to create new job types.
+
   [052f]: #x-2840ANTS-CI-3A-40BUILD-DOCS-20MGL-PAX-MINIMAL-3ASECTION-29 "Building Docs"
+  [5508]: #x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29 "Quickstart"
   [5655]: #x-2840ANTS-CI-3A-40LINTER-20MGL-PAX-MINIMAL-3ASECTION-29 "Linter"
   [6c8b]: #x-2840ANTS-CI-3A-40RUN-TESTS-20MGL-PAX-MINIMAL-3ASECTION-29 "Running Tests"
   [a9d1]: #x-2840ANTS-CI-3A-40CACHING-20MGL-PAX-MINIMAL-3ASECTION-29 "Caching"
-  [cedc]: #x-2840ANTS-CI-3A-40USAGE-20MGL-PAX-MINIMAL-3ASECTION-29 "Usage"
+  [c536]: #x-2840ANTS-CI-3A-40DETAILS-20MGL-PAX-MINIMAL-3ASECTION-29 "Details"
   [f10f]: #x-2840ANTS-CI-3A-40JOB-TYPES-20MGL-PAX-MINIMAL-3ASECTION-29 "Job Types"
 
 * * *
