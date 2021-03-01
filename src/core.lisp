@@ -294,20 +294,17 @@ It will generate `.github/workflows/docs.yml` with following content:
 
 (defsection @caching (:title "Caching")
   "
-
-```lisp
-
 To significantly speed up our tests, we can cache installed Roswell,
 Qlot and Common Lisp fasl files.
 
 To accomplish this task, you don't need to dig into GitHub's docs anymore!
 Just add one line `:cache t` to your workflow definition:
 
+```lisp
 (defworkflow docs
   :on-push-to \"master\"
   :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs)))
-
 ```
 
 Here is the diff of the generated workflow file. It shows steps, added automatically:
