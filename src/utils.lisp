@@ -4,7 +4,7 @@
   (:import-from #:str
                 #:join
                 #:split)
-  (:import-from #:jonathan)
+  (:import-from #:yason)
   (:export
    #:to-json
    #:ensure-primary-system
@@ -18,32 +18,6 @@
    #:ensure-list-of-plists
    #:make-github-workflows-path))
 (in-package 40ants-ci/utils)
-
-
-(defvar *jq-available* 'not-checked)
-
-
-(defun jq-available-p ()
-  (when (eql *jq-available* 'not-checked)
-    (setf *jq-available*
-          ;; zero status code means the utility is available
-          (zerop
-           (nth-value
-            2
-            (uiop:run-program "which jq"
-                              :ignore-error-status t)))))
-  *jq-available*)
-
-
-(defun to-json (data)
-  (let ((json (jonathan:to-json data
-                                :from :alist)))
-    (if (jq-available-p)
-        (with-output-to-string (jq-stdout)
-          (with-input-from-string (jq-stdin json)
-            (uiop:run-program "jq" :input jq-stdin
-                                   :output jq-stdout)))
-        json)))
 
 
 (defun ensure-primary-system (system)
@@ -195,8 +169,20 @@ it will output HELLO-WORLD.\"
 
 
 (defun alistp (list)
-  "Test wheather LIST is a properly formed alist."
-  (and (listp list) (every #'consp list)))
+  "Test wheather LIST is a properly formed alist.
+
+   In this library, ALIST has always a string as a key.
+   Because we need them to have this form to serialize
+   to JSON propertly.
+
+   (alistp '((\"cron\" . \"0 10 * * 1\"))) -> T
+   (alistp '(((\"cron\" . \"0 10 * * 1\")))) -> NIL
+"
+  (and (listp list)
+       (loop for item in list
+             always (and (consp item)
+                         (typep (car item)
+                                'string)))))
 
 
 (defun ensure-list-of-plists (data)
@@ -236,3 +222,44 @@ it will output HELLO-WORLD.\"
                   '(:relative
                     ".github"
                     "workflows"))))
+
+
+(defun list-to-json (obj stream)
+  (cond
+    ((alistp obj)
+     (yason:encode-alist obj stream))
+    (t
+     (yason:encode-plain-list-to-array obj stream))))
+
+
+(defun to-json (data)
+  ;; I've tried all JSON libraries (with permissive licenses)
+  ;; from this list:
+  ;; https://sabracrolleton.github.io/json-review
+  ;; and only YASON is able to produce indented results.
+  ;; However it requires a few hacks to make it work with
+  ;; nested alists.
+  ;; In the first version of this library, I've generated
+  ;; JSON with Jonathan and indented it using JQ command-line
+  ;; utility if it is available.
+  (yason:with-output-to-string* (:stream-symbol s :indent 2)
+    (let ((yason:*list-encoder* #'list-to-json)
+          (yason:*parse-json-booleans-as-symbols* t))
+      (yason:encode data))))
+
+
+;; I don't like these hacks :(
+(defmethod yason:encode ((object (eql :false)) &optional (stream yason::*json-output*))
+  (write-string "false" stream))
+
+
+(defmethod yason:encode ((object (eql :true)) &optional (stream yason::*json-output*))
+  (write-string "true" stream))
+
+
+(defmethod yason:encode ((object (eql :null)) &optional (stream yason::*json-output*))
+  (write-string "null" stream))
+
+
+(defmethod yason:encode ((object (eql nil)) &optional (stream yason::*json-output*))
+  (write-string "[]" stream))

@@ -120,7 +120,8 @@
                 (jobs workflow))))
 
     (append
-     `(("name" . ,(name workflow)))
+     `(("name" . ,(symbol-name
+                   (name workflow))))
      
      (when triggers
        `(("on" . ,triggers)))
