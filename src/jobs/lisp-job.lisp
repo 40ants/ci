@@ -35,9 +35,6 @@
       (current-system-name)))
 
 
-;; ${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-${{ matrix.os }}-${{ matrix.quicklisp }}-${{ matrix.lisp }}-${{ hashFiles('qlfile.lock') }}
-
-
 (defgeneric make-cache-key (job)
   (:method ((job lisp-job))
     (with-output-to-string (s)
@@ -54,7 +51,11 @@
         (if (single lisp)
             (format s "~A-" (first lisp))
             (write-string "${{ matrix.lisp }}-" s)))
-      (write-string "${{ hashFiles('qlfile.lock') }}" s))))
+      ;; Here we need to hash *.asd files to make cache different
+      ;; for each project. Cache content will depend not only
+      ;; on qlfile, but also on ASD systems installed during
+      ;; the build.
+      (write-string "${{ hashFiles('qlfile.lock', '*.asd') }}" s))))
 
 
 (defgeneric make-cache-steps (job)
