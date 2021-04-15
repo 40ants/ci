@@ -11,14 +11,16 @@
 
 
 (defclass build-docs (40ants-ci/jobs/lisp-job:lisp-job)
-  ())
+  ((error-on-warnings :initform t
+                      :initarg :error-on-warnings
+                      :reader error-on-warnings)))
 
 
-(defun build-docs ()
+(defun build-docs (&key asdf-system
+                        (error-on-warnings t))
   (make-instance 'build-docs
-                 ;; We need this until this pull will be merged:
-                 ;; https://github.com/melisgl/mgl-pax/pull/8
-                 :qlfile "github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"))
+                 :asdf-system asdf-system
+                 :error-on-warnings error-on-warnings))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job build-docs))
@@ -27,5 +29,8 @@
    (list
     (action "Build Docs"
             "40ants/build-docs@v1"
-            :asdf-system (or (asd-system job)
-                             (current-system-name))))))
+            :asdf-system (or (asdf-system job)
+                             (current-system-name))
+            :error-on-warnings (if (error-on-warnings job)
+                                   :true
+                                   :false)))))
