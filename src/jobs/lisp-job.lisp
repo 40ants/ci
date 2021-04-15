@@ -16,7 +16,7 @@
                 #:*use-cache*)
   (:export
    #:lisp-job
-   #:asd-system))
+   #:asdf-system))
 (in-package 40ants-ci/jobs/lisp-job)
 
 
@@ -24,13 +24,13 @@
   ((qlfile :initarg :qlfile
            :initform nil
            :reader qlfile)
-   (asd-system :initarg :asd-system
-               :initform nil
-               :reader asd-system))
+   (asdf-system :initarg :asdf-system
+                :initform nil
+                :reader asdf-system))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
 
 
-(defmethod asd-system :around ((job lisp-job))
+(defmethod asdf-system :around ((job lisp-job))
   (or (call-next-method)
       (current-system-name)))
 
@@ -94,7 +94,7 @@
           (list
            (action "Setup Common Lisp Environment"
                    "40ants/setup-lisp@v1"
-                   :asdf-system (asd-system job)
+                   :asdf-system (asdf-system job)
                    :qlfile-template (when (qlfile job)
                                       (dedent (qlfile job)))
                    :if (when *use-cache*

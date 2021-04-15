@@ -5,7 +5,8 @@
 0.2.0 (2021-04-15)
 ==================
 
-Supported option :ERROR-ON-WARNINGS for documentation builder.
+* Supported option :ERROR-ON-WARNINGS for documentation builder.
+* Option :ASD-SYSTEM was renamed to :ASDF-SYSTEM.
 
 0.1.1 (2021-03-08)
 ==================

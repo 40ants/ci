@@ -5,7 +5,7 @@
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:import-from #:40ants-ci/jobs/lisp-job
-                #:asd-system)
+                #:asdf-system)
   (:import-from #:40ants-ci/utils
                 #:dedent
                 #:current-system-name)
@@ -25,11 +25,11 @@
            :reader custom)))
 
 
-(defun run-tests (&rest rest &key coverage qlfile asd-system
+(defun run-tests (&rest rest &key coverage qlfile asdf-system
                                os quicklisp lisp
                                exclude
                                custom)
-  (declare (ignore coverage qlfile os quicklisp lisp asd-system exclude))
+  (declare (ignore coverage qlfile os quicklisp lisp asdf-system exclude))
   (check-type custom
               (or null string list))
   (apply #'make-instance 'run-tests
@@ -42,7 +42,7 @@
    (list
     (action "Run Tests"
             "40ants/run-tests@v2"
-            :asdf-system (or (asd-system job)
+            :asdf-system (or (asdf-system job)
                              (current-system-name))
             :coveralls-token (when (coverage job)
                                (dedent

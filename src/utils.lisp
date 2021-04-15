@@ -242,6 +242,9 @@ it will output HELLO-WORLD.\"
   ;; In the first version of this library, I've generated
   ;; JSON with Jonathan and indented it using JQ command-line
   ;; utility if it is available.
+  ;; 
+  ;; Also, I found it indentation works in Yason > v0.7.8
+  ;; which is available only from Ultralisp on 2021-04-04 :(
   (yason:with-output-to-string* (:stream-symbol s :indent 2)
     (let ((yason:*list-encoder* #'list-to-json)
           (yason:*parse-json-booleans-as-symbols* t))

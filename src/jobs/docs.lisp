@@ -1,7 +1,7 @@
 (defpackage #:40ants-ci/jobs/docs
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/lisp-job
-                #:asd-system)
+                #:asdf-system)
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:import-from #:40ants-ci/utils
