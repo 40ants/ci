@@ -1,7 +1,7 @@
 (uiop:define-package #:40ants-ci
   (:nicknames #:40ants-ci/core)
   (:use #:cl)
-  (:import-from #:mgl-pax-minimal
+  (:import-from #:40ants-doc
                 #:defsection
                 #:reader
                 #:section)
@@ -272,7 +272,7 @@ It will generate `.github/workflows/docs.yml` with following content:
           \"uses\": \"40ants/setup-lisp@v1\",
           \"with\": {
             \"asdf-system\": \"example\",
-            \"qlfile-template\": \"github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal\"
+            \"qlfile-template\": \"\"
           }
         },
         {
@@ -347,7 +347,7 @@ modified   .github/workflows/docs.yml
            \"uses\": \"40ants/setup-lisp@v1\",
            \"with\": {
              \"asdf-system\": \"40ants-ci\",
-             \"qlfile-template\": \"github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal\"
+             \"qlfile-template\": \"\"
 -          }
 +          },
 +          \"if\": \"steps.cache.outputs.cache-hit != 'true'\"

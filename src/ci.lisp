@@ -39,8 +39,6 @@
           :coverage t
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org
-                   {% endifequal %}
-
-                   github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal")))
+                   {% endifequal %}")))
 
 

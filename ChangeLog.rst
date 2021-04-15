@@ -7,6 +7,7 @@
 
 * Supported option :ERROR-ON-WARNINGS for documentation builder.
 * Option :ASD-SYSTEM was renamed to :ASDF-SYSTEM.
+* Moved this project's documentation to 40ANTS-DOC system.
 
 0.1.1 (2021-03-08)
 ==================
