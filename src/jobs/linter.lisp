@@ -42,4 +42,5 @@ qlot exec ros install 40ants-linter
 ")
     (sh "Run Linter"
         (format nil "qlot exec 40ants-linter --system \"~{~A~^, ~}\""
-                (asdf-systems job))))))
+                (or (asdf-systems job)
+                    (list (asdf-system job))))))))

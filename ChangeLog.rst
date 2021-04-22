@@ -2,6 +2,12 @@
  ChangeLog
 ===========
 
+0.2.1 (2021-04-22)
+==================
+
+* Linter step was fixed to use default
+  ASDF system if it wasn't specified explicitly.
+
 0.2.0 (2021-04-15)
 ==================
 
