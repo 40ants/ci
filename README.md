@@ -1,17 +1,17 @@
-<a id='x-2840ANTS-CI-3A-40INDEX-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 # 40Ants-CI - Github Workflow Generator
 
 ## Table of Contents
 
-- [1 Reasons to Use][4a44]
-- [2 Quickstart][5508]
-    - [2.1 Job Types][f10f]
-        - [2.1.1 Linter][5655]
-        - [2.1.2 Running Tests][6c8b]
-        - [2.1.3 Building Docs][052f]
-    - [2.2 Caching][a9d1]
-- [3 Details][c536]
+- [1 Reasons to Use][aa87]
+- [2 Quickstart][36eb]
+    - [2.1 Job Types][5683]
+        - [2.1.1 Linter][a74c]
+        - [2.1.2 Running Tests][c56f]
+        - [2.1.3 Building Docs][1fa8]
+    - [2.2 Caching][4982]
+- [3 Details][7c1f]
 
 ###### \[in package 40ANTS-CI with nicknames 40ANTS-CI/CORE\]
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
@@ -23,7 +23,7 @@ It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
 actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
 
-<a id='x-2840ANTS-CI-3A-40REASONS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 ## 1 Reasons to Use
 
@@ -36,7 +36,7 @@ actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilat
 - You don't have to write YAML anymore!
 
 
-<a id='x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 ## 2 Quickstart
 
@@ -63,11 +63,11 @@ of the package inferred `ASDF` system `EXAMPLE/CI`. A file should have the follo
 ```
 
 
-<a id='x-2840ANTS-CI-3A-40JOB-TYPES-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 ### 2.1 Job Types
 
-<a id='x-2840ANTS-CI-3A-40LINTER-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 #### 2.1.1 Linter
 
@@ -138,14 +138,14 @@ Here you can see, a few steps in the job:
 Another interesting thing is that this workflow automatically uses `ubuntu-latest` OS,
 `Quicklisp` and `sbcl-bin` Lisp implementation. Later I'll show you how to redefine these settings.
 
-<a id='x-2840ANTS-CI-3A-40RUN-TESTS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 #### 2.1.2 Running Tests
 
-Another interesting job type is `RUN-TESTS`.
+Another interesting job type is `40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS`.
 
 When using this job type, make sure, your system
-runs tests on `(ASDF:TEST-SYSTEM :system-name)` call
+runs tests on ```(``ASDF:TEST-SYSTEM``:system-name)``` call
 and signals error if something went wrong.
 
 ```lisp
@@ -226,11 +226,12 @@ at the final step.
 Also, I've passed an option `:coverage t` to the job. Thus coverage
 report will be uploaded to [Coveralls.io](https://coveralls.io/) automatically.
 
-<a id='x-2840ANTS-CI-3A-40BUILD-DOCS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 #### 2.1.3 Building Docs
 
-Third predefined job type is `BUILD-DOCS`. It uses [40ants/build-docs](https://40ants.com/run-tests/)
+Third predefined job type is `40ANTS-CI/JOBS/DOCS:BUILD-DOCS`.
+It uses [40ants/build-docs](https://40ants.com/build-docs/)
 action and will work only if your `ASDF` system uses a documentation builder supported by
 [40ants/docs-builder](https://40ants.com/docs-builder/).
 
@@ -275,7 +276,7 @@ It will generate `.github/workflows/docs.yml` with following content:
           "uses": "40ants/setup-lisp@v1",
           "with": {
             "asdf-system": "example",
-            "qlfile-template": "github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
+            "qlfile-template": ""
           }
         },
         {
@@ -293,7 +294,7 @@ It will generate `.github/workflows/docs.yml` with following content:
 ```
 
 
-<a id='x-2840ANTS-CI-3A-40CACHING-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 ### 2.2 Caching
 
@@ -349,7 +350,7 @@ modified   .github/workflows/docs.yml
            "uses": "40ants/setup-lisp@v1",
            "with": {
              "asdf-system": "40ants-ci",
-             "qlfile-template": "github mgl-pax svetlyak40wt/mgl-pax :branch mgl-pax-minimal"
+             "qlfile-template": ""
 -          }
 +          },
 +          "if": "steps.cache.outputs.cache-hit != 'true'"
@@ -358,21 +359,21 @@ modified   .github/workflows/docs.yml
 ```
 
 
-<a id='x-2840ANTS-CI-3A-40DETAILS-20MGL-PAX-MINIMAL-3ASECTION-29'></a>
+<a id='x-2840ANTS-CI-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
 
 ## 3 Details
 
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
 
-  [052f]: #x-2840ANTS-CI-3A-40BUILD-DOCS-20MGL-PAX-MINIMAL-3ASECTION-29 "Building Docs"
-  [4a44]: #x-2840ANTS-CI-3A-40REASONS-20MGL-PAX-MINIMAL-3ASECTION-29 "Reasons to Use"
-  [5508]: #x-2840ANTS-CI-3A-40QUICKSTART-20MGL-PAX-MINIMAL-3ASECTION-29 "Quickstart"
-  [5655]: #x-2840ANTS-CI-3A-40LINTER-20MGL-PAX-MINIMAL-3ASECTION-29 "Linter"
-  [6c8b]: #x-2840ANTS-CI-3A-40RUN-TESTS-20MGL-PAX-MINIMAL-3ASECTION-29 "Running Tests"
-  [a9d1]: #x-2840ANTS-CI-3A-40CACHING-20MGL-PAX-MINIMAL-3ASECTION-29 "Caching"
-  [c536]: #x-2840ANTS-CI-3A-40DETAILS-20MGL-PAX-MINIMAL-3ASECTION-29 "Details"
-  [f10f]: #x-2840ANTS-CI-3A-40JOB-TYPES-20MGL-PAX-MINIMAL-3ASECTION-29 "Job Types"
+  [1fa8]: #x-2840ANTS-CI-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Building Docs"
+  [36eb]: #x-2840ANTS-CI-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Quickstart"
+  [4982]: #x-2840ANTS-CI-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Caching"
+  [5683]: #x-2840ANTS-CI-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Job Types"
+  [7c1f]: #x-2840ANTS-CI-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Details"
+  [a74c]: #x-2840ANTS-CI-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Linter"
+  [aa87]: #x-2840ANTS-CI-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Reasons to Use"
+  [c56f]: #x-2840ANTS-CI-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Running Tests"
 
 * * *
-###### \[generated by [MGL-PAX](https://github.com/melisgl/mgl-pax)\]
+###### \[generated by [40ANTS-DOC](https://40ants.com/doc)\]

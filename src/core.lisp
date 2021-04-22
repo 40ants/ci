@@ -10,7 +10,9 @@
 (in-package 40ants-ci)
 
 
-(defsection @index (:title "40Ants-CI - Github Workflow Generator")
+(defsection @index (:title "40Ants-CI - Github Workflow Generator"
+                    :ignore-words ("YAML"
+                                   "CL"))
   "
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
 
@@ -140,7 +142,7 @@ Another interesting thing is that this workflow automatically uses `ubuntu-lates
 
 (defsection @run-tests (:title "Running Tests")
   "
-Another interesting job type is `RUN-TESTS`.
+Another interesting job type is 40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS.
 
 When using this job type, make sure, your system
 runs tests on `(ASDF:TEST-SYSTEM :system-name)` call
@@ -227,7 +229,8 @@ report will be uploaded to [Coveralls.io](https://coveralls.io/) automatically.
 
 (defsection @build-docs (:title "Building Docs")
   "
-Third predefined job type is `BUILD-DOCS`. It uses [40ants/build-docs](https://40ants.com/run-tests/)
+Third predefined job type is 40ANTS-CI/JOBS/DOCS:BUILD-DOCS.
+It uses [40ants/build-docs](https://40ants.com/build-docs/)
 action and will work only if your ASDF system uses a documentation builder supported by
 [40ants/docs-builder](https://40ants.com/docs-builder/).
 

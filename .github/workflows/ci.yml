@@ -67,7 +67,7 @@
         },
         {
           "name": "Run Linter",
-          "run": "qlot exec 40ants-linter --system \"\"",
+          "run": "qlot exec 40ants-linter --system \"40ants-ci\"",
           "shell": "bash"
         }
       ]
