@@ -179,8 +179,8 @@
     (let* ((system-name (string-downcase
                          (package-name *package*)))
            (*current-system*
-             (ensure-primary-system
-              (asdf:find-system system-name)))
+             (asdf:find-system
+              (asdf:primary-system-name system-name)))
            (system-path (40ants-ci/utils:make-github-workflows-path *current-system*))
            (workflow-path (make-workflow-path system-path
                                               workflow)))

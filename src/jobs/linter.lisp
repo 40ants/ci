@@ -34,12 +34,18 @@
   (append
    (call-next-method)
    (list
-    (sh "Install SBLint"
-        "
-echo 'dist ultralisp http://dist.ultralisp.org' > qlfile
-qlot update
-qlot exec ros install 40ants-linter
-")
+    (sh "Change dist to Ultralisp"
+        "echo 'dist ultralisp http://dist.ultralisp.org' > qlfile")
+    (sh "Update Qlot"
+        ;; Here we update qlot twice in case if the first
+        ;; time will fail. I wasn't able to figure out and
+        ;; reproduce this issue on my own machine, but inside
+        ;; GitHub action container qlot update sometimes
+        ;; fails on updating dependencies. The second run
+        ;; fixes this issue. :(((
+        "qlot update || qlot update")
+    (sh "Install SBLint wrapper"
+        "qlot exec ros install 40ants-linter")
     (sh "Run Linter"
         (format nil "qlot exec 40ants-linter --system \"~{~A~^, ~}\""
                 (or (asdf-systems job)

@@ -2,6 +2,13 @@
  ChangeLog
 ===========
 
+0.2.2 (2021-06-18)
+==================
+
+* Fixed an occasional failure on ``qlot update`` inside linter workflow.
+  Usually it happed when quicklisp distribution was updated and ``qlfile.lock``
+  changed.
+
 0.2.1 (2021-04-22)
 ==================
 
