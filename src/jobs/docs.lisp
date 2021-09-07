@@ -13,11 +13,13 @@
 (defclass build-docs (40ants-ci/jobs/lisp-job:lisp-job)
   ((error-on-warnings :initform t
                       :initarg :error-on-warnings
-                      :reader error-on-warnings)))
+                      :reader error-on-warnings))
+  (:documentation "Builds documentation and uploads it to GitHub using [\"40ants/build-docs\" github action](https://40ants.com/build-docs/)."))
 
 
 (defun build-docs (&key asdf-system
                         (error-on-warnings t))
+  "Creates a job of class BUILD-DOCS."
   (make-instance 'build-docs
                  :asdf-system asdf-system
                  :error-on-warnings error-on-warnings))

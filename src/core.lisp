@@ -4,15 +4,25 @@
   (:import-from #:40ants-doc
                 #:defsection
                 #:reader
-                #:section)
+                #:section
+                #:defsection-copy)
   (:import-from #:40ants-ci/github)
-  (:export #:generate))
+  (:export #:generate
+           #:@index
+           #:@readme))
 (in-package 40ants-ci)
 
 
 (defsection @index (:title "40Ants-CI - Github Workflow Generator"
                     :ignore-words ("YAML"
-                                   "CL"))
+                                   "CL"
+                                   "CI"
+                                   "OS"
+                                   "SBL"
+                                   "BSD"
+                                   "TODO"
+                                   "ASDF"
+                                   "EXAMPLE"))
   "
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
 
@@ -21,12 +31,15 @@ projects.
 
 It generates workflow for running tests and building docs. These workflows
 use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
-actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
+actions and [`SBLint`](https://github.com/cxxxr/sblint) to check code for compilation errors.
 "
+  (40ants-ci system)
   (@reasons section)
   (@quickstart section)
   (@details section))
 
+
+(defsection-copy @readme @index)
 
 
 (defsection @reasons (:title "Reasons to Use")
@@ -132,7 +145,7 @@ Here you can see, a few steps in the job:
 
 1. Checkout the code.
 2. Install Roswell & Qlot using [40ants/setup-lisp](https://40ants.com/setup-lisp/) action.
-3. Install [SBLint](https://github.com/cxxxr/sblint).
+3. Install [`SBLint`](https://github.com/cxxxr/sblint).
 4. Run linter for `example.asd`.
 
 Another interesting thing is that this workflow automatically uses `ubuntu-latest` OS,
@@ -140,7 +153,8 @@ Another interesting thing is that this workflow automatically uses `ubuntu-lates
 ")
 
 
-(defsection @run-tests (:title "Running Tests")
+(defsection @run-tests (:title "Running Tests"
+                        :ignore-words ("ASDF:TEST-SYSTEM"))
   "
 Another interesting job type is 40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS.
 
@@ -365,8 +379,22 @@ modified   .github/workflows/docs.yml
   "
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
-")
+"
+  (generate function)
+  
+  (40ants-ci/jobs/run-tests:run-tests function)
+  (40ants-ci/jobs/run-tests:run-tests class)
+  
+  (40ants-ci/jobs/docs:build-docs function)
+  (40ants-ci/jobs/docs:build-docs class))
 
 
 (defun generate (system &key path)
+  "Generates GitHub workflow for given ASDF system.
+
+   This function searches workflow definitions in all packages
+   of the given ASDF system.
+
+   If PATH argument is not given, workflow files will be written
+   to .github/workflow/ relarive to the SYSTEM."
   (40ants-ci/github:generate system path))

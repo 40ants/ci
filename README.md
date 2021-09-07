@@ -1,53 +1,52 @@
-<a id='x-2840ANTS-CI-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+<a id="x-2840ANTS-CI-3A-40README-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 # 40Ants-CI - Github Workflow Generator
 
-## Table of Contents
-
-- [1 Reasons to Use][aa87]
-- [2 Quickstart][36eb]
-    - [2.1 Job Types][5683]
-        - [2.1.1 Linter][a74c]
-        - [2.1.2 Running Tests][c56f]
-        - [2.1.3 Building Docs][1fa8]
-    - [2.2 Caching][4982]
-- [3 Details][7c1f]
-
-###### \[in package 40ANTS-CI with nicknames 40ANTS-CI/CORE\]
-[![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
+[![](https://github-actions.40ants.com/40ants/ci/matrix.svg)][de0b]
 
 This is a small utility, which can generate GitHub workflows for Common Lisp
 projects.
 
 It generates workflow for running tests and building docs. These workflows
-use [40ants/run-tests](https://40ants.com/run-tests) and [40ants/build-docs](https://40ants.com/build-doc)
-actions and [SBLint](https://github.com/cxxxr/sblint) to check code for compilation errors.
+use [40ants/run-tests][8469] and [40ants/build-docs][b882]
+actions and [`SBLint`][2f94] to check code for compilation errors.
 
-<a id='x-2840ANTS-CI-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+<a id="40-ants-ci-asdf-system-details"></a>
 
-## 1 Reasons to Use
+## 40ANTS-CI ASDF System Details
 
-- This system hides all entrails related to caching.
+* Version: 0.1.0
 
-- Includes a few ready to use job types.
+* Description: A helper to an answer a question about `OS`, Lisp and Everything.
 
-- Custom job types can be defined and distributed as separate `ASDF` systems.
+* Licence: `BSD`
 
-- You don't have to write YAML anymore!
+* Author: Alexander Artemenko
 
+<a id="x-2840ANTS-CI-3A-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-<a id='x-2840ANTS-CI-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+## Reasons to Use
 
-## 2 Quickstart
+* This system hides all entrails related to caching.
+
+* Includes a few ready to use job types.
+
+* Custom job types can be defined and distributed as separate `ASDF` systems.
+
+* You don't have to write `YAML` anymore!
+
+<a id="x-2840ANTS-CI-3A-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## Quickstart
 
 This system allows you to define workflows in the lisp code. The best way is to make these
-definitions a part of your `ASDF` system. This way `40ANTS-CI` will be able to
+definitions a part of your `ASDF` system. This way [`40ants-ci`][7ed0] will be able to
 automatically understand for which system it builds a workflow.
 
 Each workflow consists of jobs and each job is a number of steps.
 
 There are three predefine types of jobs and you can create your own. Predefined jobs
-allows to reuse steps in multiple CL libraries.
+allows to reuse steps in multiple `CL` libraries.
 
 In next examples, I'll presume you are writing code in a file which is the part
 of the package inferred `ASDF` system `EXAMPLE/CI`. A file should have the following header:
@@ -61,15 +60,13 @@ of the package inferred `ASDF` system `EXAMPLE/CI`. A file should have the follo
   (:import-from #:40ants-ci/jobs/run-tests)
   (:import-from #:40ants-ci/jobs/docs))
 ```
+<a id="x-2840ANTS-CI-3A-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
+### Job Types
 
-<a id='x-2840ANTS-CI-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+<a id="x-2840ANTS-CI-3A-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-### 2.1 Job Types
-
-<a id='x-2840ANTS-CI-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
-
-#### 2.1.1 Linter
+#### Linter
 
 The simplest job type is linter. It loads a
 
@@ -79,7 +76,6 @@ The simplest job type is linter. It loads a
   :on-pull-request t
   :jobs ((40ants-ci/jobs/linter:linter)))
 ```
-
 When you'll hit `C-c C-c` on this definition,
 it will generate `.github/workflows/linter.yml` with following content:
 
@@ -124,28 +120,27 @@ it will generate `.github/workflows/linter.yml` with following content:
   }
 }
 ```
-
 Here you can see, a few steps in the job:
 
 1. Checkout the code.
 
-2. Install Roswell & Qlot using [40ants/setup-lisp](https://40ants.com/setup-lisp/) action.
+2. Install Roswell & Qlot using [40ants/setup-lisp][8de1] action.
 
-3. Install [SBLint](https://github.com/cxxxr/sblint).
+3. Install [`SBLint`][2f94].
 
 4. Run linter for `example.asd`.
 
-Another interesting thing is that this workflow automatically uses `ubuntu-latest` OS,
+Another interesting thing is that this workflow automatically uses `ubuntu-latest` `OS`,
 `Quicklisp` and `sbcl-bin` Lisp implementation. Later I'll show you how to redefine these settings.
 
-<a id='x-2840ANTS-CI-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+<a id="x-2840ANTS-CI-3A-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-#### 2.1.2 Running Tests
+#### Running Tests
 
-Another interesting job type is `40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS`.
+Another interesting job type is `40ants-ci/jobs/run-tests:run-tests` ([`1`][60a6] [`2`][8c2a]).
 
 When using this job type, make sure, your system
-runs tests on ```(``ASDF:TEST-SYSTEM``:system-name)``` call
+runs tests on `(ASDF:TEST-SYSTEM :system-name)` call
 and signals error if something went wrong.
 
 ```lisp
@@ -156,14 +151,12 @@ and signals error if something went wrong.
   :on-pull-request t
   :jobs ((40ants-ci/jobs/run-tests:run-tests
           :coverage t)))
-
 ```
-
 Here I've added a few options to the workflow:
 
-- `by-cron` - sets a schedule.
+* `by-cron` - sets a schedule.
 
-- `on-push-to` - defines a branch or branches to track.
+* `on-push-to` - defines a branch or branches to track.
 
 It will generate `.github/workflows/ci.yml` with following content:
 
@@ -216,24 +209,22 @@ It will generate `.github/workflows/ci.yml` with following content:
     }
   }
 }
-
 ```
-
 The result is similar to the workflow generated for Linter,
-but uses [40ants/setup-lisp](https://40ants.com/run-tests/) action
+but uses [40ants/setup-lisp][59d7] action
 at the final step.
 
 Also, I've passed an option `:coverage t` to the job. Thus coverage
-report will be uploaded to [Coveralls.io](https://coveralls.io/) automatically.
+report will be uploaded to [Coveralls.io][b60c] automatically.
 
-<a id='x-2840ANTS-CI-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+<a id="x-2840ANTS-CI-3A-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-#### 2.1.3 Building Docs
+#### Building Docs
 
-Third predefined job type is `40ANTS-CI/JOBS/DOCS:BUILD-DOCS`.
-It uses [40ants/build-docs](https://40ants.com/build-docs/)
+Third predefined job type is `40ants-ci/jobs/docs:build-docs` ([`1`][019c] [`2`][843d]).
+It uses [40ants/build-docs][613f]
 action and will work only if your `ASDF` system uses a documentation builder supported by
-[40ants/docs-builder](https://40ants.com/docs-builder/).
+[40ants/docs-builder][f2be].
 
 To build docs on every push to master, just use this code:
 
@@ -242,9 +233,7 @@ To build docs on every push to master, just use this code:
 (defworkflow docs
   :on-push-to "master"
   :jobs ((40ants-ci/jobs/docs:build-docs)))
-
 ```
-
 It will generate `.github/workflows/docs.yml` with following content:
 
 ```json
@@ -290,13 +279,10 @@ It will generate `.github/workflows/docs.yml` with following content:
     }
   }
 }
-
 ```
+<a id="x-2840ANTS-CI-3A-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-
-<a id='x-2840ANTS-CI-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
-
-### 2.2 Caching
+### Caching
 
 To significantly speed up our tests, we can cache installed Roswell,
 Qlot and Common Lisp fasl files.
@@ -310,7 +296,6 @@ Just add one line `:cache t` to your workflow definition:
   :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs)))
 ```
-
 Here is the diff of the generated workflow file. It shows steps, added automatically:
 
 ```diff
@@ -357,23 +342,69 @@ modified   .github/workflows/docs.yml
          },
          {
 ```
+<a id="x-2840ANTS-CI-3A-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
+## Details
 
-<a id='x-2840ANTS-CI-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
-
-## 3 Details
-
-TODO: I have to write a few chapters with details on additional job's parameters
+`TODO`: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
 
-  [1fa8]: #x-2840ANTS-CI-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Building Docs"
-  [36eb]: #x-2840ANTS-CI-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Quickstart"
-  [4982]: #x-2840ANTS-CI-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Caching"
-  [5683]: #x-2840ANTS-CI-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Job Types"
-  [7c1f]: #x-2840ANTS-CI-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Details"
-  [a74c]: #x-2840ANTS-CI-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Linter"
-  [aa87]: #x-2840ANTS-CI-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Reasons to Use"
-  [c56f]: #x-2840ANTS-CI-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Running Tests"
+<a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
+
+### [function](701c) `40ants-ci:generate` system &key path
+
+Generates GitHub workflow for given `ASDF` system.
+
+This function searches workflow definitions in all packages
+of the given `ASDF` system.
+
+If `PATH` argument is not given, workflow files will be written
+to .github/workflow/ relarive to the `SYSTEM`.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
+
+### [function](0296) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system os quicklisp lisp exclude custom
+
+Creates a job step of class [`run-tests`][60a6].
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
+
+### [class](188c) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+
+This job test runs tests for a given `ASDF` system.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
+
+### [function](68e0) `40ants-ci/jobs/docs:build-docs` &key asdf-system (error-on-warnings t)
+
+Creates a job of class [`build-docs`][019c].
+
+<a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
+
+### [class](7b66) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+
+Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
+
+
+[7ed0]: #x-28-2240ants-ci-22-20ASDF-2FSYSTEM-3ASYSTEM-29
+[019c]: #x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29
+[843d]: #x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29
+[60a6]: #x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29
+[8c2a]: #x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29
+[701c]: NIL/blob/1993c86155b8adef37a84ae4947c280d37a85d9b/src/core.lisp#L392
+[7b66]: NIL/blob/1993c86155b8adef37a84ae4947c280d37a85d9b/src/jobs/docs.lisp#L13
+[68e0]: NIL/blob/1993c86155b8adef37a84ae4947c280d37a85d9b/src/jobs/docs.lisp#L20
+[188c]: NIL/blob/1993c86155b8adef37a84ae4947c280d37a85d9b/src/jobs/run-tests.lisp#L19
+[0296]: NIL/blob/1993c86155b8adef37a84ae4947c280d37a85d9b/src/jobs/run-tests.lisp#L29
+[b882]: https://40ants.com/build-doc
+[613f]: https://40ants.com/build-docs/
+[f2be]: https://40ants.com/docs-builder/
+[8469]: https://40ants.com/run-tests
+[59d7]: https://40ants.com/run-tests/
+[8de1]: https://40ants.com/setup-lisp/
+[b60c]: https://coveralls.io/
+[de0b]: https://github.com/40ants/ci/actions
+[2f94]: https://github.com/cxxxr/sblint
 
 * * *
-###### \[generated by [40ANTS-DOC](https://40ants.com/doc)\]
+###### [generated by [40ANTS-DOC](https://40ants.com/doc/)]

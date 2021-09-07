@@ -6,7 +6,8 @@
   :class :package-inferred-system
   :pathname "src"
   :depends-on ("40ants-ci/core"
-               "40ants-ci/ci")
+               "40ants-ci/ci"
+               "40ants-ci/changelog")
   :description "A helper to an answer a question about OS, Lisp and Everything."
   :long-description
   #.(with-open-file (stream (merge-pathnames
