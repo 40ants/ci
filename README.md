@@ -351,7 +351,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](7054) `40ants-ci:generate` system &key path
+### [function](0d5e) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -363,25 +363,25 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](5b6f) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system os quicklisp lisp exclude custom
+### [function](4b29) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][60a6].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](a039) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](84a8) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](be79) `40ants-ci/jobs/docs:build-docs` &key asdf-system (error-on-warnings t)
+### [function](270d) `40ants-ci/jobs/docs:build-docs` &key asdf-system (error-on-warnings t)
 
 Creates a job of class [`build-docs`][019c].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](be74) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](de2a) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
@@ -391,11 +391,11 @@ Builds documentation and uploads it to GitHub using ["40ants/build-docs" github 
 [843d]: #x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29
 [60a6]: #x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29
 [8c2a]: #x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29
-[7054]: NIL/blob/1bb5e3a83dca6d86cbdee9f1f3e9884fa77afc28/src/core.lisp#L394
-[be74]: NIL/blob/1bb5e3a83dca6d86cbdee9f1f3e9884fa77afc28/src/jobs/docs.lisp#L13
-[be79]: NIL/blob/1bb5e3a83dca6d86cbdee9f1f3e9884fa77afc28/src/jobs/docs.lisp#L20
-[a039]: NIL/blob/1bb5e3a83dca6d86cbdee9f1f3e9884fa77afc28/src/jobs/run-tests.lisp#L19
-[5b6f]: NIL/blob/1bb5e3a83dca6d86cbdee9f1f3e9884fa77afc28/src/jobs/run-tests.lisp#L29
+[0d5e]: NIL/blob/738cba066addadfcb1c33c415de9473c580d36f2/src/core.lisp#L406
+[de2a]: NIL/blob/738cba066addadfcb1c33c415de9473c580d36f2/src/jobs/docs.lisp#L13
+[270d]: NIL/blob/738cba066addadfcb1c33c415de9473c580d36f2/src/jobs/docs.lisp#L20
+[84a8]: NIL/blob/738cba066addadfcb1c33c415de9473c580d36f2/src/jobs/run-tests.lisp#L19
+[4b29]: NIL/blob/738cba066addadfcb1c33c415de9473c580d36f2/src/jobs/run-tests.lisp#L29
 [b882]: https://40ants.com/build-doc
 [613f]: https://40ants.com/build-docs/
 [f2be]: https://40ants.com/docs-builder/
