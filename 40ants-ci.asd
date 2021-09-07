@@ -8,7 +8,7 @@
   :depends-on ("40ants-ci/core"
                "40ants-ci/ci"
                "40ants-ci/changelog")
-  :description "A helper to an answer a question about OS, Lisp and Everything."
+  :description "A tool simplify continuous deployment for Common Lisp projects."
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.md"
