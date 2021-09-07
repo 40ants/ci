@@ -9,10 +9,22 @@
   (:import-from #:40ants-ci/github)
   (:import-from #:40ants-ci/jobs/docs)
   (:import-from #:40ants-ci/jobs/run-tests)
+  (:import-from #:docs-config
+                #:docs-config)
   (:export #:generate
            #:@index
            #:@readme))
 (in-package 40ants-ci)
+
+
+(defmethod docs-config ((system (eql (asdf:find-system "40ants-ci"))))
+  ;; 40ANTS-DOC-THEME-40ANTS system will bring
+  ;; as dependency a full 40ANTS-DOC but we don't want
+  ;; unnecessary dependencies here:
+  (ql:quickload :40ants-doc-theme-40ants)
+  (list :theme
+        (find-symbol "40ANTS-THEME"
+                     (find-package "40ANTS-DOC-THEME-40ANTS"))))
 
 
 (defsection @index (:title "40Ants-CI - Github Workflow Generator"
