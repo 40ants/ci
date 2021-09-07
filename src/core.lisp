@@ -7,6 +7,8 @@
                 #:section
                 #:defsection-copy)
   (:import-from #:40ants-ci/github)
+  (:import-from #:40ants-ci/jobs/docs)
+  (:import-from #:40ants-ci/jobs/run-tests)
   (:export #:generate
            #:@index
            #:@readme))
