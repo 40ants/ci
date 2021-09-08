@@ -9,6 +9,8 @@
                "40ants-ci/ci"
                "40ants-ci/changelog")
   :description "A tool simplify continuous deployment for Common Lisp projects."
+  :homepage "https://40ants.com/ci/"
+  :source-control (:git "https://github.com/40ants/ci")
   :long-description
   #.(with-open-file (stream (merge-pathnames
                              #p"README.md"
