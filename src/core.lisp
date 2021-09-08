@@ -29,6 +29,7 @@
 
 (defsection @index (:title "40Ants-CI - Github Workflow Generator"
                     :ignore-words ("YAML"
+                                   "GIT"
                                    "CL"
                                    "CI"
                                    "OS"
