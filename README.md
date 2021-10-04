@@ -355,7 +355,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](6a7c) `40ants-ci:generate` system &key path
+### [function](1f1b) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -367,25 +367,25 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](49d7) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system os quicklisp lisp exclude custom
+### [function](6c23) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][6cb7].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](8092) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](b11c) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](b207) `40ants-ci/jobs/docs:build-docs` &key asdf-system (error-on-warnings t)
+### [function](22b5) `40ants-ci/jobs/docs:build-docs` &key asdf-system (error-on-warnings t)
 
 Creates a job of class [`build-docs`][1ddb].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](cba9) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](c33a) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
@@ -405,11 +405,11 @@ Builds documentation and uploads it to GitHub using ["40ants/build-docs" github 
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[6a7c]: https://github.com/40ants/ci/blob/74f7eca3656d653e197fe4e4dc55adea77e8c05a/src/core.lisp#L407
-[cba9]: https://github.com/40ants/ci/blob/74f7eca3656d653e197fe4e4dc55adea77e8c05a/src/jobs/docs.lisp#L13
-[b207]: https://github.com/40ants/ci/blob/74f7eca3656d653e197fe4e4dc55adea77e8c05a/src/jobs/docs.lisp#L20
-[8092]: https://github.com/40ants/ci/blob/74f7eca3656d653e197fe4e4dc55adea77e8c05a/src/jobs/run-tests.lisp#L19
-[49d7]: https://github.com/40ants/ci/blob/74f7eca3656d653e197fe4e4dc55adea77e8c05a/src/jobs/run-tests.lisp#L29
+[1f1b]: https://github.com/40ants/ci/blob/16711ff969882cf60269ab0091f6ff9427c6fda9/src/core.lisp#L407
+[c33a]: https://github.com/40ants/ci/blob/16711ff969882cf60269ab0091f6ff9427c6fda9/src/jobs/docs.lisp#L13
+[22b5]: https://github.com/40ants/ci/blob/16711ff969882cf60269ab0091f6ff9427c6fda9/src/jobs/docs.lisp#L20
+[b11c]: https://github.com/40ants/ci/blob/16711ff969882cf60269ab0091f6ff9427c6fda9/src/jobs/run-tests.lisp#L19
+[6c23]: https://github.com/40ants/ci/blob/16711ff969882cf60269ab0091f6ff9427c6fda9/src/jobs/run-tests.lisp#L29
 [2f94]: https://github.com/cxxxr/sblint
 
 * * *
