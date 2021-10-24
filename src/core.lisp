@@ -401,7 +401,10 @@ and a way how to create new job types.
   (40ants-ci/jobs/run-tests:run-tests class)
   
   (40ants-ci/jobs/docs:build-docs function)
-  (40ants-ci/jobs/docs:build-docs class))
+  (40ants-ci/jobs/docs:build-docs class)
+  
+  (40ants-ci/jobs/linter:linter function)
+  (40ants-ci/jobs/linter:linter class))
 
 
 (defun generate (system &key path)
