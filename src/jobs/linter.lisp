@@ -6,8 +6,7 @@
                 #:asdf-system)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
-  (:export
-   #:linter))
+  (:export #:linter))
 (in-package 40ants-ci/jobs/linter)
 
 

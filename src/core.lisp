@@ -391,7 +391,8 @@ modified   .github/workflows/docs.yml
 ")
 
 
-(defsection @details (:title "Details")
+(defsection @details (:title "Details"
+                      :ignore-words ("ASD"))
   "
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
