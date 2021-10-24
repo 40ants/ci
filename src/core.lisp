@@ -8,6 +8,7 @@
                 #:defsection-copy)
   (:import-from #:40ants-ci/github)
   (:import-from #:40ants-ci/jobs/docs)
+  (:import-from #:40ants-ci/jobs/linter)
   (:import-from #:40ants-ci/jobs/run-tests)
   (:import-from #:docs-config
                 #:docs-config)
@@ -390,7 +391,8 @@ modified   .github/workflows/docs.yml
 ")
 
 
-(defsection @details (:title "Details")
+(defsection @details (:title "Details"
+                      :ignore-words ("ASD"))
   "
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
@@ -401,7 +403,10 @@ and a way how to create new job types.
   (40ants-ci/jobs/run-tests:run-tests class)
   
   (40ants-ci/jobs/docs:build-docs function)
-  (40ants-ci/jobs/docs:build-docs class))
+  (40ants-ci/jobs/docs:build-docs class)
+  
+  (40ants-ci/jobs/linter:linter function)
+  (40ants-ci/jobs/linter:linter class))
 
 
 (defun generate (system &key path)
@@ -413,3 +418,4 @@ and a way how to create new job types.
    If PATH argument is not given, workflow files will be written
    to .github/workflow/ relarive to the SYSTEM."
   (40ants-ci/github:generate system path))
+

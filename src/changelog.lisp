@@ -7,6 +7,9 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"))
+  (0.3.0 2021-10-24
+         "- Now jobs 40ANTS-CI/JOBS/LINTER:LINTER, 40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS and 40ANTS-CI/JOBS/DOCS:BUILD-DOCS
+            support ASDF-VERSION argument.")
   (0.2.2 2021-06-18
          "- Fixed an occasional failure on `qlot update` inside linter workflow.
             Usually it happed when quicklisp distribution was updated and `qlfile.lock`
