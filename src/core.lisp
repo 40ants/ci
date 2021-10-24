@@ -413,3 +413,4 @@ and a way how to create new job types.
    If PATH argument is not given, workflow files will be written
    to .github/workflow/ relarive to the SYSTEM."
   (40ants-ci/github:generate system path))
+

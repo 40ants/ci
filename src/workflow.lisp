@@ -46,10 +46,29 @@
    (call-next-method)))
 
 
+(defun eval-arg (arg)
+  "Whe use as is following forms:
+
+   - (\"foo\" \"bar\" \"baz\")
+
+   And eval others:
+
+   - \"blah\" ->  \"blah\"
+   - 12345 -> 12345
+   - (foo 1 2 3) -> result of foo call.
+ "
+  (if (and (typep arg 'list)
+           (not (typep (first arg)
+                       'symbol)))
+      arg
+      (eval arg)))
+
+
 (defun make-job (name)
   (let* ((name (uiop:ensure-list name))
          (symbol (car name))
-         (args (cdr name)))
+         (args (mapcar #'eval-arg
+                       (cdr name))))
     (if (fboundp symbol)
         (apply symbol args)
         (apply #'make-instance symbol args))))

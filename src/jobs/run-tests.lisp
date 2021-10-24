@@ -26,10 +26,15 @@
   (:documentation "This job test runs tests for a given ASDF system."))
 
 
-(defun run-tests (&rest rest &key coverage qlfile asdf-system
-                                  os quicklisp lisp
-                                  exclude
-                                  custom)
+(defun run-tests (&rest rest &key coverage
+                               qlfile
+                               asdf-system
+                               asdf-version
+                               os
+                               quicklisp
+                               lisp
+                               exclude
+                               custom)
   "Creates a job step of class RUN-TESTS."
   (declare (ignore coverage qlfile os quicklisp lisp asdf-system exclude))
   (check-type custom

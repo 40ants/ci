@@ -17,7 +17,7 @@
                  :reader asdf-systems)))
 
 
-(defun linter (&key asdf-systems)
+(defun linter (&key asdf-systems asdf-version)
   "Creates a job which will run SBLint for given ASDF systems.
 
    If no ASD files given, it will use all ASD files from
@@ -27,7 +27,8 @@
   
   (make-instance 'linter
                  :asdf-system (first asdf-systems)
-                 :asdf-systems asdf-systems))
+                 :asdf-systems asdf-systems
+                 :asdf-version asdf-version))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job linter))

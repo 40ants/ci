@@ -18,11 +18,13 @@
 
 
 (defun build-docs (&key asdf-system
-                        (error-on-warnings t))
+                     asdf-version
+                     (error-on-warnings t))
   "Creates a job of class BUILD-DOCS."
   (make-instance 'build-docs
                  :asdf-system asdf-system
-                 :error-on-warnings error-on-warnings))
+                 :error-on-warnings error-on-warnings
+                 :asdf-version asdf-version))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job build-docs))

@@ -26,7 +26,13 @@
            :reader qlfile)
    (asdf-system :initarg :asdf-system
                 :initform nil
-                :reader asdf-system))
+                :type (or null string)
+                :reader asdf-system)
+   (asdf-version :initarg :asdf-version
+                 :initform nil
+                 :type (or null string)
+                 :documentation "ASDF version to use when setting up Lisp environment. If NIL, then the latest will be used."
+                 :reader asdf-version))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
 
 
@@ -95,6 +101,7 @@
            (action "Setup Common Lisp Environment"
                    "40ants/setup-lisp@v1"
                    :asdf-system (asdf-system job)
+                   :asdf-version (asdf-version job)
                    :qlfile-template (when (qlfile job)
                                       (dedent (qlfile job)))
                    :if (when *use-cache*
