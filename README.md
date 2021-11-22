@@ -355,7 +355,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](0ae4) `40ants-ci:generate` system &key path
+### [function](a97b) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -367,31 +367,31 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](e1c3) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
+### [function](3114) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][6cb7].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](7547) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](1ad3) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](7abd) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
+### [function](38af) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
 
 Creates a job of class [`build-docs`][1ddb].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](d821) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](05a0) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](8762) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
+### [function](6963) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
@@ -400,7 +400,7 @@ the current `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-### [class](3fb3) `40ants-ci/jobs/linter:linter` (lisp-job)
+### [class](68d2) `40ants-ci/jobs/linter:linter` (lisp-job)
 
 
 [b882]: https://40ants.com/build-doc
@@ -418,13 +418,13 @@ the current `ASDF` system.
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[0ae4]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/core.lisp#L412
-[d821]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/docs.lisp#L13
-[7abd]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/docs.lisp#L20
-[3fb3]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/linter.lisp#L13
-[8762]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/linter.lisp#L19
-[7547]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/run-tests.lisp#L19
-[e1c3]: https://github.com/40ants/ci/blob/6bd95c0fdec87ebe6d20a7956303271a5e3c2081/src/jobs/run-tests.lisp#L29
+[a97b]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/core.lisp#L412
+[05a0]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/docs.lisp#L13
+[38af]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/docs.lisp#L20
+[68d2]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/linter.lisp#L13
+[6963]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/linter.lisp#L19
+[1ad3]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/run-tests.lisp#L19
+[3114]: https://github.com/40ants/ci/blob/fadc973b12f536ae8df9f2aaa1344feb4109d7e2/src/jobs/run-tests.lisp#L29
 [2f94]: https://github.com/cxxxr/sblint
 
 * * *
