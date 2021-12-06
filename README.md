@@ -25,7 +25,7 @@ actions and [`SBLint`][2f94] to check code for compilation errors.
 
 * Homepage: [https://40ants.com/ci/][3f72]
 
-* Source control: [`GIT`][e681]
+* Source control: [GIT][e681]
 
 <a id="x-2840ANTS-CI-3A-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -355,7 +355,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](1488) `40ants-ci:generate` system &key path
+### [function](7ff5) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -367,31 +367,31 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](1fe3) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
+### [function](a7df) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][6cb7].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](c9c4) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](ebc2) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](6fa9) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
+### [function](9581) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
 
 Creates a job of class [`build-docs`][1ddb].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](fb93) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](92a2) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](8a78) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
+### [function](7c90) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
@@ -400,7 +400,7 @@ the current `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-### [class](d372) `40ants-ci/jobs/linter:linter` (lisp-job)
+### [class](9f2e) `40ants-ci/jobs/linter:linter` (lisp-job)
 
 
 [b882]: https://40ants.com/build-doc
@@ -418,13 +418,13 @@ the current `ASDF` system.
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[1488]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/core.lisp#L412
-[fb93]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/docs.lisp#L13
-[6fa9]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/docs.lisp#L20
-[d372]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/linter.lisp#L13
-[8a78]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/linter.lisp#L19
-[c9c4]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/run-tests.lisp#L19
-[1fe3]: https://github.com/40ants/ci/blob/26a84a7cf9a14f016fea6c6843ac2be1fb866697/src/jobs/run-tests.lisp#L29
+[7ff5]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/core.lisp#L412
+[92a2]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/docs.lisp#L13
+[9581]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/docs.lisp#L20
+[9f2e]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/linter.lisp#L13
+[7c90]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/linter.lisp#L19
+[ebc2]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/run-tests.lisp#L19
+[a7df]: https://github.com/40ants/ci/blob/c78e2566b34bc6cff96bec4c7b4cb820fd8c25cd/src/jobs/run-tests.lisp#L29
 [2f94]: https://github.com/cxxxr/sblint
 
 * * *
