@@ -1,5 +1,6 @@
 (defpackage #:40ants-ci/workflow
   (:use #:cl)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
   (:import-from #:40ants-ci/utils
@@ -64,14 +65,13 @@
       (eval arg)))
 
 
-(defun make-job (name)
-  (let* ((name (uiop:ensure-list name))
-         (symbol (car name))
-         (args (mapcar #'eval-arg
-                       (cdr name))))
-    (if (fboundp symbol)
-        (apply symbol args)
-        (apply #'make-instance symbol args))))
+(defun make-job (name-and-optional-args)
+  (destructuring-bind (symbol . args)
+      (uiop:ensure-list name-and-optional-args)
+    (let* ((args (mapcar #'eval-arg args)))
+      (if (fboundp symbol)
+          (apply symbol args)
+          (apply #'make-instance symbol args)))))
 
 
 (defun register-workflow (workflow &key (package *package*))
@@ -136,22 +136,32 @@
   (let* ((40ants-ci/vars:*use-cache* (cache-p workflow))
          (triggers (make-triggers workflow))
          (jobs (uiop:ensure-list
-                (jobs workflow))))
+                (jobs workflow)))
+         (used-job-names (make-hash-table :test 'equal)))
 
-    (append
-     `(("name" . ,(symbol-name
-                   (name workflow))))
-     
-     (when triggers
-       `(("on" . ,triggers)))
+    (flet ((ensure-unique (name)
+             "Same type of job may be used a multiple times with different parameters.
+              To make such workflow valid for GitHub, we need these jobs have unique names."
+             (let ((num-usages (incf (gethash name used-job-names 0))))
+               (if (= num-usages 1)
+                   name
+                   (format nil "~A-~A"
+                           name
+                           num-usages)))))
+      (append
+       `(("name" . ,(symbol-name
+                     (name workflow))))
+      
+       (when triggers
+         `(("on" . ,triggers)))
 
-     (when jobs
-       `(("jobs" .
-                 ,(loop for job in jobs
-                        for job-name = (string-downcase
-                                        (class-name (class-of job)))
-                        for job-data = (40ants-ci/github:prepare-data job)
-                        collect `(,job-name . ,job-data))))))))
+       (when jobs
+         `(("jobs" .
+                   ,(loop for job in jobs
+                          for job-name = (ensure-unique
+                                          (40ants-ci/jobs/job:name job))
+                          for job-data = (40ants-ci/github:prepare-data job)
+                          collect `(,job-name . ,job-data)))))))))
 
 
 (defun make-workflow-path (base-path workflow)
