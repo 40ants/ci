@@ -136,7 +136,7 @@ it will generate `.github/workflows/linter.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v1\",
+          \"uses\": \"40ants/setup-lisp@v2\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -228,7 +228,7 @@ It will generate `.github/workflows/ci.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v1\",
+          \"uses\": \"40ants/setup-lisp@v2\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -254,6 +254,82 @@ at the final step.
 
 Also, I've passed an option `:coverage t` to the job. Thus coverage
 report will be uploaded to [Coveralls.io](https://coveralls.io/) automatically.
+"
+  (@matrix section)
+  (@multiple-jobs section))
+
+
+(defsection @matrix (:title "Defining a test Matrix")
+  "
+Lisp has many implementations and can be used on multiple platforms. Thus
+it is a good idea to test our software on many combinations of OS and lisp
+implementations. Workflow generator makes this very easy.
+
+Here is an example of workflow definition with three dimentional matrix.
+It not only tests a library under different lisps and OS, but also checks
+if it works with the latest Quicklisp and Ultralisp distributions:
+
+```lisp
+(defworkflow ci
+  :on-pull-request t
+  :jobs ((run-tests
+          :os (\"ubuntu-latest\"
+               \"macos-latest\")
+          :quicklisp (\"quicklisp\"
+                      \"ultralisp\")
+          :lisp (\"sbcl-bin\"
+                 \"ccl-bin\"
+                 \"allegro\"
+                 \"clisp\"
+                 \"cmucl\")
+          :exclude (;; Seems allegro is does not support 64bit OSX.
+                    ;; Unable to install it using Roswell:
+                    ;; alisp is not executable. Missing 32bit glibc?
+                    (:os \"macos-latest\" :lisp \"allegro\")))))
+```
+")
+
+
+(defsection @multiple-jobs (:title "Multiple jobs")
+  "
+Besides a build matrix, you might specify a multiple jobs of the same type,
+but with different parameters:
+
+```lisp
+(defworkflow ci
+  :on-push-to \"master\"
+  :on-pull-request t
+  :jobs ((run-tests
+          :lisp \"sbcl-bin\")
+         (run-tests
+          :lisp \"ccl-bin\")
+         (run-tests
+          :lisp \"allegro\")))
+```
+
+This will generate a workflow with three jobs: \"run-tests\", \"run-tests-2\" and \"run-tests-3\".
+
+Meaningful names might be specified as well:
+
+```lisp
+(defworkflow ci
+  :on-push-to \"master\"
+  :on-pull-request t
+  :jobs ((run-tests
+          :name \"test-on-sbcl\"
+          :lisp \"sbcl-bin\")
+         (run-tests
+          :name \"test-on-ccl\"
+          :lisp \"ccl-bin\")
+         (run-tests
+          :name \"test-on-allegro\"
+          :lisp \"allegro\")))
+```
+
+Here is how these jobs will look like in the GitHub interface:
+
+![](https://user-images.githubusercontent.com/24827/151619261-2d49e2a6-bc5c-42db-aec5-674d9229a1b0.png)
+
 ")
 
 
@@ -302,7 +378,7 @@ It will generate `.github/workflows/docs.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v1\",
+          \"uses\": \"40ants/setup-lisp@v2\",
           \"with\": {
             \"asdf-system\": \"example\",
             \"qlfile-template\": \"\"
@@ -377,7 +453,7 @@ modified   .github/workflows/docs.yml
 +        },
          {
            \"name\": \"Setup Common Lisp Environment\",
-           \"uses\": \"40ants/setup-lisp@v1\",
+           \"uses\": \"40ants/setup-lisp@v2\",
            \"with\": {
              \"asdf-system\": \"40ants-ci\",
              \"qlfile-template\": \"\"

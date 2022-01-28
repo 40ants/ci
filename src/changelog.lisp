@@ -7,6 +7,10 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"))
+  (0.4.0 2022-01-28
+         "
+- Now multiple jobs of the same type can be listed in the same workflow.
+- Also, you can change a job's name using :NAME argument.")
   (0.3.0 2021-10-24
          "- Now jobs 40ANTS-CI/JOBS/LINTER:LINTER, 40ANTS-CI/JOBS/RUN-TESTS:RUN-TESTS and 40ANTS-CI/JOBS/DOCS:BUILD-DOCS
             support ASDF-VERSION argument.")

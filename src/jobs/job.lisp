@@ -8,12 +8,15 @@
    #:steps
    #:os
    #:lisp
-   #:quicklisp))
+   #:quicklisp
+   #:name))
 (in-package 40ants-ci/jobs/job)
 
 
 (defclass job ()
-  ((os :initform "ubuntu-latest"
+  ((name :initarg :name
+         :reader name)
+   (os :initform "ubuntu-latest"
        :initarg :os
        :reader os)
    (quicklisp :initform "quicklisp"
@@ -30,6 +33,13 @@
           :initarg :steps
           :reader steps)))
 
+
+(defmethod initialize-instance :after ((job job) &rest initargs)
+  (declare (ignore initargs))
+  (unless (slot-boundp job 'name)
+    (setf (slot-value job 'name)
+          (string-downcase
+           (class-name (class-of job))))))
 
 (defmethod os :around ((job job))
   (uiop:ensure-list
