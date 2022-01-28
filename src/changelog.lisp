@@ -7,6 +7,8 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"))
+  (0.5.0 2022-01-28
+         "- Move the actions/checkout action from v1 to v2.")
   (0.4.0 2022-01-28
          "
 - Now multiple jobs of the same type can be listed in the same workflow.
