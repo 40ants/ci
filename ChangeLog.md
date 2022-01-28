@@ -2,6 +2,14 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E4-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.4.0 (2022-01-28)
+
+* Now multiple jobs of the same type can be listed in the same workflow.
+
+* Also, you can change a job's name using `:NAME` argument.
+
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E3-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.3.0 (2021-10-24)
