@@ -104,7 +104,7 @@ it will generate `.github/workflows/linter.yml` with following content:
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@v1",
+          "uses": "40ants/setup-lisp@v2",
           "with": {
             "asdf-system": "example"
           }
@@ -196,7 +196,7 @@ It will generate `.github/workflows/ci.yml` with following content:
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@v1",
+          "uses": "40ants/setup-lisp@v2",
           "with": {
             "asdf-system": "example"
           }
@@ -220,6 +220,76 @@ at the final step.
 
 Also, I've passed an option `:coverage t` to the job. Thus coverage
 report will be uploaded to [Coveralls.io][b60c] automatically.
+
+<a id="x-2840ANTS-CI-3A-3A-40MATRIX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### Defining a test Matrix
+
+Lisp has many implementations and can be used on multiple platforms. Thus
+it is a good idea to test our software on many combinations of `OS` and lisp
+implementations. Workflow generator makes this very easy.
+
+Here is an example of workflow definition with three dimentional matrix.
+It not only tests a library under different lisps and `OS`, but also checks
+if it works with the latest Quicklisp and Ultralisp distributions:
+
+```lisp
+(defworkflow ci
+  :on-pull-request t
+  :jobs ((run-tests
+          :os ("ubuntu-latest"
+               "macos-latest")
+          :quicklisp ("quicklisp"
+                      "ultralisp")
+          :lisp ("sbcl-bin"
+                 "ccl-bin"
+                 "allegro"
+                 "clisp"
+                 "cmucl")
+          :exclude (;; Seems allegro is does not support 64bit OSX.
+                    ;; Unable to install it using Roswell:
+                    ;; alisp is not executable. Missing 32bit glibc?
+                    (:os "macos-latest" :lisp "allegro")))))
+```
+<a id="x-2840ANTS-CI-3A-3A-40MULTIPLE-JOBS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### Multiple jobs
+
+Besides a build matrix, you might specify a multiple jobs of the same type,
+but with different parameters:
+
+```lisp
+(defworkflow ci
+  :on-push-to "master"
+  :on-pull-request t
+  :jobs ((run-tests
+          :lisp "sbcl-bin")
+         (run-tests
+          :lisp "ccl-bin")
+         (run-tests
+          :lisp "allegro")))
+```
+This will generate a workflow with three jobs: "run-tests", "run-tests-2" and "run-tests-3".
+
+Meaningful names might be specified as well:
+
+```lisp
+(defworkflow ci
+  :on-push-to "master"
+  :on-pull-request t
+  :jobs ((run-tests
+          :name "test-on-sbcl"
+          :lisp "sbcl-bin")
+         (run-tests
+          :name "test-on-ccl"
+          :lisp "ccl-bin")
+         (run-tests
+          :name "test-on-allegro"
+          :lisp "allegro")))
+```
+Here is how these jobs will look like in the GitHub interface:
+
+![](https://user-images.githubusercontent.com/24827/151619261-2d49e2a6-bc5c-42db-aec5-674d9229a1b0.png)
 
 <a id="x-2840ANTS-CI-3A-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -266,7 +336,7 @@ It will generate `.github/workflows/docs.yml` with following content:
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@v1",
+          "uses": "40ants/setup-lisp@v2",
           "with": {
             "asdf-system": "example",
             "qlfile-template": ""
@@ -336,7 +406,7 @@ modified   .github/workflows/docs.yml
 +        },
          {
            "name": "Setup Common Lisp Environment",
-           "uses": "40ants/setup-lisp@v1",
+           "uses": "40ants/setup-lisp@v2",
            "with": {
              "asdf-system": "40ants-ci",
              "qlfile-template": ""
@@ -355,7 +425,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](2207) `40ants-ci:generate` system &key path
+### [function](e30a) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -367,31 +437,31 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](7899) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
+### [function](be32) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][6cb7].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](c362) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](92da) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](cc33) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
+### [function](c5b0) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
 
 Creates a job of class [`build-docs`][1ddb].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](6458) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](4a05) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](b0fb) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
+### [function](f8e3) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
@@ -400,7 +470,7 @@ the current `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-### [class](07ab) `40ants-ci/jobs/linter:linter` (lisp-job)
+### [class](fc65) `40ants-ci/jobs/linter:linter` (lisp-job)
 
 
 [b882]: https://40ants.com/build-doc
@@ -418,13 +488,13 @@ the current `ASDF` system.
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[2207]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/core.lisp#L412
-[6458]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/docs.lisp#L13
-[cc33]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/docs.lisp#L20
-[07ab]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/linter.lisp#L13
-[b0fb]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/linter.lisp#L19
-[c362]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/run-tests.lisp#L19
-[7899]: https://github.com/40ants/ci/blob/90628c7406238a506012da7323c875e88c6c407c/src/jobs/run-tests.lisp#L29
+[e30a]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/core.lisp#L488
+[4a05]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/docs.lisp#L13
+[c5b0]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/docs.lisp#L20
+[fc65]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/linter.lisp#L13
+[f8e3]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/linter.lisp#L19
+[92da]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/run-tests.lisp#L19
+[be32]: https://github.com/40ants/ci/blob/2fc4d75df6fe19a349fc6f687b30119e01d475eb/src/jobs/run-tests.lisp#L29
 [2f94]: https://github.com/cxxxr/sblint
 
 * * *

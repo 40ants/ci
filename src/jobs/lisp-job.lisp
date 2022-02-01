@@ -105,7 +105,7 @@
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
   (append (list
            (action "Checkout Code"
-                   "actions/checkout@v1"))
+                   "actions/checkout@v2"))
           (make-cache-steps job)
           (list
            (action "Setup Common Lisp Environment"
