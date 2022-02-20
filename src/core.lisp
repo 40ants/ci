@@ -97,6 +97,7 @@ of the package inferred ASDF system `EXAMPLE/CI`. A file should have the followi
 
 (defsection @job-types (:title "Job Types")
   (@linter section)
+  (@critic section)
   (@run-tests section)
   (@build-docs section))
 
@@ -106,7 +107,6 @@ of the package inferred ASDF system `EXAMPLE/CI`. A file should have the followi
 The simplest job type is linter. It loads a
 
 ```lisp
-
 (defworkflow linter
   :on-pull-request t
   :jobs ((40ants-ci/jobs/linter:linter)))
@@ -167,6 +167,37 @@ Here you can see, a few steps in the job:
 Another interesting thing is that this workflow automatically uses `ubuntu-latest` OS,
 `Quicklisp` and `sbcl-bin` Lisp implementation. Later I'll show you how to redefine these settings.
 ")
+
+
+(defsection @critic (:title "Critic")
+  "
+This job is similar to linter, but instead of SBLint it runs
+[Lisp Critic](https://40ants.com/40ants-critic).
+
+Lisp Critic is a program which advices how to make you Common Lisp code more
+idiomatic, readable and performant. Also, sometimes it might catch logical
+errors in the code.
+
+Here is how you can add this job type in your workflow:
+
+```lisp
+(defworkflow ci
+  :on-pull-request t
+  :jobs ((40ants-ci/jobs/critic:critic)))
+```
+
+Also, you might combine this job together with others, for example,
+with linter:
+
+```lisp
+(defworkflow ci
+  :on-pull-request t
+  :jobs ((40ants-ci/jobs/linter:linter)
+         (40ants-ci/jobs/critic:critic)))
+```
+
+and they will be executed in parallel. See docs on 40ANTS-CI/JOBS/CRITIC:CRITIC function
+to learn about supported arguments.")
 
 
 (defsection @run-tests (:title "Running Tests"
@@ -482,7 +513,10 @@ and a way how to create new job types.
   (40ants-ci/jobs/docs:build-docs class)
   
   (40ants-ci/jobs/linter:linter function)
-  (40ants-ci/jobs/linter:linter class))
+  (40ants-ci/jobs/linter:linter function)
+
+  (40ants-ci/jobs/critic:critic class)
+  (40ants-ci/jobs/critic:critic function))
 
 
 (defun generate (system &key path)

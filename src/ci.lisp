@@ -1,6 +1,7 @@
 (defpackage #:40ants-ci/ci
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/linter)
+  (:import-from #:40ants-ci/jobs/critic)
   (:import-from #:40ants-ci/jobs/run-tests
                 #:run-tests)
   (:import-from #:40ants-ci/jobs/docs

@@ -7,6 +7,9 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"))
+  (0.6.0 2022-02-21
+         "- New job type \"critic\" was added. It advices how to make you Lisp code better.
+            Learn more about this job type at 40ANTS-CI::@CRITIC section.")
   (0.5.0 2022-01-28
          "- Move the actions/checkout action from v1 to v2.")
   (0.4.0 2022-01-28
