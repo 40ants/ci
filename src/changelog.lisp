@@ -7,6 +7,9 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"))
+  (0.7.0 2022-04-13
+         "- 40ANTS-CI/JOBS/CRITIC:CRITIC function's argument IGNORE-CRITICUES was
+            renames to the IGNORE-CRITIQUES argument.")
   (0.6.0 2022-02-21
          "- New job type \"critic\" was added. It advices how to make you Lisp code better.
             Learn more about this job type at 40ANTS-CI::@CRITIC section.")

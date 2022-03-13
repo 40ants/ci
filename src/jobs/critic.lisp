@@ -14,10 +14,13 @@
   ;; TODO: add ability to ignore some critiques
   ((asdf-systems :initarg :asdf-systems
                  :documentation "Critic can validate more than one system, but for the base class we need provide only one."
-                 :reader asdf-systems)))
+                 :reader asdf-systems)
+   (ignore-critiques :initarg :ignore-critiques
+                     :documentation "A list strigns with names of critiques to ignore."
+                     :reader ignore-critiques)))
 
 
-(defun critic (&key asdf-systems asdf-version)
+(defun critic (&key asdf-systems asdf-version ignore-critiques)
   "Creates a job which will run Lisp Critic for given ASDF systems.
 
    If argument ASDF-SYSTEMS is NIL, it will use ASDF system
@@ -32,7 +35,8 @@
   (make-instance 'critic
                  :asdf-system (first asdf-systems)
                  :asdf-systems asdf-systems
-                 :asdf-version asdf-version))
+                 :asdf-version asdf-version
+                 :ignore-critiques ignore-critiques))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job critic))
@@ -54,5 +58,6 @@
     (loop for system in (or (asdf-systems job)
                             (list (asdf-system job)))
           collect (sh (format nil "Run Critic for ~S system" system)
-                      (format nil "qlot exec lisp-critic ~A"
+                      (format nil "qlot exec lisp-critic~@[ --ignore ~{~A~^, ~}~] ~A"
+                              (ignore-critiques job)
                               system))))))
