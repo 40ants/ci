@@ -54,7 +54,7 @@
 (defgeneric make-cache-key (job)
   (:method ((job lisp-job))
     (with-output-to-string (s)
-      (write-string "${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-" s)
+      (write-string "a-${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-" s)
       (let ((os (os job)))
         (if (single os)
             (format s "~A-" (first os))
@@ -77,29 +77,35 @@
 (defgeneric make-cache-steps (job)
   (:method ((job lisp-job))
     (when 40ants-ci/vars:*use-cache*
-      (list (sh "Grant All Perms to Make Cache Restoring Possible"
-                "sudo mkdir -p /usr/local/etc/roswell
+      (let ((paths-to-cache
+              (list "qlfile"
+                    "qlfile.lock"
+                    "~/.cache/common-lisp/"
+                    "~/.roswell"
+                    "/usr/local/etc/roswell"
+                    "/usr/local/bin/ros"
+                    ;; On OSX Roswell is installed
+                    ;; using Homebrew and /usr/local/bin/ros
+                    ;; is a symlink into a Cellar directory:
+                    "/usr/local/Cellar/roswell"
+                    ".qlot")))
+        (list (sh "Grant All Perms to Make Cache Restoring Possible"
+                  "sudo mkdir -p /usr/local/etc/roswell
                  sudo chown \"${USER}\" /usr/local/etc/roswell
                  # Here the ros binary will be restored:
                  sudo chown \"${USER}\" /usr/local/bin")
-            (sh "Get Current Month"
-                "echo \"::set-output name=value::$(date -u \"+%Y-%m\")\""
-                :id "current-month")
-            (action "Cache Roswell Setup"
-                    "actions/cache@v2"
-                    :id "cache"
-                    :path "qlfile
-                           qlfile.lock
-                           /usr/local/bin/ros
-                           ~/.cache/common-lisp/
-                           ~/.roswell
-                           /usr/local/etc/roswell
-                           .qlot"
-                    :key (make-cache-key job))
-            (sh "Restore Path To Cached Files"
-                "echo $HOME/.roswell/bin >> $GITHUB_PATH
+              (sh "Get Current Month"
+                  "echo \"::set-output name=value::$(date -u \"+%Y-%m\")\""
+                  :id "current-month")
+              (action "Cache Roswell Setup"
+                      "actions/cache@v2"
+                      :id "cache"
+                      :path (format nil "~{~A~^~%~}" paths-to-cache)
+                      :key (make-cache-key job))
+              (sh "Restore Path To Cached Files"
+                  "echo $HOME/.roswell/bin >> $GITHUB_PATH
                  echo .qlot/bin >> $GITHUB_PATH"
-                :if "steps.cache.outputs.cache-hit == 'true'")))))
+                  :if "steps.cache.outputs.cache-hit == 'true'"))))))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
