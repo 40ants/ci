@@ -2,9 +2,17 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E8-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.8.0 (2022-03-21)
+
+* Fixed caching on `OSX`. Previously, job failed with
+`/Users/runner/.roswell/bin/qlot: line 4: exec: ros: not found` error
+if `:cache t` was given to a job running on `OSX` and Roswell was restored from a cache.
+
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E7-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-## 0.7.0 (2022-04-13)
+## 0.7.0 (2022-03-13)
 
 * `40ants-ci/jobs/critic:critic` ([`1`][484a] [`2`][cd00]) function's argument `IGNORE-CRITICUES` was
 renames to the `IGNORE-CRITIQUES` argument.
