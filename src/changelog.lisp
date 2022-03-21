@@ -6,7 +6,8 @@
 
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
-                              "ASDF"))
+                              "ASDF"
+                              "OSX"))
   (0.8.0 2022-03-21
          "- Fixed caching on OSX. Previously, job failed with
             `/Users/runner/.roswell/bin/qlot: line 4: exec: ros: not found` error
