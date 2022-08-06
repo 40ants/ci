@@ -2,6 +2,7 @@
   (:use #:cl)
   (:import-from #:40ants-ci/utils
                 #:ensure-list-of-plists)
+  (:import-from #:40ants-ci/github)
   (:export
    #:job
    #:use-matrix-p
