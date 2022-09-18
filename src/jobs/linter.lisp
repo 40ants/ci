@@ -12,8 +12,16 @@
 
 (defclass linter (40ants-ci/jobs/lisp-job:lisp-job)
   ((asdf-systems :initarg :asdf-systems
+                 :initform nil
+                 :type (or null list)
                  :documentation "Linter can validate more than one system, but for the base class we need provide only one."
                  :reader asdf-systems)))
+
+
+(defmethod asdf-systems :around ((job linter))
+  (uiop:ensure-list
+   (or (call-next-method)
+       (current-system-name))))
 
 
 (defun linter (&key asdf-systems asdf-version)
@@ -21,9 +29,6 @@
 
    If no ASD files given, it will use all ASD files from
    the current ASDF system."
-  (setf asdf-systems
-        (uiop:ensure-list asdf-systems))
-  
   (make-instance 'linter
                  :asdf-system (first asdf-systems)
                  :asdf-systems asdf-systems
