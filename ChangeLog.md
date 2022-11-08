@@ -2,6 +2,14 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E8-2E1-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.8.1 (2022-09-18)
+
+* Fixed default value of asdf-systems slot of [`40ants-ci/jobs/linter:linter`][8918] class.
+
+* Also, now linter accepts `CHECK-IMPORTS` argument and is able to warn on unused or missing imports in package-inferred systems.
+
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E8-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.8.0 (2022-03-21)
@@ -42,7 +50,7 @@ Learn more about this job type at [`Critic`][240b] section.
 
 ## 0.3.0 (2021-10-24)
 
-* Now jobs [`40ants-ci/jobs/linter:linter`][523a], `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]) and `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8])
+* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][523a] [`2`][8918]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]) and `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8])
 support `ASDF-VERSION` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E2-2E2-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -87,6 +95,7 @@ changed.
 [484a]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29
 [1ddb]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29
 [13b8]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29
+[8918]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29
 [523a]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29
 [6cb7]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29
 [e35d]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29
