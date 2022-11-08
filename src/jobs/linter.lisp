@@ -12,22 +12,33 @@
 
 (defclass linter (40ants-ci/jobs/lisp-job:lisp-job)
   ((asdf-systems :initarg :asdf-systems
+                 :initform nil
+                 :type (or null list)
                  :documentation "Linter can validate more than one system, but for the base class we need provide only one."
-                 :reader asdf-systems)))
+                 :reader asdf-systems)
+   (check-imports :initarg :check-imports
+                  :initform nil
+                  :type boolean
+                  :documentation "Linter will check for missing or unused imports of package-inferred systems."
+                  :reader check-imports)))
 
 
-(defun linter (&key asdf-systems asdf-version)
+(defmethod asdf-systems :around ((job linter))
+  (uiop:ensure-list
+   (or (call-next-method)
+       (current-system-name))))
+
+
+(defun linter (&key asdf-systems asdf-version check-imports)
   "Creates a job which will run SBLint for given ASDF systems.
 
    If no ASD files given, it will use all ASD files from
    the current ASDF system."
-  (setf asdf-systems
-        (uiop:ensure-list asdf-systems))
-  
   (make-instance 'linter
                  :asdf-system (first asdf-systems)
                  :asdf-systems asdf-systems
-                 :asdf-version asdf-version))
+                 :asdf-version asdf-version
+                 :check-imports check-imports))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job linter))
@@ -47,6 +58,7 @@
     (sh "Install SBLint wrapper"
         "qlot exec ros install 40ants-linter")
     (sh "Run Linter"
-        (format nil "qlot exec 40ants-linter --system \"~{~A~^, ~}\""
+        (format nil "qlot exec 40ants-linter --system \"~{~A~^, ~}\"~:[~; --imports~]"
                 (or (asdf-systems job)
-                    (list (asdf-system job))))))))
+                    (list (asdf-system job)))
+                (check-imports job))))))

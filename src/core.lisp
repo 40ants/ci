@@ -43,6 +43,8 @@
   "
 [![](https://github-actions.40ants.com/40ants/ci/matrix.svg)](https://github.com/40ants/ci/actions)
 
+![Quicklisp](http://quickdocs.org/badge/ci.svg)
+
 This is a small utility, which can generate GitHub workflows for Common Lisp
 projects.
 
@@ -167,7 +169,8 @@ Here you can see, a few steps in the job:
 
 Another interesting thing is that this workflow automatically uses `ubuntu-latest` OS,
 `Quicklisp` and `sbcl-bin` Lisp implementation. Later I'll show you how to redefine these settings.
-")
+"
+  (40ants-ci/jobs/linter:linter class))
 
 
 (defsection @critic (:title "Critic")

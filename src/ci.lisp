@@ -43,7 +43,9 @@
           :quicklisp ("quicklisp"
                       "ultralisp")
           :lisp ("sbcl-bin"
-                 "ccl-bin")
+                 ;; Version was fixed because of this bug:
+                 ;; https://github.com/roswell/roswell/issues/534
+                 "ccl-bin/1.12.1")
           :asdf-version *asdf-version*
           :coverage t
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}

@@ -8,6 +8,9 @@
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
                               "OSX"))
+  (0.8.1 2022-09-18
+         "- Fixed default value of asdf-systems slot of 40ANTS-CI/JOBS/LINTER:LINTER class.
+          - Also, now linter accepts CHECK-IMPORTS argument and is able to warn on unused or missing imports in package-inferred systems.")
   (0.8.0 2022-03-21
          "- Fixed caching on OSX. Previously, job failed with
             `/Users/runner/.roswell/bin/qlot: line 4: exec: ros: not found` error
