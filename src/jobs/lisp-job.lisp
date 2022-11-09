@@ -95,10 +95,10 @@
                  # Here the ros binary will be restored:
                  sudo chown \"${USER}\" /usr/local/bin")
               (sh "Get Current Month"
-                  "echo \"::set-output name=value::$(date -u \"+%Y-%m\")\""
+                  "echo \"value=$(date -u \"+%Y-%m\")\" >> $GITHUB_OUTPUT"
                   :id "current-month")
               (action "Cache Roswell Setup"
-                      "actions/cache@v2"
+                      "actions/cache@v3"
                       :id "cache"
                       :path (format nil "~{~A~^~%~}" paths-to-cache)
                       :key (make-cache-key job))
@@ -111,7 +111,7 @@
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
   (append (list
            (action "Checkout Code"
-                   "actions/checkout@v2"))
+                   "actions/checkout@v3"))
           (make-cache-steps job)
           (list
            (action "Setup Common Lisp Environment"
