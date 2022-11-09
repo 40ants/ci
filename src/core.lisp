@@ -135,7 +135,7 @@ it will generate `.github/workflows/linter.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v1\"
+          \"uses\": \"actions/checkout@v3\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
@@ -259,7 +259,7 @@ It will generate `.github/workflows/ci.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v1\"
+          \"uses\": \"actions/checkout@v3\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
@@ -409,7 +409,7 @@ It will generate `.github/workflows/docs.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v1\"
+          \"uses\": \"actions/checkout@v3\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
@@ -458,7 +458,7 @@ Here is the diff of the generated workflow file. It shows steps, added automatic
 modified   .github/workflows/docs.yml
 @@ -20,13 +20,40 @@
            \"name\": \"Checkout Code\",
-           \"uses\": \"actions/checkout@v1\"
+           \"uses\": \"actions/checkout@v3\"
          },
 +        {
 +          \"name\": \"Grant All Perms to Make Cache Restoring Possible\",
@@ -474,7 +474,7 @@ modified   .github/workflows/docs.yml
 +        {
 +          \"name\": \"Cache Roswell Setup\",
 +          \"id\": \"cache\",
-+          \"uses\": \"actions/cache@v2\",
++          \"uses\": \"actions/cache@v3\",
 +          \"with\": {
 +            \"path\": \"qlfile\\n                           qlfile.lock\\n                           /usr/local/bin/ros\\n                           ~/.cache/common-lisp/\\n                           ~/.roswell\\n                           /usr/local/etc/roswell\\n                           .qlot\",
 +            \"key\": \"${{ steps.current-month.outputs.value }}-${{ env.cache-name }}-ubuntu-latest-quicklisp-sbcl-bin-${{ hashFiles('qlfile.lock') }}\"

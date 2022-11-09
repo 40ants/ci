@@ -8,6 +8,8 @@
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
                               "OSX"))
+  (0.9.0 2022-11-10
+         "- Fixed warnings about `set-output` and [outdated Node.js versions](https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/) in checkout and cache actions.")
   (0.8.1 2022-09-18
          "- Fixed default value of asdf-systems slot of 40ANTS-CI/JOBS/LINTER:LINTER class.
           - Also, now linter accepts CHECK-IMPORTS argument and is able to warn on unused or missing imports in package-inferred systems.")
