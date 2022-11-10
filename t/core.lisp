@@ -1,8 +1,5 @@
 (uiop:define-package #:40ants-ci-test/core
   (:use #:cl)
-  (:import-from #:hamcrest/rove
-                #:contains
-                #:assert-that)
   (:import-from #:rove
                 #:testing
                 #:ok
