@@ -49,6 +49,7 @@
    (call-next-method)))
 
 
+;; ignore-critiques: evil-eval
 (defun eval-arg (arg)
   "Whe use as is following forms:
 
@@ -60,9 +61,8 @@
    - 12345 -> 12345
    - (foo 1 2 3) -> result of foo call.
  "
-  (if (and (typep arg 'list)
-           (not (typep (first arg)
-                       'symbol)))
+  (if (and (listp arg)
+           (not (symbolp (first arg))))
       arg
       (eval arg)))
 
@@ -70,7 +70,7 @@
 (defun make-job (name-and-optional-args)
   (destructuring-bind (symbol . args)
       (uiop:ensure-list name-and-optional-args)
-    (let* ((args (mapcar #'eval-arg args)))
+    (let ((args (mapcar #'eval-arg args)))
       (if (fboundp symbol)
           (apply symbol args)
           (apply #'make-instance symbol args)))))

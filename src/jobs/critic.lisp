@@ -28,14 +28,13 @@
    You may also provide ASDF-VERSION argument. It should be
    a string. By default, the latest ASDF version will be used."
   (check-type asdf-version (or null string))
-  (setf asdf-systems
-        (uiop:ensure-list asdf-systems))
   
-  (make-instance 'critic
-                 :asdf-system (first asdf-systems)
-                 :asdf-systems asdf-systems
-                 :asdf-version asdf-version
-                 :ignore-critiques ignore-critiques))
+  (let ((asdf-systems (uiop:ensure-list asdf-systems)))
+    (make-instance 'critic
+                   :asdf-system (first asdf-systems)
+                   :asdf-systems asdf-systems
+                   :asdf-version asdf-version
+                   :ignore-critiques ignore-critiques)))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job critic))

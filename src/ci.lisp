@@ -28,7 +28,8 @@
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
           :check-imports t)
-         (40ants-ci/jobs/critic:critic)
+         (40ants-ci/jobs/critic:critic
+          :ignore-critiques ("function-too-long"))
          (run-tests
           :os ("ubuntu-latest"
                "macos-latest")

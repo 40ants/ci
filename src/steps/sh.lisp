@@ -23,6 +23,7 @@
           :reader shell)))
 
 
+;; ignore-critiques: if-no-else
 (defun sh (name command &rest env &key
                                     id
                                     if

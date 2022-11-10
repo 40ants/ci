@@ -16,6 +16,7 @@
                 :documentation "A plist to be passed as \"with\" dictionary to the action.")))
 
 
+;; ignore-critiques: if-no-else
 (defun action (name uses &rest args &key id if env &allow-other-keys)
   (remove-from-plistf args :id :if :env)
   (make-instance 'action

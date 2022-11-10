@@ -145,7 +145,7 @@
         },
         {
           "name": "Run Critic for \"40ants-ci\" system",
-          "run": "qlot exec lisp-critic 40ants-ci",
+          "run": "qlot exec lisp-critic --ignore function-too-long 40ants-ci",
           "shell": "bash"
         }
       ]
