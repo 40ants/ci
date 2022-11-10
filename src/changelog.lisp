@@ -1,13 +1,17 @@
-(defpackage #:40ants-ci/changelog
+(uiop:define-package #:40ants-ci/changelog
   (:use #:cl)
   (:import-from #:40ants-doc/changelog
                 #:defchangelog))
-(in-package 40ants-ci/changelog)
+(in-package #:40ants-ci/changelog)
 
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
-                              "OSX"))
+                              "OSX")
+               :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.10.0 2022-11-10
+          "- Now Linter does \"qlot install --no-deps\" and quickloads only those systems, which should be linted.
+           - Also, 40ANTS-CI system now inherits from 40ANTS-ASDF-SYSTEM system.")
   (0.9.0 2022-11-10
          "- Fixed warnings about `set-output` and [outdated Node.js versions](https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/) in checkout and cache actions.")
   (0.8.1 2022-09-18
