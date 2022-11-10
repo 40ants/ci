@@ -1,10 +1,10 @@
-(uiop:define-package #:40ants-ci-test/core
+(uiop:define-package #:40ants-ci-tests/core
   (:use #:cl)
   (:import-from #:rove
                 #:testing
                 #:ok
                 #:deftest))
-(in-package 40ants-ci-test/core)
+(in-package 40ants-ci-tests/core)
 
 
 (deftest test-hello-world
