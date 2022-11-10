@@ -2,10 +2,9 @@
   (:use #:cl)
   (:import-from #:40ants-ci/steps/sh
                 #:sh)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/jobs/lisp-job
                 #:asdf-system)
-  (:import-from #:40ants-ci/utils
-                #:current-system-name)
   (:export #:critic))
 (in-package 40ants-ci/jobs/critic)
 

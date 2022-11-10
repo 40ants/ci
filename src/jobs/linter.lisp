@@ -4,6 +4,7 @@
                 #:sh)
   (:import-from #:40ants-ci/jobs/lisp-job
                 #:asdf-system)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
   (:export #:linter))

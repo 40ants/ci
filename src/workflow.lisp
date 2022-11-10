@@ -1,10 +1,12 @@
 (defpackage #:40ants-ci/workflow
   (:use #:cl)
-  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
   (:import-from #:40ants-ci/utils
                 #:ensure-primary-system)
+  (:import-from #:40ants-ci/vars)
+  (:import-from #:alexandria
+                #:with-output-to-file)
   (:export
    #:defworkflow))
 (in-package 40ants-ci/workflow)
@@ -189,7 +191,7 @@
       (error "Please, provide a path to save JSON data to."))
 
     (ensure-directories-exist path)
-    (alexandria:with-output-to-file (output path :if-exists :supersede)
+    (with-output-to-file (output path :if-exists :supersede)
       (write-string json output)
       (list path))))
 

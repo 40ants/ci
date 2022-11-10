@@ -1,6 +1,7 @@
 (defpackage #:40ants-ci/steps/sh
   (:use #:cl)
   (:import-from #:40ants-ci/steps/step)
+  (:import-from #:40ants-ci/github)
   (:import-from #:alexandria
                 #:remove-from-plistf)
   (:import-from #:40ants-ci/utils

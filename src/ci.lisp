@@ -7,10 +7,7 @@
   (:import-from #:40ants-ci/jobs/docs
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
-                #:defworkflow)
-  (:import-from #:40ants-ci/steps/sh
-                #:sections
-                #:sh))
+                #:defworkflow))
 (in-package 40ants-ci/ci)
 
 
@@ -31,6 +28,7 @@
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
           :check-imports t)
+         (40ants-ci/jobs/critic:critic)
          (run-tests
           :os ("ubuntu-latest"
                "macos-latest")
