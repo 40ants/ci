@@ -4,6 +4,7 @@
                 #:sh)
   (:import-from #:40ants-ci/jobs/lisp-job
                 #:asdf-system)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
   (:export #:linter))
@@ -54,7 +55,7 @@
         ;; GitHub action container qlot update sometimes
         ;; fails on updating dependencies. The second run
         ;; fixes this issue. :(((
-        "qlot update || qlot update")
+        "qlot update --no-deps")
     (sh "Install SBLint wrapper"
         "qlot exec ros install 40ants-linter")
     (sh "Run Linter"

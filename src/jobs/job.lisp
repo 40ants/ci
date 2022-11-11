@@ -63,6 +63,7 @@
    (call-next-method)))
 
 
+;; ignore-critiques: length=num
 (defgeneric use-matrix-p (job)
   (:method ((job job))
     (or (> (length (os job)) 1)
@@ -70,6 +71,7 @@
         (> (length (quicklisp job)) 1))))
 
 
+;; ignore-critiques: length=num
 (defgeneric make-matrix (job)
   (:method ((job job))
     (append
@@ -85,6 +87,7 @@
                              (exclude job))))))))
 
 
+;; ignore-critiques: length=num
 (defgeneric make-env (job)
   (:method ((job job))
     (append
@@ -106,6 +109,7 @@
               steps))))
 
 
+;; ignore-critiques: length=num
 (defgeneric make-runs-on (job)
   (:method ((job job))
     (if (> (length (os job)) 1)

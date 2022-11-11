@@ -56,8 +56,7 @@
           "name": "Setup Common Lisp Environment",
           "uses": "40ants/setup-lisp@v2",
           "with": {
-            "asdf-system": "40ants-ci",
-            "asdf-version": "3.3.5.1"
+            "asdf-system": "40ants-ci"
           },
           "if": "steps.cache.outputs.cache-hit != 'true'"
         },

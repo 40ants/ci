@@ -54,19 +54,19 @@ builder uses it to find documentation sections.
     (system-packages (asdf:find-system system)))
   (:method ((system asdf:system))
 
-    (let* ((package-name (string-upcase
-                          (asdf:component-name system))))
-      (append (list (find-package package-name))
-              (loop with prefix-name = (format nil "~A/" package-name)
-                    with prefix-name-length = (length prefix-name)
-                    for package in (list-all-packages)
-                    for package-name = (package-name package)
-                    when (and (> (length package-name)
-                                 prefix-name-length)
-                              (string= (subseq package-name
-                                               0 prefix-name-length)
-                                       prefix-name))
-                      collect package)))))
+    (let ((package-name (string-upcase
+                         (asdf:component-name system))))
+      (list* (find-package package-name)
+             (loop with prefix-name = (format nil "~A/" package-name)
+                   with prefix-name-length = (length prefix-name)
+                   for package in (list-all-packages)
+                   for package-name = (package-name package)
+                   when (and (> (length package-name)
+                                prefix-name-length)
+                             (string= (subseq package-name
+                                              0 prefix-name-length)
+                                      prefix-name))
+                     collect package)))))
 
 
 (defun current-system-name ()
@@ -181,8 +181,7 @@ it will output HELLO-WORLD.\"
   (and (listp list)
        (loop for item in list
              always (and (consp item)
-                         (typep (car item)
-                                'string)))))
+                         (stringp (car item))))))
 
 
 (defun ensure-list-of-plists (data)

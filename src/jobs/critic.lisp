@@ -2,10 +2,9 @@
   (:use #:cl)
   (:import-from #:40ants-ci/steps/sh
                 #:sh)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/jobs/lisp-job
                 #:asdf-system)
-  (:import-from #:40ants-ci/utils
-                #:current-system-name)
   (:export #:critic))
 (in-package 40ants-ci/jobs/critic)
 
@@ -29,14 +28,13 @@
    You may also provide ASDF-VERSION argument. It should be
    a string. By default, the latest ASDF version will be used."
   (check-type asdf-version (or null string))
-  (setf asdf-systems
-        (uiop:ensure-list asdf-systems))
   
-  (make-instance 'critic
-                 :asdf-system (first asdf-systems)
-                 :asdf-systems asdf-systems
-                 :asdf-version asdf-version
-                 :ignore-critiques ignore-critiques))
+  (let ((asdf-systems (uiop:ensure-list asdf-systems)))
+    (make-instance 'critic
+                   :asdf-system (first asdf-systems)
+                   :asdf-systems asdf-systems
+                   :asdf-version asdf-version
+                   :ignore-critiques ignore-critiques)))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job critic))

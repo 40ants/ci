@@ -1,10 +1,12 @@
 (defpackage #:40ants-ci/workflow
   (:use #:cl)
-  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
   (:import-from #:40ants-ci/utils
                 #:ensure-primary-system)
+  (:import-from #:40ants-ci/vars)
+  (:import-from #:alexandria
+                #:with-output-to-file)
   (:export
    #:defworkflow))
 (in-package 40ants-ci/workflow)
@@ -47,6 +49,7 @@
    (call-next-method)))
 
 
+;; ignore-critiques: evil-eval
 (defun eval-arg (arg)
   "Whe use as is following forms:
 
@@ -58,9 +61,8 @@
    - 12345 -> 12345
    - (foo 1 2 3) -> result of foo call.
  "
-  (if (and (typep arg 'list)
-           (not (typep (first arg)
-                       'symbol)))
+  (if (and (listp arg)
+           (not (symbolp (first arg))))
       arg
       (eval arg)))
 
@@ -68,7 +70,7 @@
 (defun make-job (name-and-optional-args)
   (destructuring-bind (symbol . args)
       (uiop:ensure-list name-and-optional-args)
-    (let* ((args (mapcar #'eval-arg args)))
+    (let ((args (mapcar #'eval-arg args)))
       (if (fboundp symbol)
           (apply symbol args)
           (apply #'make-instance symbol args)))))
@@ -189,7 +191,7 @@
       (error "Please, provide a path to save JSON data to."))
 
     (ensure-directories-exist path)
-    (alexandria:with-output-to-file (output path :if-exists :supersede)
+    (with-output-to-file (output path :if-exists :supersede)
       (write-string json output)
       (list path))))
 
