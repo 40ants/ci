@@ -9,6 +9,8 @@
                               "ASDF"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.10.1 2023-03-08
+          "- Fixed installation of the Linter. Now it depends on 40ANTS-ASDF-SYSTEM system.")
   (0.10.0 2022-11-10
           "- Now Linter does \"qlot install --no-deps\" and quickloads only those systems, which should be linted.
            - Also, 40ANTS-CI system now inherits from 40ANTS-ASDF-SYSTEM system.")

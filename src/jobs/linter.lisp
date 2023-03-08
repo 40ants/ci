@@ -46,8 +46,8 @@
   (append
    (call-next-method)
    (list
-    (sh "Change dist to Ultralisp"
-        "echo 'dist ultralisp http://dist.ultralisp.org' > qlfile")
+    (sh "Change dist to Ultralisp if qlfile does not exist"
+        "if [[ ! -e qlfile ]]; then echo 'dist ultralisp http://dist.ultralisp.org' > qlfile; fi")
     (sh "Update Qlot"
         ;; Here we update qlot twice in case if the first
         ;; time will fail. I wasn't able to figure out and
@@ -57,7 +57,10 @@
         ;; fixes this issue. :(((
         "qlot update --no-deps")
     (sh "Install SBLint wrapper"
-        "qlot exec ros install 40ants-linter")
+        ;; Linter has a defsystem dependency on 40ants-asdf-system
+        ;; and roswell breaks if it is not installed, thus we need
+        ;; to install both of them:
+        "qlot exec ros install 40ants-asdf-system 40ants-linter")
     (sh "Run Linter"
         (format nil "qlot exec 40ants-linter --system \"~{~A~^, ~}\"~:[~; --imports~]"
                 (or (asdf-systems job)
