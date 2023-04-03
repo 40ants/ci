@@ -2,7 +2,6 @@
   (:use #:cl)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
-  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
                 #:ensure-primary-system)
   (:import-from #:40ants-ci/vars)
