@@ -12,7 +12,7 @@
   (0.10.1 2023-03-08
           "- Fixed installation of the Linter. Now it depends on 40ANTS-ASDF-SYSTEM system.")
   (0.10.0 2022-11-10
-          "- Now Linter does \"qlot install --no-deps\" and quickloads only those systems, which should be linted.
+          "- Now Linter does `qlot install --no-deps` and quickloads only those systems, which should be linted.
            - Also, 40ANTS-CI system now inherits from 40ANTS-ASDF-SYSTEM system.")
   (0.9.0 2022-11-10
          "- Fixed warnings about `set-output` and [outdated Node.js versions](https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/) in checkout and cache actions.")
