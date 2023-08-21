@@ -12,7 +12,7 @@
 
 ## 0.10.0 (2022-11-10)
 
-* Now Linter does "qlot install --no-deps" and quickloads only those systems, which should be linted.
+* Now Linter does `qlot install --no-deps` and quickloads only those systems, which should be linted.
 
 * Also, [`40ants-ci`][b171] system now inherits from [`40ants-asdf-system`][d2a8] system.
 

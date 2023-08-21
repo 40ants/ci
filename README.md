@@ -29,6 +29,8 @@ actions and [`SBLint`][2f94] to check code for compilation errors.
 
 * Source control: [GIT][e681]
 
+* Depends on: [40ants-doc][2c00], [alexandria][8236], [docs-config][ce67], [str][ef7f], [yason][aba2]
+
 <a id="x-2840ANTS-CI-3A-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Reasons to Use
@@ -140,7 +142,7 @@ Another interesting thing is that this workflow automatically uses `ubuntu-lates
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-##### [class](198f) `40ants-ci/jobs/linter:linter` (lisp-job)
+##### [class](cab1) `40ants-ci/jobs/linter:linter` (lisp-job)
 
 <a id="x-2840ANTS-CI-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -460,7 +462,7 @@ and a way how to create new job types.
 
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](0b55) `40ants-ci:generate` system &key path
+### [function](7d88) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -472,31 +474,31 @@ to .github/workflow/ relarive to the `SYSTEM`.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
 
-### [function](e56e) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
+### [function](96b4) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
 
 Creates a job step of class [`run-tests`][6cb7].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
 
-### [class](023f) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+### [class](e647) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
 
 This job test runs tests for a given `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
 
-### [function](da19) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
+### [function](cede) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
 
 Creates a job of class [`build-docs`][1ddb].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](ff45) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+### [class](e0ef) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](6173) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports
+### [function](ec46) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
@@ -505,7 +507,7 @@ the current `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](6173) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports
+### [function](ec46) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
@@ -514,11 +516,11 @@ the current `ASDF` system.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29"></a>
 
-### [class](b826) `40ants-ci/jobs/critic:critic` (lisp-job)
+### [class](5559) `40ants-ci/jobs/critic:critic` (lisp-job)
 
 <a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29"></a>
 
-### [function](d86b) `40ants-ci/jobs/critic:critic` &key asdf-systems asdf-version ignore-critiques
+### [function](da28) `40ants-ci/jobs/critic:critic` &key asdf-systems asdf-version ignore-critiques
 
 Creates a job which will run Lisp Critic for given `ASDF` systems.
 
@@ -546,16 +548,21 @@ a string. By default, the latest `ASDF` version will be used.
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[0b55]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/core.lisp#L526
-[b826]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/critic.lisp#L12
-[d86b]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/critic.lisp#L22
-[ff45]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/docs.lisp#L14
-[da19]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/docs.lisp#L21
-[198f]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/linter.lisp#L14
-[6173]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/linter.lisp#L33
-[023f]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/run-tests.lisp#L18
-[e56e]: https://github.com/40ants/ci/blob/f2c0596efbcfe35f795fc15308fbb806d7cf61de/src/jobs/run-tests.lisp#L28
+[7d88]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/core.lisp#L526
+[5559]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/critic.lisp#L12
+[da28]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/critic.lisp#L22
+[e0ef]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/docs.lisp#L14
+[cede]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/docs.lisp#L21
+[cab1]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/linter.lisp#L14
+[ec46]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/linter.lisp#L33
+[e647]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/run-tests.lisp#L18
+[96b4]: https://github.com/40ants/ci/blob/64e4d395d01e7fafd189ca436c68a0ce6953023a/src/jobs/run-tests.lisp#L28
 [2f94]: https://github.com/cxxxr/sblint
+[2c00]: https://quickdocs.org/40ants-doc
+[8236]: https://quickdocs.org/alexandria
+[ce67]: https://quickdocs.org/docs-config
+[ef7f]: https://quickdocs.org/str
+[aba2]: https://quickdocs.org/yason
 
 * * *
 ###### [generated by [40ANTS-DOC](https://40ants.com/doc/)]
