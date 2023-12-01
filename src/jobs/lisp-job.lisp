@@ -14,6 +14,10 @@
                 #:sh)
   (:import-from #:40ants-ci/vars
                 #:*use-cache*)
+  (:import-from #:serapeum
+                #:length<)
+  (:import-from #:alexandria
+                #:length=)
   (:export #:lisp-job
            #:asdf-system
            #:lisp
@@ -64,29 +68,33 @@
 
 (defmethod 40ants-ci/jobs/job:use-matrix-p ((job lisp-job))
   (or (call-next-method)
-      (> (length (lisp job)) 1)
-      (> (length (quicklisp job)) 1)))
+      (length< 1 (lisp job))
+      (length< 1 (quicklisp job))))
 
 
 (defmethod 40ants-ci/jobs/job:make-matrix ((job lisp-job))
   (append
    (call-next-method)
    
-   (when (> (length (quicklisp job)) 1)
+   (when (length< 1 (quicklisp job))
      `(("quicklisp" . ,(quicklisp job))))
-   (when (> (length (lisp job)) 1)
+   (when (length< 1 (lisp job))
      `(("lisp" . ,(lisp job))))))
 
 
 (defmethod 40ants-ci/jobs/job:make-env ((job lisp-job))
   (append
    (call-next-method)
-   (if (= (length (quicklisp job)) 1)
-       `(("QUICKLISP_DIST" . ,(first (quicklisp job))))
-       `(("QUICKLISP_DIST" . "${{ matrix.quicklisp }}")))
-   (if (= (length (lisp job)) 1)
-       `(("LISP" . ,(first (lisp job))))
-       `(("LISP" . "${{ matrix.lisp }}")))))
+   (cond
+     ((length< 1 (quicklisp job))
+      `(("QUICKLISP_DIST" . "${{ matrix.quicklisp }}")))
+     ((length= 1 (quicklisp job))
+      `(("QUICKLISP_DIST" . ,(first (quicklisp job))))))
+   (cond
+     ((length< 1 (lisp job))
+      `(("LISP" . "${{ matrix.lisp }}")))
+     ((length= 1 (lisp job))
+      `(("LISP" . ,(first (lisp job))))))))
 
 
 (defmethod asdf-system :around ((job lisp-job))

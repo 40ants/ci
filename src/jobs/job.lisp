@@ -3,6 +3,10 @@
   (:import-from #:40ants-ci/utils
                 #:ensure-list-of-plists)
   (:import-from #:40ants-ci/github)
+  (:import-from #:serapeum
+                #:length<)
+  (:import-from #:alexandria
+                #:length=)
   (:export #:job
            #:use-matrix-p
            #:steps
@@ -48,17 +52,15 @@
    (call-next-method)))
 
 
-;; ignore-critiques: length=num
 (defgeneric use-matrix-p (job)
   (:method ((job job))
-    (or (> (length (os job)) 1))))
+    (length< 1 (os job))))
 
 
-;; ignore-critiques: length=num
 (defgeneric make-matrix (job)
   (:method ((job job))
     (append
-     (when (> (length (os job)) 1)
+     (when (length< 1 (os job))
        `(("os" . ,(os job))))
      (when (exclude job)
        `(("exclude" .
@@ -66,13 +68,14 @@
                              (exclude job))))))))
 
 
-;; ignore-critiques: length=num
 (defgeneric make-env (job)
   (:method ((job job))
     (append
-     (if (= (length (os job)) 1)
-         `(("OS" . ,(first (os job))))
-         `(("OS" . "${{ matrix.os }}"))))))
+     (cond
+       ((length< 1 (os job))
+        `(("OS" . "${{ matrix.os }}")))
+       ((length= 1 (os job))
+        `(("OS" . ,(first (os job)))))))))
 
 
 (defgeneric make-steps (job)
@@ -82,10 +85,9 @@
               steps))))
 
 
-;; ignore-critiques: length=num
 (defgeneric make-runs-on (job)
   (:method ((job job))
-    (if (> (length (os job)) 1)
+    (if (length< 1 (os job))
         "${{ matrix.os }}"
         (first (os job)))))
 

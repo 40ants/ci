@@ -35,7 +35,8 @@
                          "40ants-ci-tests")
           :check-imports t)
          (40ants-ci/jobs/critic:critic
-          :ignore-critiques ("function-too-long"))
+          :ignore-critiques ("function-too-long"
+                             "check-prefix"))
          (run-tests
           :os ("ubuntu-latest"
                "macos-latest")

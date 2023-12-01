@@ -30,6 +30,11 @@ Changed
 =======
 
 Slots `quicklisp` and `lisp` were moved from class 40ANTS-CI/JOBS/JOB:JOB to 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB.
+
+Fixed
+=====
+
+Class 40ANTS-CI/JOBS/CRITIC:CRITIC was fixed for case when there are multiple critiques to ignore.
 ")
   (0.10.1 2023-03-08
           "- Fixed installation of the Linter. Now it depends on 40ANTS-ASDF-SYSTEM system.")
