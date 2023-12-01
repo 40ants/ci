@@ -11,6 +11,7 @@
   (:import-from #:40ants-ci/jobs/linter)
   (:import-from #:40ants-ci/jobs/critic)
   (:import-from #:40ants-ci/jobs/run-tests)
+  (:import-from #:40ants-ci/jobs/autotag)
   (:import-from #:docs-config
                 #:docs-config)
   (:export #:generate
