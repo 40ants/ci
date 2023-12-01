@@ -21,7 +21,7 @@
   :on-push-to "master"
   :on-pull-request t
   :by-cron "0 10 * * 1"
-  :cache t
+  ;; :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs)))
 
 

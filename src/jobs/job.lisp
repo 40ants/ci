@@ -75,7 +75,9 @@
        ((length< 1 (os job))
         `(("OS" . "${{ matrix.os }}")))
        ((length= 1 (os job))
-        `(("OS" . ,(first (os job)))))))))
+        `(("OS" . ,(first (os job)))))
+       (t
+        nil)))))
 
 
 (defgeneric make-steps (job)

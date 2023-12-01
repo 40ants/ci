@@ -89,12 +89,16 @@
      ((length< 1 (quicklisp job))
       `(("QUICKLISP_DIST" . "${{ matrix.quicklisp }}")))
      ((length= 1 (quicklisp job))
-      `(("QUICKLISP_DIST" . ,(first (quicklisp job))))))
+      `(("QUICKLISP_DIST" . ,(first (quicklisp job)))))
+     (t
+      nil))
    (cond
      ((length< 1 (lisp job))
       `(("LISP" . "${{ matrix.lisp }}")))
      ((length= 1 (lisp job))
-      `(("LISP" . ,(first (lisp job))))))))
+      `(("LISP" . ,(first (lisp job)))))
+     (t
+      nil))))
 
 
 (defmethod asdf-system :around ((job lisp-job))
