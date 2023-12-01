@@ -7,6 +7,8 @@
                 #:section
                 #:defsection-copy)
   (:import-from #:40ants-ci/github)
+  (:import-from #:40ants-ci/jobs/job)
+  (:import-from #:40ants-ci/jobs/lisp-job)
   (:import-from #:40ants-ci/jobs/docs)
   (:import-from #:40ants-ci/jobs/linter)
   (:import-from #:40ants-ci/jobs/critic)
