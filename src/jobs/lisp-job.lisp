@@ -1,9 +1,7 @@
 (uiop:define-package #:40ants-ci/jobs/lisp-job
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/job
-                #:os
-                #:lisp
-                #:quicklisp)
+                #:os)
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:import-from #:40ants-ci/utils
