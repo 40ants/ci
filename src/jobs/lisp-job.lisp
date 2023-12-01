@@ -1,4 +1,4 @@
-(defpackage #:40ants-ci/jobs/lisp-job
+(uiop:define-package #:40ants-ci/jobs/lisp-job
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/job
                 #:os
@@ -14,14 +14,21 @@
                 #:sh)
   (:import-from #:40ants-ci/vars
                 #:*use-cache*)
-  (:export
-   #:lisp-job
-   #:asdf-system))
+  (:export #:lisp-job
+           #:asdf-system
+           #:lisp
+           #:quicklisp))
 (in-package 40ants-ci/jobs/lisp-job)
 
 
 (defclass lisp-job (40ants-ci/jobs/job:job)
-  ((qlfile :initarg :qlfile
+  ((quicklisp :initform "quicklisp"
+                 :initarg :quicklisp
+                 :reader quicklisp)
+   (lisp :initform "sbcl-bin"
+         :initarg :lisp
+         :reader lisp)
+   (qlfile :initarg :qlfile
            :initform nil
            :reader qlfile)
    (asdf-system :initarg :asdf-system
@@ -44,6 +51,42 @@
                  :documentation "Qlot version to use when setting up Lisp environment. If NIL, then will be used version, pinned in SETUP-LISP github action."
                  :reader qlot-version))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
+
+
+(defmethod lisp :around ((job lisp-job))
+  (uiop:ensure-list
+   (call-next-method)))
+
+(defmethod quicklisp :around ((job lisp-job))
+  (uiop:ensure-list
+   (call-next-method)))
+
+
+(defmethod 40ants-ci/jobs/job:use-matrix-p ((job lisp-job))
+  (or (call-next-method)
+      (> (length (lisp job)) 1)
+      (> (length (quicklisp job)) 1)))
+
+
+(defmethod 40ants-ci/jobs/job:make-matrix ((job lisp-job))
+  (append
+   (call-next-method)
+   
+   (when (> (length (quicklisp job)) 1)
+     `(("quicklisp" . ,(quicklisp job))))
+   (when (> (length (lisp job)) 1)
+     `(("lisp" . ,(lisp job))))))
+
+
+(defmethod 40ants-ci/jobs/job:make-env ((job lisp-job))
+  (append
+   (call-next-method)
+   (if (= (length (quicklisp job)) 1)
+       `(("QUICKLISP_DIST" . ,(first (quicklisp job))))
+       `(("QUICKLISP_DIST" . "${{ matrix.quicklisp }}")))
+   (if (= (length (lisp job)) 1)
+       `(("LISP" . ,(first (lisp job))))
+       `(("LISP" . "${{ matrix.lisp }}")))))
 
 
 (defmethod asdf-system :around ((job lisp-job))

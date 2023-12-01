@@ -9,6 +9,28 @@
                               "ASDF"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.11.0 2023-12-01
+          "
+Added
+=====
+
+New job class 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG was added.
+
+Use it like this:
+
+```lisp
+(defworkflow release
+  :on-push-to \"master\"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
+
+and it will search for new semver tags in the ChangeLog.md file and push them to the git.
+
+Changed
+=======
+
+Slots `quicklisp` and `lisp` were moved from class 40ANTS-CI/JOBS/JOB:JOB to 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB.
+")
   (0.10.1 2023-03-08
           "- Fixed installation of the Linter. Now it depends on 40ANTS-ASDF-SYSTEM system.")
   (0.10.0 2022-11-10

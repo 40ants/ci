@@ -34,6 +34,6 @@
    (when (action-args action)
      `(("with" . ,(loop for (name value) on (action-args action) by #'cddr
                         when value
-                          collect (cons (string-downcase
-                                         (symbol-name name))
-                                        value)))))))
+                          collect (cons
+                                   (string-downcase name)
+                                   value)))))))

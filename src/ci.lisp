@@ -7,8 +7,14 @@
   (:import-from #:40ants-ci/jobs/docs
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
-                #:defworkflow))
+                #:defworkflow)
+  (:import-from #:40ants-ci/jobs/autotag))
 (in-package 40ants-ci/ci)
+
+
+(defworkflow release
+  :on-push-to "master"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
 
 
 (defworkflow docs
