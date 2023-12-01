@@ -35,7 +35,8 @@
                   :initform *default-token-pattern*
                   :type string
                   :documentation "Auth token pattern."
-                  :reader token-pattern)))
+                  :reader token-pattern))
+  (:documentation "This type of the job created a git tag when finds a new tag in specified file."))
 
 
 (defun autotag (&key (filename *default-filename*)
