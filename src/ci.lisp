@@ -29,7 +29,7 @@
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :on-pull-request t
-  :cache t
+  ;; :cache t
   :jobs ((40ants-ci/jobs/linter:linter
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
