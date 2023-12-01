@@ -1,10 +1,6 @@
 (uiop:define-package #:40ants-ci/jobs/autotag
   (:use #:cl)
-  (:import-from #:40ants-ci/steps/sh
-                #:sh)
   (:import-from #:40ants-ci/jobs/job)
-  (:import-from #:40ants-ci/utils
-                #:current-system-name)
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:export #:autotag))
