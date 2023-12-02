@@ -7,15 +7,21 @@
   (:import-from #:40ants-ci/jobs/docs
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
-                #:defworkflow))
+                #:defworkflow)
+  (:import-from #:40ants-ci/jobs/autotag))
 (in-package 40ants-ci/ci)
+
+
+(defworkflow release
+  :on-push-to "master"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
 
 
 (defworkflow docs
   :on-push-to "master"
   :on-pull-request t
   :by-cron "0 10 * * 1"
-  :cache t
+  ;; :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs)))
 
 
@@ -23,13 +29,14 @@
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :on-pull-request t
-  :cache t
+  ;; :cache t
   :jobs ((40ants-ci/jobs/linter:linter
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
           :check-imports t)
          (40ants-ci/jobs/critic:critic
-          :ignore-critiques ("function-too-long"))
+          :ignore-critiques ("function-too-long"
+                             "check-prefix"))
          (run-tests
           :os ("ubuntu-latest"
                "macos-latest")

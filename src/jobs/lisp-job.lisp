@@ -1,9 +1,7 @@
-(defpackage #:40ants-ci/jobs/lisp-job
+(uiop:define-package #:40ants-ci/jobs/lisp-job
   (:use #:cl)
   (:import-from #:40ants-ci/jobs/job
-                #:os
-                #:lisp
-                #:quicklisp)
+                #:os)
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:import-from #:40ants-ci/utils
@@ -14,14 +12,25 @@
                 #:sh)
   (:import-from #:40ants-ci/vars
                 #:*use-cache*)
-  (:export
-   #:lisp-job
-   #:asdf-system))
+  (:import-from #:serapeum
+                #:length<)
+  (:import-from #:alexandria
+                #:length=)
+  (:export #:lisp-job
+           #:asdf-system
+           #:lisp
+           #:quicklisp))
 (in-package 40ants-ci/jobs/lisp-job)
 
 
 (defclass lisp-job (40ants-ci/jobs/job:job)
-  ((qlfile :initarg :qlfile
+  ((quicklisp :initform "quicklisp"
+                 :initarg :quicklisp
+                 :reader quicklisp)
+   (lisp :initform "sbcl-bin"
+         :initarg :lisp
+         :reader lisp)
+   (qlfile :initarg :qlfile
            :initform nil
            :reader qlfile)
    (asdf-system :initarg :asdf-system
@@ -44,6 +53,50 @@
                  :documentation "Qlot version to use when setting up Lisp environment. If NIL, then will be used version, pinned in SETUP-LISP github action."
                  :reader qlot-version))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
+
+
+(defmethod lisp :around ((job lisp-job))
+  (uiop:ensure-list
+   (call-next-method)))
+
+(defmethod quicklisp :around ((job lisp-job))
+  (uiop:ensure-list
+   (call-next-method)))
+
+
+(defmethod 40ants-ci/jobs/job:use-matrix-p ((job lisp-job))
+  (or (call-next-method)
+      (length< 1 (lisp job))
+      (length< 1 (quicklisp job))))
+
+
+(defmethod 40ants-ci/jobs/job:make-matrix ((job lisp-job))
+  (append
+   (call-next-method)
+   
+   (when (length< 1 (quicklisp job))
+     `(("quicklisp" . ,(quicklisp job))))
+   (when (length< 1 (lisp job))
+     `(("lisp" . ,(lisp job))))))
+
+
+(defmethod 40ants-ci/jobs/job:make-env ((job lisp-job))
+  (append
+   (call-next-method)
+   (cond
+     ((length< 1 (quicklisp job))
+      `(("QUICKLISP_DIST" . "${{ matrix.quicklisp }}")))
+     ((length= 1 (quicklisp job))
+      `(("QUICKLISP_DIST" . ,(first (quicklisp job)))))
+     (t
+      nil))
+   (cond
+     ((length< 1 (lisp job))
+      `(("LISP" . "${{ matrix.lisp }}")))
+     ((length= 1 (lisp job))
+      `(("LISP" . ,(first (lisp job)))))
+     (t
+      nil))))
 
 
 (defmethod asdf-system :around ((job lisp-job))

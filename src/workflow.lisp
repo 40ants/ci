@@ -7,6 +7,7 @@
   (:import-from #:40ants-ci/vars)
   (:import-from #:alexandria
                 #:with-output-to-file)
+  (:import-from #:40ants-ci/jobs/job)
   (:export
    #:defworkflow))
 (in-package 40ants-ci/workflow)

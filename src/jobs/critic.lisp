@@ -56,6 +56,6 @@
     (loop for system in (or (asdf-systems job)
                             (list (asdf-system job)))
           collect (sh (format nil "Run Critic for ~S system" system)
-                      (format nil "qlot exec lisp-critic~@[ --ignore ~{~A~^, ~}~] ~A"
+                      (format nil "qlot exec lisp-critic~@[ --ignore ~{~A~^,~}~] ~A"
                               (ignore-critiques job)
                               system))))))

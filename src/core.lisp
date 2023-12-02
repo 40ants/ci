@@ -7,10 +7,13 @@
                 #:section
                 #:defsection-copy)
   (:import-from #:40ants-ci/github)
+  (:import-from #:40ants-ci/jobs/job)
+  (:import-from #:40ants-ci/jobs/lisp-job)
   (:import-from #:40ants-ci/jobs/docs)
   (:import-from #:40ants-ci/jobs/linter)
   (:import-from #:40ants-ci/jobs/critic)
   (:import-from #:40ants-ci/jobs/run-tests)
+  (:import-from #:40ants-ci/jobs/autotag)
   (:import-from #:docs-config
                 #:docs-config)
   (:export #:generate
@@ -516,11 +519,27 @@ and a way how to create new job types.
   (40ants-ci/jobs/docs:build-docs function)
   (40ants-ci/jobs/docs:build-docs class)
   
-  (40ants-ci/jobs/linter:linter function)
+  (40ants-ci/jobs/job:job class)
+  (40ants-ci/jobs/job:name (reader 40ants-ci/jobs/job:job))
+  (40ants-ci/jobs/job:os (reader 40ants-ci/jobs/job:job))
+  (40ants-ci/jobs/job:steps (reader 40ants-ci/jobs/job:job))
+  (40ants-ci/jobs/job:make-env generic-function)
+  (40ants-ci/jobs/job:use-matrix-p generic-function)
+  (40ants-ci/jobs/job:make-matrix generic-function)
+  
+  (40ants-ci/jobs/lisp-job:lisp-job class)
+  (40ants-ci/jobs/lisp-job:lisp (reader 40ants-ci/jobs/lisp-job:lisp-job))
+  (40ants-ci/jobs/lisp-job:asdf-system (reader 40ants-ci/jobs/lisp-job:lisp-job))
+  (40ants-ci/jobs/lisp-job:quicklisp (reader 40ants-ci/jobs/lisp-job:lisp-job))
+  
+  (40ants-ci/jobs/linter:linter class)
   (40ants-ci/jobs/linter:linter function)
 
   (40ants-ci/jobs/critic:critic class)
-  (40ants-ci/jobs/critic:critic function))
+  (40ants-ci/jobs/critic:critic function)
+  
+  (40ants-ci/jobs/autotag:autotag class)
+  (40ants-ci/jobs/autotag:autotag function))
 
 
 (defun generate (system &key path)
