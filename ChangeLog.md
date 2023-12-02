@@ -2,6 +2,37 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E11-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.11.0 (2023-12-01)
+
+<a id="added"></a>
+
+### Added
+
+New job class [`40ants-ci/jobs/autotag:autotag`][1b03] was added.
+
+Use it like this:
+
+```lisp
+(defworkflow release
+  :on-push-to "master"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
+and it will search for new semver tags in the ChangeLog.md file and push them to the git.
+
+<a id="changed"></a>
+
+### Changed
+
+Slots `quicklisp` and `lisp` were moved from class [`40ants-ci/jobs/job:job`][17c5] to [`40ants-ci/jobs/lisp-job:lisp-job`][2f4c].
+
+<a id="fixed"></a>
+
+### Fixed
+
+Class [`40ants-ci/jobs/critic:critic`][cd00] was fixed for case when there are multiple critiques to ignore.
+
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E10-2E1-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.10.1 (2023-03-08)
@@ -13,7 +44,6 @@
 ## 0.10.0 (2022-11-10)
 
 * Now Linter does `qlot install --no-deps` and quickloads only those systems, which should be linted.
-
 * Also, [`40ants-ci`][b171] system now inherits from [`40ants-asdf-system`][d2a8] system.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E9-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -27,7 +57,6 @@
 ## 0.8.1 (2022-09-18)
 
 * Fixed default value of asdf-systems slot of [`40ants-ci/jobs/linter:linter`][8918] class.
-
 * Also, now linter accepts `CHECK-IMPORTS` argument and is able to warn on unused or missing imports in package-inferred systems.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E8-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -42,7 +71,7 @@ if `:cache t` was given to a job running on `OSX` and Roswell was restored from 
 
 ## 0.7.0 (2022-03-13)
 
-* `40ants-ci/jobs/critic:critic` ([`1`][484a] [`2`][cd00]) function's argument `IGNORE-CRITICUES` was
+* `40ants-ci/jobs/critic:critic` ([`1`][cd00] [`2`][484a]) function's argument `IGNORE-CRITICUES` was
 renames to the `IGNORE-CRITIQUES` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E6-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -63,14 +92,13 @@ Learn more about this job type at [`Critic`][240b] section.
 ## 0.4.0 (2022-01-28)
 
 * Now multiple jobs of the same type can be listed in the same workflow.
-
 * Also, you can change a job's name using `:NAME` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E3-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.3.0 (2021-10-24)
 
-* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][523a] [`2`][8918]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]) and `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8])
+* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][8918] [`2`][523a]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][e35d] [`2`][6cb7]) and `40ants-ci/jobs/docs:build-docs` ([`1`][13b8] [`2`][1ddb])
 support `ASDF-VERSION` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E2-2E2-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -93,9 +121,7 @@ changed.
 ## 0.2.0 (2021-04-15)
 
 * Supported `ERROR-ON-WARNINGS` argument for documentation builder.
-
 * Argument `ASD-SYSTEM` was renamed to `ASDF-SYSTEM`.
-
 * Moved this project's documentation to `40ANTS-DOC` system.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E1-2E1-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -113,12 +139,15 @@ changed.
 
 [d2a8]: /home/runner/work/40ants-asdf-system/40ants-asdf-system/docs/build/#x-28-23A-28-2818-29-20BASE-CHAR-20-2E-20-2240ants-asdf-system-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29
 [b171]: https://40ants.com/ci/#x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ants-ci-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29
+[1b03]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29
 [cd00]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29
 [484a]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29
 [1ddb]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29
 [13b8]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29
+[17c5]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FJOB-3AJOB-20CLASS-29
 [8918]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29
 [523a]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29
+[2f4c]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29
 [6cb7]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29
 [e35d]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29
 [240b]: https://40ants.com/ci/#x-2840ANTS-CI-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
