@@ -7,8 +7,18 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
+			      "DEPLOY_TRIGGER_TOKEN"
+			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.12.0 2023-12-11
+          "
+Changed
+=======
+
+Use `secrets.GITHUB_TOKEN` instead of `secrets.DEPLOY_TRIGGER_TOKEN` and set required scopes for the token.
+This way you don't have to setup a special secret for each repository or an organization.
+")
   (0.11.0 2023-12-01
           "
 Added

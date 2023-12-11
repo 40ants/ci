@@ -13,7 +13,9 @@
            #:os
            #:name
            #:make-matrix
-           #:make-env))
+           #:make-env
+           #:permissions
+           #:make-permissions))
 (in-package 40ants-ci/jobs/job)
 
 
@@ -29,7 +31,17 @@
             :documentation "A list of plists denoting matrix combinations to be excluded.")
    (steps :initform nil
           :initarg :steps
-          :reader steps)))
+          :reader steps)
+   (permissions :initform nil
+                :initarg :permissions
+                :documentation "A plist of permissions need for running the job.
+
+                                These permissions will be bound to secrets.GITHUB_TOKEN variable.
+                                Use default-initargs to override permissions in subclasses:
+
+                                (:default-initargs
+                                 :permissions '(:content \"write\"))"
+                :reader permissions)))
 
 
 (defmethod initialize-instance :after ((job job) &rest initargs)
@@ -94,11 +106,25 @@
         (first (os job)))))
 
 
+(defgeneric make-permissions (job)
+  (:documentation "Should return an alist with mapping from string to string where keys are scopes and values are permission names. Default method generates this alist from the plist of job's \"permissions\" slot.")
+  (:method ((job job))
+    (loop for (key value) on (permissions job) by #'cddr
+          for key-as-str = (string-downcase key)
+          for value-as-str = (string-downcase value)
+          collect (cons key-as-str
+                        value-as-str))))
+
+
 (defmethod 40ants-ci/github:prepare-data ((job job))
   (append 
    (when (use-matrix-p job)
      `(("strategy" . (("fail-fast" . :false)
                       ("matrix" . ,(make-matrix job))))))
+
+   (when (permissions job)
+     (list (cons "permissions"
+                 (make-permissions job))))
 
    `(("runs-on" . ,(make-runs-on job))
      ("env" . ,(make-env job))

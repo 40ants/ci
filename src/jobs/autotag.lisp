@@ -12,7 +12,7 @@
 
 (defparameter *default-tag-prefix* "v")
 
-(defparameter *default-token-pattern* "${{ secrets.DEPLOY_TRIGGER_TOKEN }}")
+(defparameter *default-token-pattern* "${{ secrets.GITHUB_TOKEN }}")
 
 
 (defclass autotag (40ants-ci/jobs/job:job)
@@ -36,6 +36,8 @@
                   :type string
                   :documentation "Auth token pattern."
                   :reader token-pattern))
+  (:default-initargs
+   :permissions '(:contents "write"))
   (:documentation "This type of the job created a git tag when finds a new tag in specified file."))
 
 
