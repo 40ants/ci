@@ -9,6 +9,9 @@
   },
   "jobs": {
     "autotag": {
+      "permissions": {
+        "contents": "write"
+      },
       "runs-on": "ubuntu-latest",
       "env": {
         "OS": "ubuntu-latest"
@@ -27,7 +30,7 @@
             "tag_prefix": "v"
           },
           "env": {
-            "GITHUB_TOKEN": "${{ secrets.DEPLOY_TRIGGER_TOKEN }}"
+            "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"
           }
         }
       ]
