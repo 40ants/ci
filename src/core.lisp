@@ -102,6 +102,7 @@ of the package inferred ASDF system `EXAMPLE/CI`. A file should have the followi
 
 
 (defsection @job-types (:title "Job Types")
+  (@autotag section)
   (@linter section)
   (@critic section)
   (@run-tests section)
@@ -205,6 +206,26 @@ with linter:
 
 and they will be executed in parallel. See docs on 40ANTS-CI/JOBS/CRITIC:CRITIC function
 to learn about supported arguments.")
+
+
+(defsection @autotag (:title "Autotag")
+  "
+This job is automates git tag placement on the commit where you have changed the ChangeLog.md.
+
+This can be a useful to automate package deployment and releases. You update the changelog,
+a job pushes a new git tag and the next action triggers on this tag and build a release.
+
+Or you if you publish your library at Quicklisp distribution, then you can change
+it's source type to the `latest-github-tag` to provide more stable releases to your
+users. This way you commits into master will be ignored until you change the changelog and
+git tag will be pushed. Here is an [example](https://github.com/quicklisp/quicklisp-projects/blob/ee133271c81caf5d8bbf8cef3054544ff47b64c6/projects/alexa/source.txt) how to setup this kind of quicklisp project source.
+
+(defworkflow release
+  :on-push-to \"master\"
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
+"
+  (40ants-ci/jobs/autotag:autotag function)
+  (40ants-ci/jobs/autotag:autotag class))
 
 
 (defsection @run-tests (:title "Running Tests"
@@ -523,9 +544,11 @@ and a way how to create new job types.
   (40ants-ci/jobs/job:name (reader 40ants-ci/jobs/job:job))
   (40ants-ci/jobs/job:os (reader 40ants-ci/jobs/job:job))
   (40ants-ci/jobs/job:steps (reader 40ants-ci/jobs/job:job))
+  (40ants-ci/jobs/job:permissions (reader 40ants-ci/jobs/job:job))
   (40ants-ci/jobs/job:make-env generic-function)
   (40ants-ci/jobs/job:use-matrix-p generic-function)
   (40ants-ci/jobs/job:make-matrix generic-function)
+  (40ants-ci/jobs/job:make-permissions generic-function)
   
   (40ants-ci/jobs/lisp-job:lisp-job class)
   (40ants-ci/jobs/lisp-job:lisp (reader 40ants-ci/jobs/lisp-job:lisp-job))

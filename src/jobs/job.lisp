@@ -36,11 +36,13 @@
                 :initarg :permissions
                 :documentation "A plist of permissions need for running the job.
 
-                                These permissions will be bound to secrets.GITHUB_TOKEN variable.
+                                These permissions will be bound to `secrets.GITHUB_TOKEN` variable.
                                 Use default-initargs to override permissions in subclasses:
 
+                                ```lisp
                                 (:default-initargs
-                                 :permissions '(:content \"write\"))"
+                                 :permissions '(:content \"write\"))
+                                ```"
                 :reader permissions)))
 
 
