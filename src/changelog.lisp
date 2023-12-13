@@ -11,6 +11,17 @@
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.13.0 2023-12-14
+          "
+Changed
+=======
+
+Jobs now use setup-lisp@v3 action where a fix to quicklisp-client is applied.
+This fix makes ql:quickload work with package-inferred systems.
+
+If you want to use this fix in your own environments, you can find
+it [here](https://github.com/40ants/quicklisp-client-fix).
+")
   (0.12.0 2023-12-11
           "
 Changed
@@ -18,6 +29,7 @@ Changed
 
 Use `secrets.GITHUB_TOKEN` instead of `secrets.DEPLOY_TRIGGER_TOKEN` and set required scopes for the token.
 This way you don't have to setup a special secret for each repository or an organization.
+
 ")
   (0.11.0 2023-12-01
           "

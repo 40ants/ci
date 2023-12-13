@@ -168,7 +168,7 @@
           (make-cache-steps job)
           (list
            (action "Setup Common Lisp Environment"
-                   "40ants/setup-lisp@v2"
+                   "40ants/setup-lisp@v3"
                    :asdf-system (asdf-system job)
                    :asdf-version (asdf-version job)
                    :roswell-version (roswell-version job)

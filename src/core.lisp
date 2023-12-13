@@ -143,7 +143,7 @@ it will generate `.github/workflows/linter.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v2\",
+          \"uses\": \"40ants/setup-lisp@v3\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -220,9 +220,11 @@ it's source type to the `latest-github-tag` to provide more stable releases to y
 users. This way you commits into master will be ignored until you change the changelog and
 git tag will be pushed. Here is an [example](https://github.com/quicklisp/quicklisp-projects/blob/ee133271c81caf5d8bbf8cef3054544ff47b64c6/projects/alexa/source.txt) how to setup this kind of quicklisp project source.
 
+```lisp
 (defworkflow release
   :on-push-to \"master\"
   :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
 "
   (40ants-ci/jobs/autotag:autotag function)
   (40ants-ci/jobs/autotag:autotag class))
@@ -287,7 +289,7 @@ It will generate `.github/workflows/ci.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v2\",
+          \"uses\": \"40ants/setup-lisp@v3\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -437,7 +439,7 @@ It will generate `.github/workflows/docs.yml` with following content:
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v2\",
+          \"uses\": \"40ants/setup-lisp@v3\",
           \"with\": {
             \"asdf-system\": \"example\",
             \"qlfile-template\": \"\"
@@ -512,7 +514,7 @@ modified   .github/workflows/docs.yml
 +        },
          {
            \"name\": \"Setup Common Lisp Environment\",
-           \"uses\": \"40ants/setup-lisp@v2\",
+           \"uses\": \"40ants/setup-lisp@v3\",
            \"with\": {
              \"asdf-system\": \"40ants-ci\",
              \"qlfile-template\": \"\"
