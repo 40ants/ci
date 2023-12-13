@@ -220,9 +220,11 @@ it's source type to the `latest-github-tag` to provide more stable releases to y
 users. This way you commits into master will be ignored until you change the changelog and
 git tag will be pushed. Here is an [example](https://github.com/quicklisp/quicklisp-projects/blob/ee133271c81caf5d8bbf8cef3054544ff47b64c6/projects/alexa/source.txt) how to setup this kind of quicklisp project source.
 
+```lisp
 (defworkflow release
   :on-push-to \"master\"
   :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
 "
   (40ants-ci/jobs/autotag:autotag function)
   (40ants-ci/jobs/autotag:autotag class))
