@@ -35,6 +35,38 @@
           }
         },
         {
+          "name": "Checkout Code",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "40ants/setup-lisp@v4",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "cache": "false"
+          }
+        },
+        {
+          "name": "Change dist to Ultralisp if qlfile does not exist",
+          "run": "if [[ ! -e qlfile ]]; then echo 'dist ultralisp http://dist.ultralisp.org' > qlfile; fi",
+          "shell": "bash"
+        },
+        {
+          "name": "Update Qlot",
+          "run": "qlot update --no-deps",
+          "shell": "bash"
+        },
+        {
+          "name": "Install SBLint wrapper",
+          "run": "qlot exec ros install 40ants-asdf-system 40ants-linter",
+          "shell": "bash"
+        },
+        {
+          "name": "Run Linter",
+          "run": "qlot exec 40ants-linter --system \"40ants-ci, 40ants-ci-tests\" --imports",
+          "shell": "bash"
+        },
+        {
           "name": "Change dist to Ultralisp if qlfile does not exist",
           "run": "if [[ ! -e qlfile ]]; then echo 'dist ultralisp http://dist.ultralisp.org' > qlfile; fi",
           "shell": "bash"
@@ -75,6 +107,38 @@
             "asdf-system": "40ants-ci",
             "cache": "true"
           }
+        },
+        {
+          "name": "Checkout Code",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "40ants/setup-lisp@v4",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "cache": "false"
+          }
+        },
+        {
+          "name": "Change dist to Ultralisp",
+          "run": "echo 'dist ultralisp http://dist.ultralisp.org' > qlfile",
+          "shell": "bash"
+        },
+        {
+          "name": "Update Qlot",
+          "run": "qlot update || qlot update",
+          "shell": "bash"
+        },
+        {
+          "name": "Install LISP-CRITIC wrapper",
+          "run": "qlot exec ros install 40ants-critic",
+          "shell": "bash"
+        },
+        {
+          "name": "Run Critic for \"40ants-ci\" system",
+          "run": "qlot exec lisp-critic --ignore function-too-long,check-prefix 40ants-ci",
+          "shell": "bash"
         },
         {
           "name": "Change dist to Ultralisp",
@@ -134,6 +198,27 @@
             "asdf-system": "40ants-ci",
             "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}",
             "cache": "true"
+          }
+        },
+        {
+          "name": "Checkout Code",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "40ants/setup-lisp@v4",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}",
+            "cache": "false"
+          }
+        },
+        {
+          "name": "Run Tests",
+          "uses": "40ants/run-tests@v2",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "coveralls-token": "\n${{ matrix.lisp == 'sbcl-bin' &&\n    matrix.os == 'ubuntu-latest' &&\n    matrix.quicklisp == 'ultralisp' &&\n    secrets.github_token }}"
           }
         },
         {

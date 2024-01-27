@@ -59,3 +59,20 @@
    
    (when (step-if step)
      `(("if" . ,(step-if step))))))
+
+
+(defun ensure-step (step-or-step-definition)
+  (check-type step-or-step-definition (or step list))
+  (etypecase step-or-step-definition
+    (step step-or-step-definition)
+    (list
+     (let ((head (car step-or-step-definition))
+           (args (cdr step-or-step-definition)))
+       
+       (unless (symbolp head)
+         (error "~A is not a correct step definition."
+                step-or-step-definition))
+       
+       (if (fboundp head)
+           (apply head args)
+           (apply #'make-instance head args))))))

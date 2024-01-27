@@ -7,6 +7,8 @@
                 #:length<)
   (:import-from #:alexandria
                 #:length=)
+  (:import-from #:40ants-ci/steps/step
+                #:ensure-step)
   (:export #:job
            #:use-matrix-p
            #:steps
@@ -16,7 +18,7 @@
            #:make-env
            #:permissions
            #:make-permissions))
-(in-package 40ants-ci/jobs/job)
+(in-package #:40ants-ci/jobs/job)
 
 
 (defclass job ()
@@ -51,7 +53,10 @@
   (unless (slot-boundp job 'name)
     (setf (slot-value job 'name)
           (string-downcase
-           (class-name (class-of job))))))
+           (class-name (class-of job)))
+          (slot-value job 'steps)
+          (mapcar #'ensure-step
+                  (steps job)))))
 
 (defmethod os :around ((job job))
   (uiop:ensure-list

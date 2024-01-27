@@ -2,6 +2,7 @@
   (:use #:cl)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
+  (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
                 #:ensure-primary-system)
   (:import-from #:40ants-ci/vars)
@@ -105,20 +106,24 @@
                               on-pull-request
                               cache
                               jobs)
-  `(progn
-     (defclass ,name (workflow)
-       ())
-     (let* ((jobs (mapcar #'make-job ',jobs))
-            (workflow (make-instance ',name
-                                     :name ',name
-                                     :jobs jobs
-                                     :on-push-to ',(uiop:ensure-list on-push-to)
-                                     :by-cron ',(uiop:ensure-list by-cron)
-                                     :on-pull-request ,on-pull-request
-                                     :cache ,cache)))
-       (register-workflow workflow)
-       (on-workflow-redefinition workflow)
-       workflow)))
+  (let ((make-func-name (intern (format nil "MAKE-~A-WORKFLOW"
+                                        name))))
+    `(with-current-system ()
+       (defclass ,name (workflow)
+         ())
+       (defun ,make-func-name ()
+         (let ((jobs (mapcar #'make-job ',jobs)))
+           (make-instance ',name
+                          :name ',name
+                          :jobs jobs
+                          :on-push-to ',(uiop:ensure-list on-push-to)
+                          :by-cron ',(uiop:ensure-list by-cron)
+                          :on-pull-request ,on-pull-request
+                          :cache ,cache)))
+       (let* ((workflow (,make-func-name) ))
+         (register-workflow workflow)
+         (on-workflow-redefinition workflow)
+         workflow))))
 
 
 (defgeneric make-triggers (workflow)
@@ -208,12 +213,20 @@
                    to the primary system with same package name
                    as a package where defworkflow is used.")
   (:method ((workflow workflow))
-    (let* ((system-name (string-downcase
-                         (package-name *package*)))
-           (*current-system*
-             (asdf:find-system
-              (asdf:primary-system-name system-name)))
-           (system-path (40ants-ci/utils:make-github-workflows-path *current-system*))
+    (let* ((system-path (40ants-ci/utils:make-github-workflows-path *current-system*))
            (workflow-path (make-workflow-path system-path
                                               workflow)))
       (40ants-ci/github:generate workflow workflow-path))))
+
+
+(defun call-with-current-system (thunk)
+  (let* ((system-name (string-downcase
+                       (package-name *package*)))
+         (*current-system*
+           (asdf:find-system
+            (asdf:primary-system-name system-name))))
+    (funcall thunk)))
+
+
+(defmacro with-current-system (() &body body)
+  `(call-with-current-system (lambda () ,@body)))
