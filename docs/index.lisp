@@ -8,11 +8,16 @@
   (:import-from #:docs-config
                 #:docs-config)
   (:import-from #:40ants-doc/autodoc
-                #:defautodoc))
+                #:defautodoc)
+  (:import-from #:40ants-logging-docs/changelog
+                #:@changelog)
+  (:export #:@index
+           #:@readme
+           #:@changelog))
 (in-package #:40ants-ci-docs/index)
 
 
-(defmethod docs-config ((system (eql (asdf:find-system "40ants-ci"))))
+(defmethod docs-config ((system (eql (asdf:find-system "40ants-ci-docs"))))
   ;; 40ANTS-DOC-THEME-40ANTS system will bring
   ;; as dependency a full 40ANTS-DOC but we don't want
   ;; unnecessary dependencies here:
