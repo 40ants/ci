@@ -120,7 +120,7 @@
                           :by-cron ',(uiop:ensure-list by-cron)
                           :on-pull-request ,on-pull-request
                           :cache ,cache)))
-       (let* ((workflow (,make-func-name) ))
+       (let ((workflow (,make-func-name) ))
          (register-workflow workflow)
          (on-workflow-redefinition workflow)
          workflow))))
