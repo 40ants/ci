@@ -50,6 +50,8 @@
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org
                    {% endifequal %}")
+         ;; This is an example of a job with a custom
+         ;; step:
          (40ants-ci/jobs/lisp-job:lisp-job :name "check-ros-config"
                                            :lisp "ccl-bin"
                                            :steps ((40ants-ci/steps/sh:sh "Show Roswell Config"
