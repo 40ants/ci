@@ -8,7 +8,9 @@
                 #:build-docs)
   (:import-from #:40ants-ci/workflow
                 #:defworkflow)
-  (:import-from #:40ants-ci/jobs/autotag))
+  (:import-from #:40ants-ci/jobs/autotag)
+  (:import-from #:40ants-ci/jobs/lisp-job
+                #:lisp-job))
 (in-package 40ants-ci/ci)
 
 
@@ -47,6 +49,9 @@
           :coverage t
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org
-                   {% endifequal %}")))
+                   {% endifequal %}")
+         (40ants-ci/jobs/lisp-job:lisp-job :lisp "ccl-bin"
+                                           :steps ((40ants-ci/steps/sh:sh "Show Roswell Config"
+                                                                          "ros config")))))
 
 

@@ -145,6 +145,33 @@
           }
         }
       ]
+    },
+    "lisp-job": {
+      "runs-on": "ubuntu-latest",
+      "env": {
+        "OS": "ubuntu-latest",
+        "QUICKLISP_DIST": "quicklisp",
+        "LISP": "ccl-bin"
+      },
+      "steps": [
+        {
+          "name": "Checkout Code",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Setup Common Lisp Environment",
+          "uses": "40ants/setup-lisp@v4",
+          "with": {
+            "asdf-system": "40ants-ci",
+            "cache": "true"
+          }
+        },
+        {
+          "name": "Show Roswell Config",
+          "run": "ros config",
+          "shell": "bash"
+        }
+      ]
     }
   }
 }
