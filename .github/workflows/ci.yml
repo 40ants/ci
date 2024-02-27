@@ -23,12 +23,12 @@
       },
       "steps": [
         {
-          "name": "Checkout Code 2",
+          "name": "Checkout Code",
           "uses": "actions/checkout@v4"
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@fix-recreating-of-qlfile-inside-cache",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
             "cache": "true"
@@ -65,12 +65,12 @@
       },
       "steps": [
         {
-          "name": "Checkout Code 2",
+          "name": "Checkout Code",
           "uses": "actions/checkout@v4"
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@fix-recreating-of-qlfile-inside-cache",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
             "cache": "true"
@@ -124,12 +124,12 @@
       },
       "steps": [
         {
-          "name": "Checkout Code 2",
+          "name": "Checkout Code",
           "uses": "actions/checkout@v4"
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@fix-recreating-of-qlfile-inside-cache",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
             "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}",
@@ -155,12 +155,12 @@
       },
       "steps": [
         {
-          "name": "Checkout Code 2",
+          "name": "Checkout Code",
           "uses": "actions/checkout@v4"
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@fix-recreating-of-qlfile-inside-cache",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
             "cache": "true"

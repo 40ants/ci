@@ -28,7 +28,7 @@
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@fix-recreating-of-qlfile-inside-cache",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci-docs",
             "cache": "true"
