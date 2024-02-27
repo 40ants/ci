@@ -24,7 +24,8 @@
 
 (defclass job ()
   ((name :initarg :name
-         :reader name)
+         :reader name
+         :documentation "If this name was not given in constructor, then name will be lowercased name of the job class.")
    (os :initform "ubuntu-latest"
        :initarg :os
        :reader os)
