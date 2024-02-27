@@ -23,7 +23,7 @@
   :on-push-to "master"
   :on-pull-request t
   :by-cron "0 10 * * 1"
-  :cache nil
+  :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs
           :asdf-system "40ants-ci-docs")))
 
@@ -32,7 +32,7 @@
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :on-pull-request t
-  :cache nil
+  :cache t
   :jobs ((40ants-ci/jobs/linter:linter
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
