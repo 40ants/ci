@@ -16,6 +16,8 @@
   (:import-from #:40ants-ci/jobs/autotag)
   (:import-from #:docs-config
                 #:docs-config)
+  (:import-from #:40ants-doc/autodoc
+                #:defautodoc)
   (:export #:generate
            #:@index
            #:@readme))
@@ -574,7 +576,7 @@ Pay attention to the NAME argument of 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB class. If
 ")
 
 
-(40ants-doc/autodoc:defautodoc @api (:system "40ants-ci"))
+(defautodoc @api (:system "40ants-ci"))
 
 
 (defun generate (system &key path)
