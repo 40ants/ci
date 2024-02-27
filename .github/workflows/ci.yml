@@ -146,7 +146,7 @@
         }
       ]
     },
-    "lisp-job": {
+    "check-ros-config": {
       "runs-on": "ubuntu-latest",
       "env": {
         "OS": "ubuntu-latest",

@@ -52,13 +52,15 @@
 
 (defmethod initialize-instance :after ((job job) &rest initargs)
   (declare (ignore initargs))
+  
   (unless (slot-boundp job 'name)
     (setf (slot-value job 'name)
           (string-downcase
-           (class-name (class-of job))))
-    (setf (slot-value job 'steps)
-          (mapcar #'ensure-step
-                  (slot-value job 'steps)))))
+           (class-name (class-of job)))))
+  
+  (setf (slot-value job 'steps)
+        (mapcar #'ensure-step
+                (slot-value job 'steps))))
 
 
 (defmethod os :around ((job job))
