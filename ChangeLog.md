@@ -2,6 +2,18 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E14-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.14.0 (2024-02-25)
+
+<a id="changed"></a>
+
+### Changed
+
+All jobs now use setup-lisp@v4 where internal caching was implemented.
+
+Also all jobs were switched to from `actions/checkout@v3` to `actions/checkout@v4` action.
+
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E13-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.13.0 (2023-12-14)
@@ -96,7 +108,7 @@ if `:cache t` was given to a job running on `OSX` and Roswell was restored from 
 
 ## 0.7.0 (2022-03-13)
 
-* `40ants-ci/jobs/critic:critic` ([`1`][cd00] [`2`][484a]) function's argument `IGNORE-CRITICUES` was
+* `40ants-ci/jobs/critic:critic` ([`1`][484a] [`2`][cd00]) function's argument `IGNORE-CRITICUES` was
 renames to the `IGNORE-CRITIQUES` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E6-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -123,7 +135,7 @@ Learn more about this job type at [`Critic`][240b] section.
 
 ## 0.3.0 (2021-10-24)
 
-* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][8918] [`2`][523a]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][e35d] [`2`][6cb7]) and `40ants-ci/jobs/docs:build-docs` ([`1`][13b8] [`2`][1ddb])
+* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][523a] [`2`][8918]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]) and `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8])
 support `ASDF-VERSION` argument.
 
 <a id="x-2840ANTS-CI-2FCHANGELOG-3A-3A-7C0-2E2-2E2-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
