@@ -1,8 +1,8 @@
-(uiop:define-package #:40ants-ci/changelog
+(uiop:define-package #:40ants-ci-docs/changelog
   (:use #:cl)
   (:import-from #:40ants-doc/changelog
                 #:defchangelog))
-(in-package #:40ants-ci/changelog)
+(in-package #:40ants-ci-docs/changelog)
 
 
 (defchangelog (:ignore-words ("40ANTS-DOC"

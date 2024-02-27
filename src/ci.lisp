@@ -24,7 +24,8 @@
   :on-pull-request t
   :by-cron "0 10 * * 1"
   :cache nil
-  :jobs ((40ants-ci/jobs/docs:build-docs)))
+  :jobs ((40ants-ci/jobs/docs:build-docs
+          :asdf-system "40ants-ci-docs")))
 
 
 (defworkflow ci
