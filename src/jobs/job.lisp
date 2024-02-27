@@ -18,7 +18,8 @@
            #:make-env
            #:permissions
            #:make-permissions
-           #:explicit-steps))
+           #:explicit-steps
+           #:exclude))
 (in-package #:40ants-ci/jobs/job)
 
 

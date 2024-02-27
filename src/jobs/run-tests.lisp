@@ -10,9 +10,10 @@
                 #:current-system-name)
   (:import-from #:alexandria
                 #:when-let)
-  (:export
-   #:run-tests))
-(in-package 40ants-ci/jobs/run-tests)
+  (:export #:run-tests
+           #:coverage
+           #:custom))
+(in-package #:40ants-ci/jobs/run-tests)
 
 
 (defclass run-tests (40ants-ci/jobs/lisp-job:lisp-job)

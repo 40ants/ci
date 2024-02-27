@@ -37,10 +37,12 @@
                                    "GIT"
                                    "CL"
                                    "CI"
+                                   "JSON"
                                    "OS"
                                    "SBL"
                                    "BSD"
                                    "TODO"
+                                   "ASD"
                                    "ASDF"
                                    "EXAMPLE"))
   "
@@ -58,7 +60,8 @@ actions and [`SBLint`](https://github.com/cxxxr/sblint) to check code for compil
   (40ants-ci system)
   (@reasons section)
   (@quickstart section)
-  (@details section))
+  (@details section)
+  (@api section))
 
 
 (defsection-copy @readme @index)
@@ -529,42 +532,49 @@ modified   .github/workflows/docs.yml
 
 
 (defsection @details (:title "Details"
-                      :ignore-words ("ASD"))
+                      :ignore-words ("ASDF"
+                                     "CCL-BIN"))
   "
 TODO: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
-"
-  (generate function)
-  
-  (40ants-ci/jobs/run-tests:run-tests function)
-  (40ants-ci/jobs/run-tests:run-tests class)
-  
-  (40ants-ci/jobs/docs:build-docs function)
-  (40ants-ci/jobs/docs:build-docs class)
-  
-  (40ants-ci/jobs/job:job class)
-  (40ants-ci/jobs/job:name (reader 40ants-ci/jobs/job:job))
-  (40ants-ci/jobs/job:os (reader 40ants-ci/jobs/job:job))
-  (40ants-ci/jobs/job:steps (reader 40ants-ci/jobs/job:job))
-  (40ants-ci/jobs/job:permissions (reader 40ants-ci/jobs/job:job))
-  (40ants-ci/jobs/job:make-env generic-function)
-  (40ants-ci/jobs/job:use-matrix-p generic-function)
-  (40ants-ci/jobs/job:make-matrix generic-function)
-  (40ants-ci/jobs/job:make-permissions generic-function)
-  
-  (40ants-ci/jobs/lisp-job:lisp-job class)
-  (40ants-ci/jobs/lisp-job:lisp (reader 40ants-ci/jobs/lisp-job:lisp-job))
-  (40ants-ci/jobs/lisp-job:asdf-system (reader 40ants-ci/jobs/lisp-job:lisp-job))
-  (40ants-ci/jobs/lisp-job:quicklisp (reader 40ants-ci/jobs/lisp-job:lisp-job))
-  
-  (40ants-ci/jobs/linter:linter class)
-  (40ants-ci/jobs/linter:linter function)
 
-  (40ants-ci/jobs/critic:critic class)
-  (40ants-ci/jobs/critic:critic function)
-  
-  (40ants-ci/jobs/autotag:autotag class)
-  (40ants-ci/jobs/autotag:autotag function))
+But for now, I want to show a small example, how to define a workflow with a
+job which takes care about lisp installation and then calls a custom step:
+
+
+```lisp
+(defworkflow ci
+  :on-push-to \"master\"
+  :by-cron \"0 10 * * 1\"
+  :on-pull-request t
+  :cache t
+  :jobs ((40ants-ci/jobs/lisp-job:lisp-job :name \"check-ros-config\"
+                                           :lisp \"ccl-bin\"
+                                           :steps ((40ants-ci/steps/sh:sh \"Show Roswell Config\"
+                                                                          \"ros config\")))))
+```
+
+Here we are using the class 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB which is base for most classes in this ASDF system
+and pass a custom 40ANTS-CI/STEPS/SH:SH step to it. This step will be called after the repostory checkout and CCL-BIN lisp installation.
+so, thus when this step will run `ros config` command, it will output something like that:
+
+```
+asdf.version=3.3.5.3
+ccl-bin.version=1.12.2
+setup.time=3918000017
+sbcl-bin.version=2.4.1
+default.lisp=ccl-bin
+
+Possible subcommands:
+set
+show
+```
+
+Pay attention to the NAME argument of 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB class. If you omit it, then default \"lisp-job\" name will be used.
+")
+
+
+(40ants-doc/autodoc:defautodoc @api (:system "40ants-ci"))
 
 
 (defun generate (system &key path)

@@ -17,7 +17,11 @@
   (:export #:lisp-job
            #:asdf-system
            #:lisp
-           #:quicklisp))
+           #:quicklisp
+           #:qlfile
+           #:asdf-version
+           #:roswell-version
+           #:qlot-version))
 (in-package 40ants-ci/jobs/lisp-job)
 
 
@@ -43,12 +47,12 @@
    (roswell-version :initarg :roswell-version
                     :initform nil
                     :type (or null string)
-                    :documentation "Roswell version to use when setting up Lisp environment. If NIL, then will be used version, pinned in SETUP-LISP github action."
+                    :documentation "Roswell version to use when setting up Lisp environment. If NIL, then will be used version, pinned in `setup-lisp` github action."
                     :reader roswell-version)
    (qlot-version :initarg :qlot-version
                  :initform nil
                  :type (or null string)
-                 :documentation "Qlot version to use when setting up Lisp environment. If NIL, then will be used version, pinned in SETUP-LISP github action."
+                 :documentation "Qlot version to use when setting up Lisp environment. If NIL, then will be used version, pinned in `setup-lisp` github action."
                  :reader qlot-version))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
 

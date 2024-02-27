@@ -6,10 +6,11 @@
                 #:remove-from-plistf)
   (:import-from #:40ants-ci/utils
                 #:dedent)
-  (:export
-   #:sh
-   #:sections))
-(in-package 40ants-ci/steps/sh)
+  (:export #:sh
+           #:sections
+           #:command
+           #:shell))
+(in-package #:40ants-ci/steps/sh)
 
 
 (defvar *default-shell* "bash")

@@ -7,7 +7,9 @@
                 #:plistp)
   (:export #:step
            #:step-id
-           #:step-name))
+           #:step-name
+           #:env
+           #:step-if))
 (in-package 40ants-ci/steps/step)
 
 

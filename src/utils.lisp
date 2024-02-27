@@ -43,10 +43,6 @@ CL-USER> (docs-builder/utils:system-packages :docs-builder)
  #<PACKAGE \"DOCS-BUILDER/DOCS\">
  #<PACKAGE \"DOCS-BUILDER/BUILDERS/MGL-PAX/BUILDER\">)
 ```
-
-This function can be used by builder to find pieces of documentation.
-For example, DOCS-BUILDER/BUILDERS/MGL-PAX/GUESSER:@INDEX
-builder uses it to find documentation sections.
 ")
   (:method ((system string))
     (system-packages (asdf:find-system system)))
@@ -169,9 +165,9 @@ it will output HELLO-WORLD.\"
 
 
 (defun alistp (list)
-  "Test wheather LIST is a properly formed alist.
+  "Test wheather LIST argument is a properly formed alist.
 
-   In this library, ALIST has always a string as a key.
+   In this library, alist has always a string as a key.
    Because we need them to have this form to serialize
    to JSON propertly.
 

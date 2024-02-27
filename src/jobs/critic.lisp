@@ -5,7 +5,9 @@
   (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/jobs/lisp-job
                 #:asdf-system)
-  (:export #:critic))
+  (:export #:critic
+           #:asdf-systems
+           #:ignore-critiques))
 (in-package 40ants-ci/jobs/critic)
 
 

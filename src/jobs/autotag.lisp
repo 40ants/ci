@@ -3,7 +3,11 @@
   (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/steps/action
                 #:action)
-  (:export #:autotag))
+  (:export #:autotag
+           #:filename
+           #:regex
+           #:tag-prefix
+           #:token-pattern))
 (in-package 40ants-ci/jobs/autotag)
 
 (defparameter *default-filename* "ChangeLog.md")

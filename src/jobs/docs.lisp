@@ -7,7 +7,8 @@
                 #:action)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
-  (:export #:build-docs))
+  (:export #:build-docs
+           #:error-on-warnings))
 (in-package 40ants-ci/jobs/docs)
 
 

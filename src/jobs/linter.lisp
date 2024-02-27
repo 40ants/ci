@@ -7,7 +7,9 @@
   (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
-  (:export #:linter))
+  (:export #:linter
+           #:asdf-systems
+           #:check-imports))
 (in-package 40ants-ci/jobs/linter)
 
 
