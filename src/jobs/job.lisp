@@ -17,7 +17,8 @@
            #:make-matrix
            #:make-env
            #:permissions
-           #:make-permissions))
+           #:make-permissions
+           #:explicit-steps))
 (in-package #:40ants-ci/jobs/job)
 
 
@@ -33,7 +34,8 @@
             :documentation "A list of plists denoting matrix combinations to be excluded.")
    (steps :initform nil
           :initarg :steps
-          :reader steps)
+          :documentation "This slot holds steps given as a STEPS argument to a job constructor. Depending on a job class, it might add additional steps around these explicit steps."
+          :reader explicit-steps)
    (permissions :initform nil
                 :initarg :permissions
                 :documentation "A plist of permissions need for running the job.
@@ -53,18 +55,25 @@
   (unless (slot-boundp job 'name)
     (setf (slot-value job 'name)
           (string-downcase
-           (class-name (class-of job)))
-          (slot-value job 'steps)
+           (class-name (class-of job))))
+    (setf (slot-value job 'steps)
           (mapcar #'ensure-step
-                  (steps job)))))
+                  (slot-value job 'steps)))))
+
 
 (defmethod os :around ((job job))
   (uiop:ensure-list
    (call-next-method)))
 
-(defmethod steps :around ((job job))
-  (uiop:ensure-list
-   (call-next-method)))
+
+(defgeneric steps (job)
+  (:method ((job job))
+    (explicit-steps job))
+  
+  (:method :around ((job job))
+    (uiop:ensure-list
+     (call-next-method))))
+
 
 (defmethod exclude :around ((job job))
   (ensure-list-of-plists

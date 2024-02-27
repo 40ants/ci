@@ -32,22 +32,6 @@
           "env": {
             "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"
           }
-        },
-        {
-          "name": "Checkout Code",
-          "uses": "actions/checkout@v4"
-        },
-        {
-          "name": "Create release tag",
-          "uses": "butlerlogic/action-autotag@8bc1ad456dcdee34e8c6ffbce991cc31793578c2",
-          "with": {
-            "root": "ChangeLog.md",
-            "regex_pattern": "^## (?<version>\\d+\\.\\d+\\.\\d+.*?)( |\\n).*$",
-            "tag_prefix": "v"
-          },
-          "env": {
-            "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"
-          }
         }
       ]
     }
