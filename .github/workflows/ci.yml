@@ -31,7 +31,7 @@
           "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
-            "cache": "true"
+            "cache": "false"
           }
         },
         {
@@ -73,7 +73,7 @@
           "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
-            "cache": "true"
+            "cache": "false"
           }
         },
         {
@@ -133,7 +133,7 @@
           "with": {
             "asdf-system": "40ants-ci",
             "qlfile-template": "{% ifequal quicklisp_dist \"ultralisp\" %}\ndist ultralisp http://dist.ultralisp.org\n{% endifequal %}",
-            "cache": "true"
+            "cache": "false"
           }
         },
         {
@@ -163,7 +163,7 @@
           "uses": "40ants/setup-lisp@v4",
           "with": {
             "asdf-system": "40ants-ci",
-            "cache": "true"
+            "cache": "false"
           }
         },
         {
