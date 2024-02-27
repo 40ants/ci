@@ -8,8 +8,6 @@
                 #:single
                 #:dedent
                 #:current-system-name)
-  (:import-from #:40ants-ci/steps/sh
-                #:sh)
   (:import-from #:40ants-ci/vars
                 #:*use-cache*)
   (:import-from #:serapeum
