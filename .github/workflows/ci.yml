@@ -23,7 +23,7 @@
       },
       "steps": [
         {
-          "name": "Checkout Code",
+          "name": "Checkout Code 2",
           "uses": "actions/checkout@v4"
         },
         {
@@ -65,7 +65,7 @@
       },
       "steps": [
         {
-          "name": "Checkout Code",
+          "name": "Checkout Code 2",
           "uses": "actions/checkout@v4"
         },
         {
@@ -124,7 +124,7 @@
       },
       "steps": [
         {
-          "name": "Checkout Code",
+          "name": "Checkout Code 2",
           "uses": "actions/checkout@v4"
         },
         {
@@ -155,7 +155,7 @@
       },
       "steps": [
         {
-          "name": "Checkout Code",
+          "name": "Checkout Code 2",
           "uses": "actions/checkout@v4"
         },
         {
