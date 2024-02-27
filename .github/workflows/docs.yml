@@ -24,13 +24,14 @@
       "steps": [
         {
           "name": "Checkout Code",
-          "uses": "actions/checkout@v3"
+          "uses": "actions/checkout@v4"
         },
         {
           "name": "Setup Common Lisp Environment",
-          "uses": "40ants/setup-lisp@v2",
+          "uses": "40ants/setup-lisp@v4",
           "with": {
-            "asdf-system": "40ants-ci"
+            "asdf-system": "40ants-ci",
+            "cache": "true"
           }
         },
         {
