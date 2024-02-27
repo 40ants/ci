@@ -8,8 +8,6 @@
                 #:single
                 #:dedent
                 #:current-system-name)
-  (:import-from #:40ants-ci/steps/sh
-                #:sh)
   (:import-from #:40ants-ci/vars
                 #:*use-cache*)
   (:import-from #:serapeum
@@ -127,54 +125,20 @@
       (write-string "${{ hashFiles('qlfile.lock', '*.asd') }}" s))))
 
 
-(defgeneric make-cache-steps (job)
-  (:method ((job lisp-job))
-    (when 40ants-ci/vars:*use-cache*
-      (let ((paths-to-cache
-              (list "qlfile"
-                    "qlfile.lock"
-                    "~/.cache/common-lisp/"
-                    "~/.roswell"
-                    "/usr/local/etc/roswell"
-                    "/usr/local/bin/ros"
-                    ;; On OSX Roswell is installed
-                    ;; using Homebrew and /usr/local/bin/ros
-                    ;; is a symlink into a Cellar directory:
-                    "/usr/local/Cellar/roswell"
-                    ".qlot")))
-        (list (sh "Grant All Perms to Make Cache Restoring Possible"
-                  "sudo mkdir -p /usr/local/etc/roswell
-                 sudo chown \"${USER}\" /usr/local/etc/roswell
-                 # Here the ros binary will be restored:
-                 sudo chown \"${USER}\" /usr/local/bin")
-              (sh "Get Current Month"
-                  "echo \"value=$(date -u \"+%Y-%m\")\" >> $GITHUB_OUTPUT"
-                  :id "current-month")
-              (action "Cache Roswell Setup"
-                      "actions/cache@v3"
-                      :id "cache"
-                      :path (format nil "~{~A~^~%~}" paths-to-cache)
-                      :key (make-cache-key job))
-              (sh "Restore Path To Cached Files"
-                  "echo $HOME/.roswell/bin >> $GITHUB_PATH
-                 echo .qlot/bin >> $GITHUB_PATH"
-                  :if "steps.cache.outputs.cache-hit == 'true'"))))))
-
-
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
   (append (list
            (action "Checkout Code"
-                   "actions/checkout@v3"))
-          (make-cache-steps job)
+                   "actions/checkout@v4"))
           (list
            (action "Setup Common Lisp Environment"
-                   "40ants/setup-lisp@v3"
+                   "40ants/setup-lisp@v4"
                    :asdf-system (asdf-system job)
                    :asdf-version (asdf-version job)
                    :roswell-version (roswell-version job)
                    :qlot-version (qlot-version job)
                    :qlfile-template (when (qlfile job)
                                       (dedent (qlfile job)))
-                   :if (when *use-cache*
-                         "steps.cache.outputs.cache-hit != 'true'")))
+                   :cache (if *use-cache*
+                              "true"
+                              "false")))
           (call-next-method)))

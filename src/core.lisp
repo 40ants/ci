@@ -139,11 +139,11 @@ it will generate `.github/workflows/linter.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v3\"
+          \"uses\": \"actions/checkout@v4\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v3\",
+          \"uses\": \"40ants/setup-lisp@v4\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -285,11 +285,11 @@ It will generate `.github/workflows/ci.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v3\"
+          \"uses\": \"actions/checkout@v4\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v3\",
+          \"uses\": \"40ants/setup-lisp@v4\",
           \"with\": {
             \"asdf-system\": \"example\"
           }
@@ -435,11 +435,11 @@ It will generate `.github/workflows/docs.yml` with following content:
       \"steps\": [
         {
           \"name\": \"Checkout Code\",
-          \"uses\": \"actions/checkout@v3\"
+          \"uses\": \"actions/checkout@v4\"
         },
         {
           \"name\": \"Setup Common Lisp Environment\",
-          \"uses\": \"40ants/setup-lisp@v3\",
+          \"uses\": \"40ants/setup-lisp@v4\",
           \"with\": {
             \"asdf-system\": \"example\",
             \"qlfile-template\": \"\"
@@ -484,7 +484,7 @@ Here is the diff of the generated workflow file. It shows steps, added automatic
 modified   .github/workflows/docs.yml
 @@ -20,13 +20,40 @@
            \"name\": \"Checkout Code\",
-           \"uses\": \"actions/checkout@v3\"
+           \"uses\": \"actions/checkout@v4\"
          },
 +        {
 +          \"name\": \"Grant All Perms to Make Cache Restoring Possible\",
@@ -514,7 +514,7 @@ modified   .github/workflows/docs.yml
 +        },
          {
            \"name\": \"Setup Common Lisp Environment\",
-           \"uses\": \"40ants/setup-lisp@v3\",
+           \"uses\": \"40ants/setup-lisp@v4\",
            \"with\": {
              \"asdf-system\": \"40ants-ci\",
              \"qlfile-template\": \"\"

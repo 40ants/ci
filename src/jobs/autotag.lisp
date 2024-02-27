@@ -56,7 +56,7 @@
 (defmethod 40ants-ci/jobs/job:steps ((job autotag))
   (append (list
            (action "Checkout Code"
-                   "actions/checkout@v3"))
+                   "actions/checkout@v4"))
           (list
            (action "Create release tag"
                    "butlerlogic/action-autotag@8bc1ad456dcdee34e8c6ffbce991cc31793578c2"

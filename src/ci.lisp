@@ -21,7 +21,7 @@
   :on-push-to "master"
   :on-pull-request t
   :by-cron "0 10 * * 1"
-  ;; :cache t
+  :cache t
   :jobs ((40ants-ci/jobs/docs:build-docs)))
 
 
@@ -29,7 +29,7 @@
   :on-push-to "master"
   :by-cron "0 10 * * 1"
   :on-pull-request t
-  ;; :cache t
+  :cache t
   :jobs ((40ants-ci/jobs/linter:linter
           :asdf-systems ("40ants-ci"
                          "40ants-ci-tests")
@@ -43,9 +43,7 @@
           :quicklisp ("quicklisp"
                       "ultralisp")
           :lisp ("sbcl-bin"
-                 ;; Version was fixed because of this bug:
-                 ;; https://github.com/roswell/roswell/issues/534
-                 "ccl-bin/1.12.1")
+                 "ccl-bin")
           :coverage t
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org

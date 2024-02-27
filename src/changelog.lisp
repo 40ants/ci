@@ -11,6 +11,15 @@
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.14.0 2024-02-25
+          "
+Changed
+=======
+
+All jobs now use setup-lisp@v4 where internal caching was implemented.
+
+Also all jobs were switched to from `actions/checkout@v3` to `actions/checkout@v4` action.
+")
   (0.13.0 2023-12-14
           "
 Changed
