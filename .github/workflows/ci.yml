@@ -170,6 +170,14 @@
           "name": "Show Roswell Config",
           "run": "ros config",
           "shell": "bash"
+        },
+        {
+          "name": "Custom ENV",
+          "run": "echo $CUSTOM_ENV",
+          "shell": "bash",
+          "env": {
+            "CUSTOM-ENV": "Hello world!"
+          }
         }
       ]
     }
