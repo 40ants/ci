@@ -146,7 +146,7 @@
         }
       ]
     },
-    "check-ros-config": {
+    "custom-steps": {
       "runs-on": "ubuntu-latest",
       "env": {
         "OS": "ubuntu-latest",
@@ -176,7 +176,7 @@
           "run": "echo $CUSTOM_ENV",
           "shell": "bash",
           "env": {
-            "CUSTOM-ENV": "Hello world!"
+            "CUSTOM_ENV": "Hello world!"
           }
         }
       ]
