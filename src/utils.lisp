@@ -261,3 +261,29 @@ it will output HELLO-WORLD.\"
 
 (defmethod yason:encode ((object (eql nil)) &optional (stream yason::*json-output*))
   (write-string "[]" stream))
+
+
+(deftype allowed-env-name-type ()
+  '(or string keyword))
+
+
+(deftype env-alist-type ()
+  '(serapeum:soft-alist-of allowed-env-name-type string))
+
+
+(defun to-env-alist (env)
+  (flet ((make-env-name (name)
+           (str:replace-all "-" "_"
+                            (string-upcase name))))
+    (cond
+      ((plistp env)
+       (loop for (key value) on env by #'cddr
+             collect (cons (make-env-name key)
+                           value)))
+      ((typep env 'env-alist-type)
+       (loop for (key . value) in env
+             collect (cons (make-env-name key)
+                           value)))
+      (t
+       (error "~A is not alist or plist"
+              env)))))

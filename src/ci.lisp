@@ -24,8 +24,10 @@
   :on-pull-request t
   :by-cron "0 10 * * 1"
   :cache t
+  :env ((:custom-env-hello . "Hello"))
   :jobs ((40ants-ci/jobs/docs:build-docs
-          :asdf-system "40ants-ci-docs")))
+          :asdf-system "40ants-ci-docs"
+          :env ((:custom-env-world . "World!")))))
 
 
 (defworkflow ci
@@ -51,11 +53,12 @@
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org
                    {% endifequal %}")
-         ;; This is an example of a job with a custom
-         ;; step:
-         (40ants-ci/jobs/lisp-job:lisp-job :name "check-ros-config"
+         ;; This is an example of a job with a custom steps:
+         (40ants-ci/jobs/lisp-job:lisp-job :name "custom-steps"
                                            :lisp "ccl-bin"
                                            :steps ((40ants-ci/steps/sh:sh "Show Roswell Config"
-                                                                          "ros config")))))
-
+                                                                          "ros config")
+                                                   (40ants-ci/steps/sh:sh "Custom ENV"
+                                                                          "echo $CUSTOM_ENV"
+                                                                          :env (:custom-env "Hello world!"))))))
 

@@ -569,4 +569,48 @@ Pay attention to the NAME argument of 40ANTS-CI/JOBS/LISP-JOB:LISP-JOB class. If
 ")
 
 
+(defsection @env (:title "Adding env variables")
+  "
+You can specify additional environment variables on any level of the GitHub workflow: for workflow itself, for a job or for a step.
+
+To specify env for workflow or a job, just add an ENV argument with alist or plist value like this:
+
+```lisp
+(defworkflow release
+  :on-push-to \"master\"
+  :env (:github-token \"${{ secrets.autotag_token }}\")
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
+
+or as alist:
+
+```lisp
+(defworkflow release
+  :on-push-to \"master\"
+  :env ((\"github_token\" . \"${{ secrets.autotag_token }}\"))
+  :jobs ((40ants-ci/jobs/autotag:autotag)))
+```
+
+or for the job itself:
+
+```lisp
+(defworkflow release
+  :on-push-to \"master\"
+  :jobs ((40ants-ci/jobs/autotag:autotag
+           :env (:github-token \"${{ secrets.autotag_token }}\"))))
+```
+
+the same way it can be specified on a custom step:
+
+```lisp
+(40ants-ci/steps/sh:sh \"Custom env-var example\"
+                       \"echo $CUSTOM_VAR\"
+                       :env (:custom-var \"Hello world!\"))
+```
+
+Note - environment variable names are always transformed to uppercase and dashes are replaced with underscores.
+
+")
+
+
 (defautodoc @api (:system "40ants-ci"))

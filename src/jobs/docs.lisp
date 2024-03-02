@@ -19,14 +19,14 @@
   (:documentation "Builds documentation and uploads it to GitHub using [\"40ants/build-docs\" github action](https://40ants.com/build-docs/)."))
 
 
-(defun build-docs (&key asdf-system
-                     asdf-version
-                     (error-on-warnings t))
-  "Creates a job of class BUILD-DOCS."
-  (make-instance 'build-docs
-                 :asdf-system asdf-system
-                 :error-on-warnings error-on-warnings
-                 :asdf-version asdf-version))
+;; (defun build-docs (&key asdf-system
+;;                      asdf-version
+;;                      (error-on-warnings t))
+;;   "Creates a job of class BUILD-DOCS."
+;;   (make-instance 'build-docs
+;;                  :asdf-system asdf-system
+;;                  :error-on-warnings error-on-warnings
+;;                  :asdf-version asdf-version))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job build-docs))

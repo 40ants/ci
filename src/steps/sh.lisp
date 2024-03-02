@@ -25,12 +25,7 @@
 
 
 ;; ignore-critiques: if-no-else
-(defun sh (name command &rest env &key
-                                    id
-                                    if
-                                    (shell *default-shell*)
-           &allow-other-keys)
-  (remove-from-plistf env :id :if :shell)
+(defun sh (name command &key id if (shell *default-shell*) env)
   (make-instance 'sh
                  :name name
                  :command command

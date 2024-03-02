@@ -13,10 +13,14 @@
       }
     ]
   },
+  "env": {
+    "CUSTOM_ENV_HELLO": "Hello"
+  },
   "jobs": {
     "build-docs": {
       "runs-on": "ubuntu-latest",
       "env": {
+        "CUSTOM_ENV_WORLD": "World!",
         "OS": "ubuntu-latest",
         "QUICKLISP_DIST": "quicklisp",
         "LISP": "sbcl-bin"

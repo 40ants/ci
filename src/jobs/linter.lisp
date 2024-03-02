@@ -32,7 +32,7 @@
        (current-system-name))))
 
 
-(defun linter (&key asdf-systems asdf-version check-imports)
+(defun linter (&key asdf-systems asdf-version check-imports env)
   "Creates a job which will run SBLint for given ASDF systems.
 
    If no ASD files given, it will use all ASD files from
@@ -41,6 +41,7 @@
                  :asdf-system (first asdf-systems)
                  :asdf-systems asdf-systems
                  :asdf-version asdf-version
+                 :env env
                  :check-imports check-imports))
 
 

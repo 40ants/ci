@@ -3,8 +3,11 @@
   (:shadow #:step)
   (:import-from #:40ants-ci/github)
   (:import-from #:40ants-ci/utils
+                #:to-env-alist
                 #:alistp
                 #:plistp)
+  (:import-from #:serapeum
+                #:soft-alist-of)
   (:export #:step
            #:step-id
            #:step-name
@@ -22,25 +25,29 @@
          :reader step-name)
    (env :initarg :env
         :initform nil
+        :type (soft-alist-of string string)
+        :documentation "An alist of environment variables."
         :reader env)
    (if :initarg :if
        :initform nil
        :reader step-if)))
 
 
+(defmethod initialize-instance :around ((step step) &rest initargs)
+  (let* ((initargs (copy-list initargs))
+         (env (getf initargs :env)))
+    (when env
+      (setf (getf initargs :env)
+            (to-env-alist env)))
+    
+    (apply #'call-next-method
+           step
+           initargs)))
+
+
 (defgeneric make-env (step)
   (:method ((step step))
-    (let ((env (env step)))
-      (cond
-        ((plistp env)
-         (loop for (key value) on env by #'cddr
-               collect (cons (symbol-name key)
-                             value)))
-        ((alistp env)
-         env)
-        (t
-         (error "~A is not alisp or plist"
-                env))))))
+    (env step)))
 
 
 (defmethod 40ants-ci/github:prepare-data ((step step))

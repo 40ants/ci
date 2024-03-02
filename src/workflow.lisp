@@ -1,16 +1,26 @@
-(defpackage #:40ants-ci/workflow
+(uiop:define-package #:40ants-ci/workflow
   (:use #:cl)
   (:import-from #:40ants-ci/github
                 #:*current-system*)
   (:import-from #:40ants-ci/jobs/job)
   (:import-from #:40ants-ci/utils
+                #:to-env-alist
                 #:ensure-primary-system)
   (:import-from #:40ants-ci/vars)
   (:import-from #:alexandria
                 #:with-output-to-file)
   (:import-from #:40ants-ci/jobs/job)
-  (:export
-   #:defworkflow))
+  (:import-from #:serapeum
+                #:soft-alist-of)
+  (:export #:defworkflow
+           #:workflow-env
+           #:workflow
+           #:name
+           #:on-push-to
+           #:on-pull-request
+           #:by-cron
+           #:cache-p
+           #:jobs))
 (in-package 40ants-ci/workflow)
 
 
@@ -34,9 +44,31 @@
    (cache :initform t
           :initarg :cache
           :reader cache-p)
+   (env :initform nil
+        :type (soft-alist-of string string)
+        :initarg :env
+        :documentation "An alist of environment variables and their values to be added on workflow level. Values are evaluated in runtime."
+        :reader workflow-env)
    (jobs :initform nil
          :initarg :jobs
          :reader jobs)))
+
+
+(defmethod initialize-instance :around ((workflow workflow) &rest initargs)
+  (let* ((initargs (copy-list initargs))
+         (env (getf initargs :env)))
+    (when env
+      (setf (getf initargs :env)
+            (to-env-alist env)))
+
+    (setf (getf initargs :jobs)
+          (mapcar #'make-job
+                  (getf initargs :jobs)))
+    
+    (apply #'call-next-method
+           workflow
+           initargs)))
+
 
 (defmethod on-push-to :around ((workflow workflow))
   (uiop:ensure-list
@@ -105,6 +137,7 @@
                               by-cron
                               on-pull-request
                               cache
+                              env
                               jobs)
   (let ((make-func-name (intern (format nil "MAKE-~A-WORKFLOW"
                                         name))))
@@ -112,14 +145,14 @@
        (defclass ,name (workflow)
          ())
        (defun ,make-func-name ()
-         (let ((jobs (mapcar #'make-job ',jobs)))
-           (make-instance ',name
-                          :name ',name
-                          :jobs jobs
-                          :on-push-to ',(uiop:ensure-list on-push-to)
-                          :by-cron ',(uiop:ensure-list by-cron)
-                          :on-pull-request ,on-pull-request
-                          :cache ,cache)))
+         (make-instance ',name
+                        :name ',name
+                        :jobs ',jobs
+                        :env ',env
+                        :on-push-to ',(uiop:ensure-list on-push-to)
+                        :by-cron ',(uiop:ensure-list by-cron)
+                        :on-pull-request ,on-pull-request
+                        :cache ,cache))
        (let ((workflow (,make-func-name) ))
          (register-workflow workflow)
          (on-workflow-redefinition workflow)
@@ -145,6 +178,7 @@
          (triggers (make-triggers workflow))
          (jobs (uiop:ensure-list
                 (jobs workflow)))
+         (env (workflow-env workflow))
          (used-job-names (make-hash-table :test 'equal)))
 
     (flet ((ensure-unique (name)
@@ -159,9 +193,12 @@
       (append
        `(("name" . ,(symbol-name
                      (name workflow))))
-      
+       
        (when triggers
          `(("on" . ,triggers)))
+
+       (when env
+         `(("env" . ,env)))
 
        (when jobs
          `(("jobs" .
