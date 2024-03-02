@@ -1,4 +1,4 @@
-<a id="x-2840ANTS-CI-3A-40README-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-40README-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 # 40Ants-CI - Github Workflow Generator
 
@@ -17,15 +17,14 @@ actions and [`SBLint`][2f94] to check code for compilation errors.
 
 ## 40ANTS-CI ASDF System Details
 
-* Version: 0.14.0
 * Description: A tool simplify continuous deployment for Common Lisp projects.
 * Licence: `BSD`
 * Author: Alexander Artemenko
 * Homepage: [https://40ants.com/ci/][3f72]
 * Source control: [GIT][e681]
-* Depends on: [40ants-doc][2c00], [alexandria][8236], [docs-config][ce67], [serapeum][c41d], [str][ef7f], [yason][aba2]
+* Depends on: [alexandria][8236], [serapeum][c41d], [str][ef7f], [yason][aba2]
 
-<a id="x-2840ANTS-CI-3A-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40REASONS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Reasons to Use
 
@@ -34,12 +33,12 @@ actions and [`SBLint`][2f94] to check code for compilation errors.
 * Custom job types can be defined and distributed as separate `ASDF` systems.
 * You don't have to write `YAML` anymore!
 
-<a id="x-2840ANTS-CI-3A-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40QUICKSTART-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Quickstart
 
 This system allows you to define workflows in the lisp code. The best way is to make these
-definitions a part of your `ASDF` system. This way [`40ants-ci`][b171] will be able to
+definitions a part of your `ASDF` system. This way `40ants-ci` ([`1`][900b] [`2`][b171]) will be able to
 automatically understand for which system it builds a workflow.
 
 Each workflow consists of jobs and each job is a number of steps.
@@ -59,11 +58,11 @@ of the package inferred `ASDF` system `EXAMPLE/CI`. A file should have the follo
   (:import-from #:40ants-ci/jobs/run-tests)
   (:import-from #:40ants-ci/jobs/docs))
 ```
-<a id="x-2840ANTS-CI-3A-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40JOB-TYPES-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ### Job Types
 
-<a id="x-2840ANTS-CI-3A-3A-40AUTOTAG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40AUTOTAG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 #### Autotag
 
@@ -84,17 +83,17 @@ git tag will be pushed. Here is an [example][1cec] how to setup this kind of qui
 ```
 <a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20FUNCTION-29"></a>
 
-##### [function](3b00) `40ants-ci/jobs/autotag:autotag` &key (filename \*default-filename\*) (regex \*default-regex\*) (tag-prefix \*default-tag-prefix\*) (token-pattern \*default-token-pattern\*)
+##### [function](6d04) `40ants-ci/jobs/autotag:autotag` &key (filename \*default-filename\*) (regex \*default-regex\*) (tag-prefix \*default-tag-prefix\*) (token-pattern \*default-token-pattern\*) env
 
 Creates a job which will run autotagger to create a new git tag for release.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29"></a>
 
-##### [class](deaf) `40ants-ci/jobs/autotag:autotag` (job)
+##### [class](80ba) `40ants-ci/jobs/autotag:autotag` (job)
 
 This type of the job created a git tag when finds a new tag in specified file.
 
-<a id="x-2840ANTS-CI-3A-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40LINTER-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 #### Linter
 
@@ -161,9 +160,9 @@ Another interesting thing is that this workflow automatically uses `ubuntu-lates
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-##### [class](1cf0) `40ants-ci/jobs/linter:linter` (lisp-job)
+##### [class](d905) `40ants-ci/jobs/linter:linter` (lisp-job)
 
-<a id="x-2840ANTS-CI-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 #### Critic
 
@@ -193,11 +192,11 @@ with linter:
 and they will be executed in parallel. See docs on [`40ants-ci/jobs/critic:critic`][484a] function
 to learn about supported arguments.
 
-<a id="x-2840ANTS-CI-3A-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40RUN-TESTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 #### Running Tests
 
-Another interesting job type is `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]).
+Another interesting job type is `40ants-ci/jobs/run-tests:run-tests` ([`1`][e35d] [`2`][6cb7]).
 
 When using this job type, make sure, your system
 runs tests on `(ASDF:TEST-SYSTEM :system-name)` call
@@ -276,7 +275,7 @@ at the final step.
 Also, I've passed an option `:coverage t` to the job. Thus coverage
 report will be uploaded to [Coveralls.io][b60c] automatically.
 
-<a id="x-2840ANTS-CI-3A-3A-40MATRIX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40MATRIX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ##### Defining a test Matrix
 
@@ -306,7 +305,7 @@ if it works with the latest Quicklisp and Ultralisp distributions:
                     ;; alisp is not executable. Missing 32bit glibc?
                     (:os "macos-latest" :lisp "allegro")))))
 ```
-<a id="x-2840ANTS-CI-3A-3A-40MULTIPLE-JOBS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40MULTIPLE-JOBS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ##### Multiple jobs
 
@@ -346,11 +345,11 @@ Here is how these jobs will look like in the GitHub interface:
 
 ![](https://user-images.githubusercontent.com/24827/151619261-2d49e2a6-bc5c-42db-aec5-674d9229a1b0.png)
 
-<a id="x-2840ANTS-CI-3A-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40BUILD-DOCS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 #### Building Docs
 
-Third predefined job type is `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8]).
+Third predefined job type is `40ants-ci/jobs/docs:build-docs` ([`1`][13b8] [`2`][1ddb]).
 It uses [40ants/build-docs][613f]
 action and will work only if your `ASDF` system uses a documentation builder supported by
 [40ants/docs-builder][f2be].
@@ -409,7 +408,7 @@ It will generate `.github/workflows/docs.yml` with following content:
   }
 }
 ```
-<a id="x-2840ANTS-CI-3A-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40CACHING-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ### Caching
 
@@ -471,16 +470,63 @@ modified   .github/workflows/docs.yml
          },
          {
 ```
-<a id="x-2840ANTS-CI-3A-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40DETAILS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## Details
 
 `TODO`: I have to write a few chapters with details on additional job's parameters
 and a way how to create new job types.
 
+But for now, I want to show a small example, how to define a workflow with a
+job which takes care about lisp installation and then calls a custom step:
+
+```lisp
+(defworkflow ci
+  :on-push-to "master"
+  :by-cron "0 10 * * 1"
+  :on-pull-request t
+  :cache t
+  :jobs ((40ants-ci/jobs/lisp-job:lisp-job :name "check-ros-config"
+                                           :lisp "ccl-bin"
+                                           :steps ((40ants-ci/steps/sh:sh "Show Roswell Config"
+                                                                          "ros config")))))
+```
+Here we are using the class [`40ants-ci/jobs/lisp-job:lisp-job`][2f4c] which is base for most classes in this `ASDF` system
+and pass a custom `40ants-ci/steps/sh:sh` ([`1`][4d70] [`2`][0f59]) step to it. This step will be called after the repostory checkout and `CCL-BIN` lisp installation.
+so, thus when this step will run `ros config` command, it will output something like that:
+
+```
+asdf.version=3.3.5.3
+ccl-bin.version=1.12.2
+setup.time=3918000017
+sbcl-bin.version=2.4.1
+default.lisp=ccl-bin
+
+Possible subcommands:
+set
+show
+```
+Pay attention to the `NAME` argument of [`40ants-ci/jobs/lisp-job:lisp-job`][2f4c] class. If you omit it, then default "lisp-job" name will be used.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## API
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI
+
+<a id="x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-22-29-20PACKAGE-29"></a>
+
+#### [package](f14f) `40ants-ci`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
 <a id="x-2840ANTS-CI-3AGENERATE-20FUNCTION-29"></a>
 
-### [function](19df) `40ants-ci:generate` system &key path
+##### [function](f88c) `40ants-ci:generate` system &key path
 
 Generates GitHub workflow for given `ASDF` system.
 
@@ -490,49 +536,235 @@ of the given `ASDF` system.
 If `PATH` argument is not given, workflow files will be written
 to .github/workflow/ relarive to the `SYSTEM`.
 
-<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FGITHUB-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-### [function](cdcd) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom
+### 40ANTS-CI/GITHUB
 
-Creates a job step of class [`run-tests`][6cb7].
+<a id="x-28-23A-28-2816-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FGITHUB-22-29-20PACKAGE-29"></a>
 
-<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
+#### [package](0d1e) `40ants-ci/github`
 
-### [class](b6c8) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FGITHUB-3FGenerics-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-This job test runs tests for a given `ASDF` system.
+#### Generics
 
-<a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
+<a id="x-2840ANTS-CI-2FGITHUB-3AGENERATE-20GENERIC-FUNCTION-29"></a>
 
-### [function](0fe3) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t)
+##### [generic-function](c588) `40ants-ci/github:generate` obj path
 
-Creates a job of class [`build-docs`][1ddb].
+<a id="x-2840ANTS-CI-2FGITHUB-3APREPARE-DATA-20GENERIC-FUNCTION-29"></a>
+
+##### [generic-function](32f6) `40ants-ci/github:prepare-data` obj
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FGITHUB-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Variables
+
+<a id="x-2840ANTS-CI-2FVARS-3A-2ACURRENT-SYSTEM-2A-20-28VARIABLE-29-29"></a>
+
+##### [variable](e5d6) `40ants-ci/vars:*current-system*` -unbound-
+
+When workflow is generated for `ASDF` system, this variable will contain a primary `ASDF` system.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FAUTOTAG-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/JOBS/AUTOTAG
+
+<a id="x-28-23A-28-2822-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FAUTOTAG-22-29-20PACKAGE-29"></a>
+
+#### [package](f145) `40ants-ci/jobs/autotag`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FAUTOTAG-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FAUTOTAG-24AUTOTAG-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### AUTOTAG
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29"></a>
+
+###### [class](80ba) `40ants-ci/jobs/autotag:autotag` (job)
+
+This type of the job created a git tag when finds a new tag in specified file.
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AFILENAME-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-29-29"></a>
+
+###### [reader](44e0) `40ants-ci/jobs/autotag:filename` (autotag) (:filename = \*default-filename\*)
+
+File where to search for version numbers.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AREGEX-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-29-29"></a>
+
+###### [reader](1d04) `40ants-ci/jobs/autotag:regex` (autotag) (:regex = \*default-regex\*)
+
+Regexp used to extract version numbers.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3ATAG-PREFIX-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-29-29"></a>
+
+###### [reader](c915) `40ants-ci/jobs/autotag:tag-prefix` (autotag) (:tag-prefix = \*default-tag-prefix\*)
+
+Tag prefix.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3ATOKEN-PATTERN-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-29-29"></a>
+
+###### [reader](65f9) `40ants-ci/jobs/autotag:token-pattern` (autotag) (:token-pattern = \*default-token-pattern\*)
+
+Auth token pattern.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FAUTOTAG-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20FUNCTION-29"></a>
+
+##### [function](6d04) `40ants-ci/jobs/autotag:autotag` &key (filename \*default-filename\*) (regex \*default-regex\*) (tag-prefix \*default-tag-prefix\*) (token-pattern \*default-token-pattern\*) env
+
+Creates a job which will run autotagger to create a new git tag for release.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FCRITIC-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/JOBS/CRITIC
+
+<a id="x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FCRITIC-22-29-20PACKAGE-29"></a>
+
+#### [package](772d) `40ants-ci/jobs/critic`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FCRITIC-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FCRITIC-24CRITIC-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### CRITIC
+
+<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29"></a>
+
+###### [class](7754) `40ants-ci/jobs/critic:critic` (lisp-job)
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3AASDF-SYSTEMS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-29-29"></a>
+
+###### [reader](ac65) `40ants-ci/jobs/critic:asdf-systems` (critic) (:asdf-systems)
+
+Critic can validate more than one system, but for the base class we need provide only one.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3AIGNORE-CRITIQUES-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-29-29"></a>
+
+###### [reader](236e) `40ants-ci/jobs/critic:ignore-critiques` (critic) (:ignore-critiques)
+
+A list strigns with names of critiques to ignore.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FCRITIC-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29"></a>
+
+##### [function](1cdc) `40ants-ci/jobs/critic:critic` &key asdf-systems asdf-version ignore-critiques env
+
+Creates a job which will run Lisp Critic for given `ASDF` systems.
+
+If argument `ASDF-SYSTEMS` is `NIL`, it will use `ASDF` system
+to which current lisp file is belong.
+
+You may also provide `ASDF-VERSION` argument. It should be
+a string. By default, the latest `ASDF` version will be used.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FDOCS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/JOBS/DOCS
+
+<a id="x-28-23A-28-2819-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FDOCS-22-29-20PACKAGE-29"></a>
+
+#### [package](df4c) `40ants-ci/jobs/docs`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FDOCS-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FDOCS-24BUILD-DOCS-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### BUILD-DOCS
 
 <a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29"></a>
 
-### [class](bdad) `40ants-ci/jobs/docs:build-docs` (lisp-job)
+###### [class](746e) `40ants-ci/jobs/docs:build-docs` (lisp-job)
 
 Builds documentation and uploads it to GitHub using ["40ants/build-docs" github action][613f].
 
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3AERROR-ON-WARNINGS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-29-29"></a>
+
+###### [reader](a770) `40ants-ci/jobs/docs:error-on-warnings` (build-docs) (:error-on-warnings = t)
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FDOCS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29"></a>
+
+##### [function](ab23) `40ants-ci/jobs/docs:build-docs` &key asdf-system asdf-version (error-on-warnings t) env
+
+Creates a job of class [`build-docs`][1ddb].
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FJOB-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/JOBS/JOB
+
+<a id="x-28-23A-28-2818-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FJOB-22-29-20PACKAGE-29"></a>
+
+#### [package](7ddd) `40ants-ci/jobs/job`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FJOB-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FJOB-24JOB-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### JOB
+
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AJOB-20CLASS-29"></a>
 
-### [class](c907) `40ants-ci/jobs/job:job` ()
+###### [class](a31b) `40ants-ci/jobs/job:job` ()
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AEXCLUDE-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
+
+###### [reader](12d4) `40ants-ci/jobs/job:exclude` (job) (:exclude = nil)
+
+A list of plists denoting matrix combinations to be excluded.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AEXPLICIT-STEPS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
+
+###### [reader](862a) `40ants-ci/jobs/job:explicit-steps` (job) (:steps = nil)
+
+This slot holds steps given as a `STEPS` argument to a job constructor. Depending on a job class, it might add additional steps around these explicit steps.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AJOB-ENV-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
+
+###### [reader](9a96) `40ants-ci/jobs/job:job-env` (job) (:env = nil)
+
+An alist of environment variables and their values to be added on job level. Values are evaluated in runtime.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3ANAME-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
 
-### [reader](c7c4) `40ants-ci/jobs/job:name` (job) (:name)
+###### [reader](04fd) `40ants-ci/jobs/job:name` (job) (:name)
+
+If this name was not given in constructor, then name will be lowercased name of the job class.
 
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AOS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
 
-### [reader](fe69) `40ants-ci/jobs/job:os` (job) (:OS = "ubuntu-latest")
-
-<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3ASTEPS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
-
-### [reader](ad39) `40ants-ci/jobs/job:steps` (job) (:steps = nil)
+###### [reader](f69f) `40ants-ci/jobs/job:os` (job) (:OS = "ubuntu-latest")
 
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3APERMISSIONS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FJOB-3AJOB-29-29"></a>
 
-### [reader](8b5b) `40ants-ci/jobs/job:permissions` (job) (:permissions = nil)
+###### [reader](07ed) `40ants-ci/jobs/job:permissions` (job) (:permissions = nil)
 
 A plist of permissions need for running the job.
 
@@ -543,94 +775,501 @@ Use default-initargs to override permissions in subclasses:
 (:default-initargs
  :permissions '(:content "write"))
 ```
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FJOB-3FGenerics-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Generics
+
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AMAKE-ENV-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](611a) `40ants-ci/jobs/job:make-env` job
-
-<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AUSE-MATRIX-P-20GENERIC-FUNCTION-29"></a>
-
-### [generic-function](50bd) `40ants-ci/jobs/job:use-matrix-p` job
+##### [generic-function](e4ef) `40ants-ci/jobs/job:make-env` job
 
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AMAKE-MATRIX-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](0e0b) `40ants-ci/jobs/job:make-matrix` job
+##### [generic-function](72e9) `40ants-ci/jobs/job:make-matrix` job
 
 <a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AMAKE-PERMISSIONS-20GENERIC-FUNCTION-29"></a>
 
-### [generic-function](6850) `40ants-ci/jobs/job:make-permissions` job
+##### [generic-function](c160) `40ants-ci/jobs/job:make-permissions` job
 
 Should return an alist with mapping from string to string where keys are scopes and values are permission names. Default method generates this alist from the plist of job's "permissions" slot.
 
-<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29"></a>
+<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3ASTEPS-20GENERIC-FUNCTION-29"></a>
 
-### [class](4c7f) `40ants-ci/jobs/lisp-job:lisp-job` (job)
+##### [generic-function](1625) `40ants-ci/jobs/job:steps` job
 
-This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs.
+<a id="x-2840ANTS-CI-2FJOBS-2FJOB-3AUSE-MATRIX-P-20GENERIC-FUNCTION-29"></a>
 
-<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+##### [generic-function](bf5f) `40ants-ci/jobs/job:use-matrix-p` job
 
-### [reader](37d2) `40ants-ci/jobs/lisp-job:lisp` (lisp-job) (:LISP = "sbcl-bin")
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FLINTER-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AASDF-SYSTEM-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+### 40ANTS-CI/JOBS/LINTER
 
-### [reader](9fae) `40ants-ci/jobs/lisp-job:asdf-system` (lisp-job) (:asdf-system = nil)
+<a id="x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FLINTER-22-29-20PACKAGE-29"></a>
 
-<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AQUICKLISP-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+#### [package](f9d3) `40ants-ci/jobs/linter`
 
-### [reader](ee25) `40ants-ci/jobs/lisp-job:quicklisp` (lisp-job) (:QUICKLISP = "quicklisp")
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FLINTER-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FLINTER-24LINTER-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### LINTER
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29"></a>
 
-### [class](1cf0) `40ants-ci/jobs/linter:linter` (lisp-job)
+###### [class](d905) `40ants-ci/jobs/linter:linter` (lisp-job)
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3AASDF-SYSTEMS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLINTER-3ALINTER-29-29"></a>
+
+###### [reader](1f46) `40ants-ci/jobs/linter:asdf-systems` (linter) (:asdf-systems = nil)
+
+Linter can validate more than one system, but for the base class we need provide only one.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ACHECK-IMPORTS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLINTER-3ALINTER-29-29"></a>
+
+###### [reader](8381) `40ants-ci/jobs/linter:check-imports` (linter) (:check-imports = nil)
+
+Linter will check for missing or unused imports of package-inferred systems.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FLINTER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
 
 <a id="x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29"></a>
 
-### [function](71eb) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports
+##### [function](fa59) `40ants-ci/jobs/linter:linter` &key asdf-systems asdf-version check-imports env
 
 Creates a job which will run `SBL`int for given `ASDF` systems.
 
 If no `ASD` files given, it will use all `ASD` files from
 the current `ASDF` system.
 
-<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29"></a>
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FLISP-JOB-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-### [class](9a66) `40ants-ci/jobs/critic:critic` (lisp-job)
+### 40ANTS-CI/JOBS/LISP-JOB
 
-<a id="x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29"></a>
+<a id="x-28-23A-28-2823-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FLISP-JOB-22-29-20PACKAGE-29"></a>
 
-### [function](7c3c) `40ants-ci/jobs/critic:critic` &key asdf-systems asdf-version ignore-critiques
+#### [package](6fff) `40ants-ci/jobs/lisp-job`
 
-Creates a job which will run Lisp Critic for given `ASDF` systems.
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FLISP-JOB-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-If argument `ASDF-SYSTEMS` is `NIL`, it will use `ASDF` system
-to which current lisp file is belong.
+#### Classes
 
-You may also provide `ASDF-VERSION` argument. It should be
-a string. By default, the latest `ASDF` version will be used.
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FLISP-JOB-24LISP-JOB-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
-<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29"></a>
+##### LISP-JOB
 
-### [class](deaf) `40ants-ci/jobs/autotag:autotag` (job)
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29"></a>
 
-This type of the job created a git tag when finds a new tag in specified file.
+###### [class](65c1) `40ants-ci/jobs/lisp-job:lisp-job` (job)
 
-<a id="x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20FUNCTION-29"></a>
+This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs.
 
-### [function](3b00) `40ants-ci/jobs/autotag:autotag` &key (filename \*default-filename\*) (regex \*default-regex\*) (tag-prefix \*default-tag-prefix\*) (token-pattern \*default-token-pattern\*)
+**Readers**
 
-Creates a job which will run autotagger to create a new git tag for release.
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AASDF-SYSTEM-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](c12e) `40ants-ci/jobs/lisp-job:asdf-system` (lisp-job) (:asdf-system = nil)
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AASDF-VERSION-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](f309) `40ants-ci/jobs/lisp-job:asdf-version` (lisp-job) (:asdf-version = nil)
+
+`ASDF` version to use when setting up Lisp environment. If `NIL`, then the latest will be used.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](15d9) `40ants-ci/jobs/lisp-job:lisp` (lisp-job) (:LISP = "sbcl-bin")
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AQLFILE-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](bc48) `40ants-ci/jobs/lisp-job:qlfile` (lisp-job) (:qlfile = nil)
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AQLOT-VERSION-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](e2df) `40ants-ci/jobs/lisp-job:qlot-version` (lisp-job) (:qlot-version = nil)
+
+Qlot version to use when setting up Lisp environment. If `NIL`, then will be used version, pinned in `setup-lisp` github action.
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AQUICKLISP-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](dd0d) `40ants-ci/jobs/lisp-job:quicklisp` (lisp-job) (:QUICKLISP = "quicklisp")
+
+<a id="x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3AROSWELL-VERSION-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-29-29"></a>
+
+###### [reader](79ca) `40ants-ci/jobs/lisp-job:roswell-version` (lisp-job) (:roswell-version = nil)
+
+Roswell version to use when setting up Lisp environment. If `NIL`, then will be used version, pinned in `setup-lisp` github action.
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FRUN-TESTS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/JOBS/RUN-TESTS
+
+<a id="x-28-23A-28-2824-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FJOBS-2FRUN-TESTS-22-29-20PACKAGE-29"></a>
+
+#### [package](3465) `40ants-ci/jobs/run-tests`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FRUN-TESTS-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FJOBS-2FRUN-TESTS-24RUN-TESTS-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### RUN-TESTS
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29"></a>
+
+###### [class](20e6) `40ants-ci/jobs/run-tests:run-tests` (lisp-job)
+
+This job test runs tests for a given `ASDF` system.
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ACOVERAGE-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-29-29"></a>
+
+###### [reader](843f) `40ants-ci/jobs/run-tests:coverage` (run-tests) (:coverage = nil)
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ACUSTOM-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-29-29"></a>
+
+###### [reader](64e2) `40ants-ci/jobs/run-tests:custom` (run-tests) (:custom = nil)
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FJOBS-2FRUN-TESTS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29"></a>
+
+##### [function](7663) `40ants-ci/jobs/run-tests:run-tests` &rest rest &key coverage qlfile asdf-system asdf-version os quicklisp lisp exclude custom env
+
+Creates a job step of class [`run-tests`][6cb7].
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FACTION-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/STEPS/ACTION
+
+<a id="x-28-23A-28-2822-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FSTEPS-2FACTION-22-29-20PACKAGE-29"></a>
+
+#### [package](c011) `40ants-ci/steps/action`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FACTION-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FACTION-24ACTION-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### ACTION
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FACTION-3AACTION-20CLASS-29"></a>
+
+###### [class](1608) `40ants-ci/steps/action:action` (step)
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FACTION-3AACTION-ARGS-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FACTION-3AACTION-29-29"></a>
+
+###### [reader](d4f0) `40ants-ci/steps/action:action-args` (action) (:args)
+
+A plist to be passed as "with" dictionary to the action.
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FACTION-3AUSES-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FACTION-3AACTION-29-29"></a>
+
+###### [reader](2b0b) `40ants-ci/steps/action:uses` (action) (:uses)
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FACTION-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FACTION-3AACTION-20FUNCTION-29"></a>
+
+##### [function](9701) `40ants-ci/steps/action:action` name uses &rest args &key id if env &allow-other-keys
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FSH-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/STEPS/SH
+
+<a id="x-28-23A-28-2818-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FSTEPS-2FSH-22-29-20PACKAGE-29"></a>
+
+#### [package](e951) `40ants-ci/steps/sh`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FSH-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FSH-24SH-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### SH
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20CLASS-29"></a>
+
+###### [class](f486) `40ants-ci/steps/sh:sh` (step)
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSH-3ACOMMAND-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSH-3ASH-29-29"></a>
+
+###### [reader](0fa0) `40ants-ci/steps/sh:command` (sh) (:command)
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSH-3ASHELL-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSH-3ASH-29-29"></a>
+
+###### [reader](9401) `40ants-ci/steps/sh:shell` (sh) (:shell = \*default-shell\*)
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FSH-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20FUNCTION-29"></a>
+
+##### [function](994b) `40ants-ci/steps/sh:sh` name command &key id if (shell \*default-shell\*) env
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FSH-3FMacros-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Macros
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSH-3ASECTIONS-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29"></a>
+
+##### [macro](8e63) `40ants-ci/steps/sh:sections` &body body
+
+Returns a string with a bash script where some parts are grouped.
+
+In this example we have 3 sections:
+
+```lisp
+(sections
+      ("Help Argument"
+       "qlot exec cl-info --help")
+      ("Version Argument"
+       "qlot exec cl-info --version")
+      ("Lisp Systems Info"
+       "qlot exec cl-info"
+       "qlot exec cl-info cl-info defmain"))
+```
+It will be compiled into:
+
+```bash
+echo ::group::Help Argument
+qlot exec cl-info --help
+echo ::endgroup::
+echo ::group::Version Argument
+qlot exec cl-info --version
+echo ::endgroup::
+echo ::group::Lisp Systems Info
+qlot exec cl-info
+qlot exec cl-info cl-info defmain
+echo ::endgroup::
+```
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FSTEP-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/STEPS/STEP
+
+<a id="x-28-23A-28-2820-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FSTEPS-2FSTEP-22-29-20PACKAGE-29"></a>
+
+#### [package](5759) `40ants-ci/steps/step`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FSTEPS-2FSTEP-3FClasses-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Classes
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FSTEPS-2FSTEP-24STEP-3FCLASS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+##### STEP
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-20CLASS-29"></a>
+
+###### [class](c335) `40ants-ci/steps/step:step` ()
+
+**Readers**
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSTEP-3AENV-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-29-29"></a>
+
+###### [reader](872a) `40ants-ci/steps/step:env` (step) (:env = nil)
+
+An alist of environment variables.
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-ID-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-29-29"></a>
+
+###### [reader](f106) `40ants-ci/steps/step:step-id` (step) (:id = nil)
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-IF-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-29-29"></a>
+
+###### [reader](4d74) `40ants-ci/steps/step:step-if` (step) (:if = nil)
+
+<a id="x-2840ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-NAME-20-2840ANTS-DOC-2FLOCATIVES-3AREADER-2040ANTS-CI-2FSTEPS-2FSTEP-3ASTEP-29-29"></a>
+
+###### [reader](b33c) `40ants-ci/steps/step:step-name` (step) (:name = nil)
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FUTILS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/UTILS
+
+<a id="x-28-23A-28-2815-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FUTILS-22-29-20PACKAGE-29"></a>
+
+#### [package](0008) `40ants-ci/utils`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FUTILS-3FGenerics-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Generics
+
+<a id="x-2840ANTS-CI-2FUTILS-3ASYSTEM-PACKAGES-20GENERIC-FUNCTION-29"></a>
+
+##### [generic-function](4f11) `40ants-ci/utils:system-packages` system
+
+Returns a list of packages created by `ASDF` system.
+
+Default implementation returns a package having the same name as a system
+and all packages matched to package-inferred subsystems:
+
+```
+CL-USER> (docs-builder/utils:system-packages :docs-builder)
+(#<PACKAGE "DOCS-BUILDER">
+ #<PACKAGE "DOCS-BUILDER/UTILS">
+ #<PACKAGE "DOCS-BUILDER/GUESSER">
+ #<PACKAGE "DOCS-BUILDER/BUILDERS/GENEVA/GUESSER">
+ #<PACKAGE "DOCS-BUILDER/BUILDER">
+ #<PACKAGE "DOCS-BUILDER/BUILDERS/MGL-PAX/GUESSER">
+ #<PACKAGE "DOCS-BUILDER/DOCS">
+ #<PACKAGE "DOCS-BUILDER/BUILDERS/MGL-PAX/BUILDER">)
+```
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FUTILS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Functions
+
+<a id="x-2840ANTS-CI-2FUTILS-3AALISTP-20FUNCTION-29"></a>
+
+##### [function](4e28) `40ants-ci/utils:alistp` list
+
+Test wheather `LIST` argument is a properly formed alist.
+
+In this library, alist has always a string as a key.
+Because we need them to have this form to serialize
+to `JSON` propertly.
+
+(alistp '(("cron" . "0 10 * * 1"))) -> T
+(alistp '((("cron" . "0 10 * * 1")))) -> `NIL`
+
+<a id="x-2840ANTS-CI-2FUTILS-3ACURRENT-SYSTEM-NAME-20FUNCTION-29"></a>
+
+##### [function](e4ab) `40ants-ci/utils:current-system-name`
+
+<a id="x-2840ANTS-CI-2FUTILS-3ADEDENT-20FUNCTION-29"></a>
+
+##### [function](1e23) `40ants-ci/utils:dedent` text
+
+Removes common leading whitespace from each string.
+
+A few examples:
+
+```
+(dedent "Hello
+          World
+          and all Lispers!")
+
+"Hello
+World
+and all Lispers!"
+```
+```
+(dedent "
+    Hello
+    World
+    and all Lispers!")
+
+"Hello
+World
+and all Lispers!"
+```
+```
+(dedent "This is a code:
+
+              (symbol-name :hello-world)
+
+          it will output HELLO-WORLD.")
+
+"This is a code:
+
+    (symbol-name :hello-world)
+
+it will output HELLO-WORLD."
+```
+<a id="x-2840ANTS-CI-2FUTILS-3AENSURE-LIST-OF-PLISTS-20FUNCTION-29"></a>
+
+##### [function](148b) `40ants-ci/utils:ensure-list-of-plists` data
+
+<a id="x-2840ANTS-CI-2FUTILS-3AENSURE-PRIMARY-SYSTEM-20FUNCTION-29"></a>
+
+##### [function](7f83) `40ants-ci/utils:ensure-primary-system` system
+
+<a id="x-2840ANTS-CI-2FUTILS-3AMAKE-GITHUB-WORKFLOWS-PATH-20FUNCTION-29"></a>
+
+##### [function](27dd) `40ants-ci/utils:make-github-workflows-path` system
+
+<a id="x-2840ANTS-CI-2FUTILS-3APLIST-TO-ALIST-20FUNCTION-29"></a>
+
+##### [function](c13c) `40ants-ci/utils:plist-to-alist` plist &key (string-keys t) (lowercase t)
+
+Make an alist from a plist `PLIST`.
+
+By default, transforms keys to lowercased strings
+
+<a id="x-2840ANTS-CI-2FUTILS-3APLISTP-20FUNCTION-29"></a>
+
+##### [function](98fa) `40ants-ci/utils:plistp` list
+
+Test wheather `LIST` is a properly formed plist.
+
+<a id="x-2840ANTS-CI-2FUTILS-3ASINGLE-20FUNCTION-29"></a>
+
+##### [function](54c7) `40ants-ci/utils:single` list
+
+Test wheather `LIST` contains exactly 1 element.
+
+<a id="x-2840ANTS-CI-2FUTILS-3ATO-JSON-20FUNCTION-29"></a>
+
+##### [function](4c48) `40ants-ci/utils:to-json` data
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-4040ANTS-CI-2FVARS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+### 40ANTS-CI/VARS
+
+<a id="x-28-23A-28-2814-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-2FVARS-22-29-20PACKAGE-29"></a>
+
+#### [package](cf84) `40ants-ci/vars`
+
+<a id="x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-7C-4040ANTS-CI-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+#### Variables
+
+<a id="x-2840ANTS-CI-2FVARS-3A-2ACURRENT-SYSTEM-2A-20-28VARIABLE-29-29"></a>
+
+##### [variable](e5d6) `40ants-ci/vars:*current-system*` -unbound-
+
+When workflow is generated for `ASDF` system, this variable will contain a primary `ASDF` system.
+
+<a id="x-2840ANTS-CI-2FVARS-3A-2AUSE-CACHE-2A-20-28VARIABLE-29-29"></a>
+
+##### [variable](e6e3) `40ants-ci/vars:*use-cache*` nil
+
+Workflow will set this variable when preparing the data or `YAML` generation.
 
 
 [2100]: https://40ants.com/40ants-critic
 [b882]: https://40ants.com/build-doc
 [613f]: https://40ants.com/build-docs/
 [3f72]: https://40ants.com/ci/
+[900b]: https://40ants.com/ci/#x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ANTS-CI-22-29-20PACKAGE-29
 [b171]: https://40ants.com/ci/#x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ants-ci-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29
 [484a]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29
 [1ddb]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29
 [13b8]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29
+[2f4c]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29
 [6cb7]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29
 [e35d]: https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29
+[0f59]: https://40ants.com/ci/#x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20CLASS-29
+[4d70]: https://40ants.com/ci/#x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20FUNCTION-29
 [f2be]: https://40ants.com/docs-builder/
 [8469]: https://40ants.com/run-tests
 [59d7]: https://40ants.com/run-tests/
@@ -638,35 +1277,94 @@ Creates a job which will run autotagger to create a new git tag for release.
 [b60c]: https://coveralls.io/
 [e681]: https://github.com/40ants/ci
 [de0b]: https://github.com/40ants/ci/actions
-[19df]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/core.lisp#L570
-[deaf]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/autotag.lisp#L18
-[3b00]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/autotag.lisp#L44
-[9a66]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/critic.lisp#L12
-[7c3c]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/critic.lisp#L22
-[bdad]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/docs.lisp#L14
-[0fe3]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/docs.lisp#L21
-[6850]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L111
-[c907]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L22
-[c7c4]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L23
-[fe69]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L25
-[ad39]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L32
-[8b5b]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L35
-[50bd]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L69
-[0e0b]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L74
-[611a]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/job.lisp#L85
-[1cf0]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/linter.lisp#L14
-[71eb]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/linter.lisp#L33
-[4c7f]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/lisp-job.lisp#L24
-[ee25]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/lisp-job.lisp#L25
-[37d2]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/lisp-job.lisp#L28
-[9fae]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/lisp-job.lisp#L34
-[b6c8]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/run-tests.lisp#L18
-[cdcd]: https://github.com/40ants/ci/blob/a0375b69ce29a8a193e003700f7fafddec1eec0e/src/jobs/run-tests.lisp#L28
+[f14f]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/core.lisp#L1
+[f88c]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/core.lisp#L9
+[0d1e]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/github.lisp#L1
+[c588]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/github.lisp#L16
+[32f6]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/github.lisp#L36
+[f145]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L1
+[80ba]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L23
+[44e0]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L24
+[1d04]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L29
+[c915]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L34
+[65f9]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L39
+[6d04]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/autotag.lisp#L49
+[772d]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/critic.lisp#L1
+[7754]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/critic.lisp#L14
+[ac65]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/critic.lisp#L16
+[236e]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/critic.lisp#L19
+[1cdc]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/critic.lisp#L24
+[df4c]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/docs.lisp#L1
+[746e]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/docs.lisp#L15
+[a770]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/docs.lisp#L16
+[ab23]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/docs.lisp#L22
+[7ddd]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L1
+[bf5f]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L104
+[72e9]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L109
+[e4ef]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L120
+[c160]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L149
+[a31b]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L29
+[04fd]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L30
+[f69f]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L33
+[12d4]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L36
+[9a96]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L40
+[862a]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L45
+[07ed]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L49
+[1625]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/job.lisp#L90
+[f9d3]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/linter.lisp#L1
+[d905]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/linter.lisp#L16
+[1f46]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/linter.lisp#L17
+[8381]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/linter.lisp#L22
+[fa59]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/linter.lisp#L35
+[6fff]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L1
+[65c1]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L28
+[dd0d]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L29
+[15d9]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L32
+[bc48]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L35
+[c12e]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L38
+[f309]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L42
+[79ca]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L47
+[e2df]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/lisp-job.lisp#L52
+[3465]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/run-tests.lisp#L1
+[20e6]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/run-tests.lisp#L19
+[843f]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/run-tests.lisp#L20
+[64e2]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/run-tests.lisp#L23
+[7663]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/jobs/run-tests.lisp#L29
+[c011]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/action.lisp#L1
+[1608]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/action.lisp#L13
+[2b0b]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/action.lisp#L14
+[d4f0]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/action.lisp#L16
+[9701]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/action.lisp#L22
+[e951]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L1
+[f486]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L17
+[0fa0]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L18
+[9401]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L20
+[994b]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L26
+[8e63]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/sh.lisp#L42
+[5759]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L1
+[c335]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L19
+[f106]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L20
+[b33c]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L23
+[872a]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L26
+[4d74]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/steps/step.lisp#L31
+[0008]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L1
+[54c7]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L154
+[98fa]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L159
+[4e28]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L169
+[148b]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L185
+[c13c]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L197
+[27dd]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L215
+[4c48]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L232
+[7f83]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L25
+[4f11]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L31
+[e4ab]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L70
+[1e23]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/utils.lisp#L85
+[cf84]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/vars.lisp#L1
+[e6e3]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/vars.lisp#L14
+[e5d6]: https://github.com/40ants/ci/blob/633ae5eae237d9eb1b18062abc9d0d981887aa0c/src/vars.lisp#L9
 [2f94]: https://github.com/cxxxr/sblint
 [1cec]: https://github.com/quicklisp/quicklisp-projects/blob/ee133271c81caf5d8bbf8cef3054544ff47b64c6/projects/alexa/source.txt
-[2c00]: https://quickdocs.org/40ants-doc
 [8236]: https://quickdocs.org/alexandria
-[ce67]: https://quickdocs.org/docs-config
 [c41d]: https://quickdocs.org/serapeum
 [ef7f]: https://quickdocs.org/str
 [aba2]: https://quickdocs.org/yason
