@@ -34,10 +34,12 @@
                                quicklisp
                                lisp
                                exclude
-                               custom)
+                               custom
+                               env)
   "Creates a job step of class RUN-TESTS."
   (declare (ignore coverage qlfile os quicklisp lisp
-                   asdf-system asdf-version exclude))
+                   asdf-system asdf-version exclude
+                   env))
   (check-type custom
               (or null string list))
   (apply #'make-instance 'run-tests

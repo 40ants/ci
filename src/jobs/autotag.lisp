@@ -1,6 +1,7 @@
 (uiop:define-package #:40ants-ci/jobs/autotag
   (:use #:cl)
-  (:import-from #:40ants-ci/jobs/job)
+  (:import-from #:40ants-ci/jobs/job
+                #:job-env)
   (:import-from #:40ants-ci/steps/action
                 #:action)
   (:export #:autotag
@@ -48,13 +49,15 @@
 (defun autotag (&key (filename *default-filename*)
                      (regex *default-regex*)
                      (tag-prefix *default-tag-prefix*)
-                     (token-pattern *default-token-pattern*))
+                     (token-pattern *default-token-pattern*)
+                     env)
   "Creates a job which will run autotagger to create a new git tag for release."
   (make-instance 'autotag
                  :filename filename
                  :regex regex
                  :tag-prefix tag-prefix
-                 :token-pattern token-pattern))
+                 :token-pattern token-pattern
+                 :env env))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job autotag))
@@ -67,6 +70,8 @@
                    :root (filename job)
                    :regex_pattern (regex job)
                    :tag_prefix (tag-prefix job)
-                   :env (list :github_token
-                              (token-pattern job))))
+                   :env (unless (assoc "GITHUB_TOKEN" (job-env job)
+                                       :test #'string=)
+                          (list :github_token
+                                (token-pattern job)))))
           (call-next-method)))

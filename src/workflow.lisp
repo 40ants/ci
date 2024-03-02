@@ -96,7 +96,9 @@
    - (foo 1 2 3) -> result of foo call.
  "
   (if (and (listp arg)
-           (not (symbolp (first arg))))
+           (or (not (symbolp (first arg)))
+               ;; We don't want to eval plists
+               (keywordp (first arg))))
       arg
       (eval arg)))
 

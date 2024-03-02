@@ -17,11 +17,13 @@ New
 ===
 
 * Now you can specify ENV argument to 40ANTS-CI:DEFWORKFLOW and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in 40ANTS-CI-DOCS/INDEX::@ENV section.
+* 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG function now ignores TOKEN-PATTERN argument if ENV argument was given and has GITHUB_TOKEN value for whole job.
 
 Backward incompatible changes
 =============================
 
 * When additional keyword arguments to 40ANTS-CI/STEPS/SH:SH function are given, they are transformed into env variables. Previously, their names were taken as is. Now they are uppercased and dash symbols are replaced with underscores.
+
 
 ")
   (0.14.0 2024-02-25

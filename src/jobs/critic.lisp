@@ -21,7 +21,7 @@
                      :reader ignore-critiques)))
 
 
-(defun critic (&key asdf-systems asdf-version ignore-critiques)
+(defun critic (&key asdf-systems asdf-version ignore-critiques env)
   "Creates a job which will run Lisp Critic for given ASDF systems.
 
    If argument ASDF-SYSTEMS is NIL, it will use ASDF system
@@ -36,7 +36,8 @@
                    :asdf-system (first asdf-systems)
                    :asdf-systems asdf-systems
                    :asdf-version asdf-version
-                   :ignore-critiques ignore-critiques)))
+                   :ignore-critiques ignore-critiques
+                   :env env)))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job critic))
