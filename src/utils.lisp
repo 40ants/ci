@@ -5,6 +5,8 @@
                 #:join
                 #:split)
   (:import-from #:yason)
+  (:import-from #:serapeum
+                #:soft-alist-of)
   (:export
    #:to-json
    #:ensure-primary-system
@@ -268,7 +270,7 @@ it will output HELLO-WORLD.\"
 
 
 (deftype env-alist-type ()
-  '(serapeum:soft-alist-of allowed-env-name-type string))
+  '(soft-alist-of allowed-env-name-type string))
 
 
 (defun to-env-alist (env)
