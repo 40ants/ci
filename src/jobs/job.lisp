@@ -1,12 +1,16 @@
 (uiop:define-package #:40ants-ci/jobs/job
   (:use #:cl)
   (:import-from #:40ants-ci/utils
+                #:to-env-alist
                 #:ensure-list-of-plists)
   (:import-from #:40ants-ci/github)
   (:import-from #:serapeum
+                #:soft-alist-of
                 #:length<)
   (:import-from #:alexandria
                 #:length=)
+  (:import-from #:40ants-ci/steps/step
+                #:ensure-step)
   (:export #:job
            #:use-matrix-p
            #:steps
@@ -15,13 +19,17 @@
            #:make-matrix
            #:make-env
            #:permissions
-           #:make-permissions))
-(in-package 40ants-ci/jobs/job)
+           #:make-permissions
+           #:explicit-steps
+           #:exclude
+           #:job-env))
+(in-package #:40ants-ci/jobs/job)
 
 
 (defclass job ()
   ((name :initarg :name
-         :reader name)
+         :reader name
+         :documentation "If this name was not given in constructor, then name will be lowercased name of the job class.")
    (os :initform "ubuntu-latest"
        :initarg :os
        :reader os)
@@ -29,9 +37,15 @@
             :initarg :exclude
             :reader exclude
             :documentation "A list of plists denoting matrix combinations to be excluded.")
+   (env :initform nil
+        :type (soft-alist-of string string)
+        :initarg :env
+        :documentation "An alist of environment variables and their values to be added on job level. Values are evaluated in runtime."
+        :reader job-env)
    (steps :initform nil
           :initarg :steps
-          :reader steps)
+          :documentation "This slot holds steps given as a STEPS argument to a job constructor. Depending on a job class, it might add additional steps around these explicit steps."
+          :reader explicit-steps)
    (permissions :initform nil
                 :initarg :permissions
                 :documentation "A plist of permissions need for running the job.
@@ -46,20 +60,41 @@
                 :reader permissions)))
 
 
-(defmethod initialize-instance :after ((job job) &rest initargs)
-  (declare (ignore initargs))
-  (unless (slot-boundp job 'name)
-    (setf (slot-value job 'name)
-          (string-downcase
-           (class-name (class-of job))))))
+(defmethod initialize-instance :around ((job job) &rest initargs)
+  (let* ((initargs (copy-list initargs))
+         (env (getf initargs :env)))
+    (when env
+      (setf (getf initargs :env)
+            (to-env-alist env)))
+
+    (unless (getf initargs :name)
+      (setf (getf initargs :name)
+            (string-downcase
+             (class-name (class-of job)))))
+
+    
+    (setf (getf initargs :steps)
+          (mapcar #'ensure-step
+                  (getf initargs :steps)))
+    
+    (apply #'call-next-method
+           job
+           initargs)))
+
 
 (defmethod os :around ((job job))
   (uiop:ensure-list
    (call-next-method)))
 
-(defmethod steps :around ((job job))
-  (uiop:ensure-list
-   (call-next-method)))
+
+(defgeneric steps (job)
+  (:method ((job job))
+    (explicit-steps job))
+  
+  (:method :around ((job job))
+    (uiop:ensure-list
+     (call-next-method))))
+
 
 (defmethod exclude :around ((job job))
   (ensure-list-of-plists
@@ -85,6 +120,9 @@
 (defgeneric make-env (job)
   (:method ((job job))
     (append
+     (when (job-env job)
+       (job-env job))
+     
      (cond
        ((length< 1 (os job))
         `(("OS" . "${{ matrix.os }}")))

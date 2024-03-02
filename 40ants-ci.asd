@@ -6,8 +6,12 @@
   :defsystem-depends-on ("40ants-asdf-system")
   :pathname "src"
   :depends-on ("40ants-ci/core"
-               "40ants-ci/ci"
-               "40ants-ci/changelog")
+               "40ants-ci/jobs/job"
+               "40ants-ci/jobs/docs"
+               "40ants-ci/jobs/linter"
+               "40ants-ci/jobs/critic"
+               "40ants-ci/jobs/run-tests"
+               "40ants-ci/jobs/autotag")
   :description "A tool simplify continuous deployment for Common Lisp projects."
   :homepage "https://40ants.com/ci/"
   :source-control (:git "https://github.com/40ants/ci")

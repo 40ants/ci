@@ -7,7 +7,8 @@
                 #:action)
   (:import-from #:40ants-ci/utils
                 #:current-system-name)
-  (:export #:build-docs))
+  (:export #:build-docs
+           #:error-on-warnings))
 (in-package 40ants-ci/jobs/docs)
 
 
@@ -20,12 +21,14 @@
 
 (defun build-docs (&key asdf-system
                      asdf-version
-                     (error-on-warnings t))
+                     (error-on-warnings t)
+                     env)
   "Creates a job of class BUILD-DOCS."
   (make-instance 'build-docs
                  :asdf-system asdf-system
                  :error-on-warnings error-on-warnings
-                 :asdf-version asdf-version))
+                 :asdf-version asdf-version
+                 :env env))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job build-docs))

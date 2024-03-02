@@ -5,6 +5,8 @@
                 #:join
                 #:split)
   (:import-from #:yason)
+  (:import-from #:serapeum
+                #:soft-alist-of)
   (:export
    #:to-json
    #:ensure-primary-system
@@ -43,10 +45,6 @@ CL-USER> (docs-builder/utils:system-packages :docs-builder)
  #<PACKAGE \"DOCS-BUILDER/DOCS\">
  #<PACKAGE \"DOCS-BUILDER/BUILDERS/MGL-PAX/BUILDER\">)
 ```
-
-This function can be used by builder to find pieces of documentation.
-For example, DOCS-BUILDER/BUILDERS/MGL-PAX/GUESSER:@INDEX
-builder uses it to find documentation sections.
 ")
   (:method ((system string))
     (system-packages (asdf:find-system system)))
@@ -169,9 +167,9 @@ it will output HELLO-WORLD.\"
 
 
 (defun alistp (list)
-  "Test wheather LIST is a properly formed alist.
+  "Test wheather LIST argument is a properly formed alist.
 
-   In this library, ALIST has always a string as a key.
+   In this library, alist has always a string as a key.
    Because we need them to have this form to serialize
    to JSON propertly.
 
@@ -265,3 +263,29 @@ it will output HELLO-WORLD.\"
 
 (defmethod yason:encode ((object (eql nil)) &optional (stream yason::*json-output*))
   (write-string "[]" stream))
+
+
+(deftype allowed-env-name-type ()
+  '(or string keyword))
+
+
+(deftype env-alist-type ()
+  '(soft-alist-of allowed-env-name-type string))
+
+
+(defun to-env-alist (env)
+  (flet ((make-env-name (name)
+           (str:replace-all "-" "_"
+                            (string-upcase name))))
+    (cond
+      ((plistp env)
+       (loop for (key value) on env by #'cddr
+             collect (cons (make-env-name key)
+                           value)))
+      ((typep env 'env-alist-type)
+       (loop for (key . value) in env
+             collect (cons (make-env-name key)
+                           value)))
+      (t
+       (error "~A is not alist or plist"
+              env)))))

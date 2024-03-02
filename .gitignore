@@ -1,5 +1,5 @@
-/docs/
+/docs/build/
 /env/
 /.qlot
-/.DS_Store
 *.fasl
+.DS_Store

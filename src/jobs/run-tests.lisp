@@ -10,9 +10,10 @@
                 #:current-system-name)
   (:import-from #:alexandria
                 #:when-let)
-  (:export
-   #:run-tests))
-(in-package 40ants-ci/jobs/run-tests)
+  (:export #:run-tests
+           #:coverage
+           #:custom))
+(in-package #:40ants-ci/jobs/run-tests)
 
 
 (defclass run-tests (40ants-ci/jobs/lisp-job:lisp-job)
@@ -33,10 +34,12 @@
                                quicklisp
                                lisp
                                exclude
-                               custom)
+                               custom
+                               env)
   "Creates a job step of class RUN-TESTS."
   (declare (ignore coverage qlfile os quicklisp lisp
-                   asdf-system asdf-version exclude))
+                   asdf-system asdf-version exclude
+                   env))
   (check-type custom
               (or null string list))
   (apply #'make-instance 'run-tests

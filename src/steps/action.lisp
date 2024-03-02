@@ -4,8 +4,10 @@
   (:import-from #:40ants-ci/github)
   (:import-from #:alexandria
                 #:remove-from-plistf)
-  (:export #:action))
-(in-package 40ants-ci/steps/action)
+  (:export #:action
+           #:uses
+           #:action-args))
+(in-package #:40ants-ci/steps/action)
 
 
 (defclass action (40ants-ci/steps/step:step)
