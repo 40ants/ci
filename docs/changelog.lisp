@@ -11,6 +11,36 @@
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.16.0 2024-12-14
+          "
+Added
+=====
+
+Now dynamic space size can be given for lisp steps.
+
+There are two ways to set it:
+
+```
+(build-docs
+  :asdf-system \"cl-telegram-bot-docs\"
+  :env ((\"DYNAMIC_SPACE_SIZE\" . \"4Gb\")))
+```
+
+This way it will be applied only to the step of the documentation building,
+because [docs-builder script](https://github.com/40ants/docs-builder) allows to use
+such environment variable.
+
+But if you CI process fails to compile the ASDF system because of the memory limit,
+then you need to set dynamic space size on the earlier state - during \"Setup Lisp\"
+step. For this case an argument DYNAMIC-SPACE-SIZE can be given:
+
+```
+(build-docs
+ :asdf-system \"cl-telegram-bot-docs\"
+ :dynamic-space-size \"4gb\")
+```
+
+")
   (0.15.0 2024-03-02
           "
 New
@@ -23,7 +53,6 @@ Backward incompatible changes
 =============================
 
 * When additional keyword arguments to 40ANTS-CI/STEPS/SH:SH function are given, they are transformed into env variables. Previously, their names were taken as is. Now they are uppercased and dash symbols are replaced with underscores.
-
 
 ")
   (0.14.0 2024-02-25

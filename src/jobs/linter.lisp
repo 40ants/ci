@@ -1,4 +1,4 @@
-(defpackage #:40ants-ci/jobs/linter
+(uiop:define-package #:40ants-ci/jobs/linter
   (:use #:cl)
   (:import-from #:40ants-ci/steps/sh
                 #:sh)
@@ -10,7 +10,7 @@
   (:export #:linter
            #:asdf-systems
            #:check-imports))
-(in-package 40ants-ci/jobs/linter)
+(in-package #:40ants-ci/jobs/linter)
 
 
 (defclass linter (40ants-ci/jobs/lisp-job:lisp-job)
@@ -32,17 +32,35 @@
        (current-system-name))))
 
 
-(defun linter (&key asdf-systems asdf-version check-imports env)
+(defun linter (&rest args
+               &key
+               asdf-systems
+               check-imports
+               ;; Settings from base JOB class
+               os
+               permissions
+               exclude
+               env
+               ;; Settings from base LISP-JOB class
+               roswell-version
+               asdf-version
+               qlot-version
+               quicklisp
+               lisp
+               qlfile
+               dynamic-space-size)
   "Creates a job which will run SBLint for given ASDF systems.
 
    If no ASD files given, it will use all ASD files from
    the current ASDF system."
-  (make-instance 'linter
-                 :asdf-system (first asdf-systems)
-                 :asdf-systems asdf-systems
-                 :asdf-version asdf-version
-                 :env env
-                 :check-imports check-imports))
+  (declare (ignore check-imports os permissions exclude env
+                   roswell-version asdf-version qlot-version
+                   quicklisp lisp qlfile dynamic-space-size))
+  
+  (apply #'make-instance
+         'linter
+         :asdf-system (first asdf-systems)
+         args))
 
 
 (defmethod 40ants-ci/jobs/job:steps ((job linter))

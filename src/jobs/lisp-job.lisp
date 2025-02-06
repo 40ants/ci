@@ -27,8 +27,8 @@
 
 (defclass lisp-job (40ants-ci/jobs/job:job)
   ((quicklisp :initform "quicklisp"
-                 :initarg :quicklisp
-                 :reader quicklisp)
+              :initarg :quicklisp
+              :reader quicklisp)
    (lisp :initform "sbcl-bin"
          :initarg :lisp
          :reader lisp)
@@ -49,6 +49,11 @@
                     :type (or null string)
                     :documentation "Roswell version to use when setting up Lisp environment. If NIL, then will be used version, pinned in `setup-lisp` github action."
                     :reader roswell-version)
+   (dynamic-space-size :initarg :dynamic-space-size
+                       :initform nil
+                       :type (or null string)
+                       :documentation "Dynamic space size for SBCL."
+                       :reader dynamic-space-size)
    (qlot-version :initarg :qlot-version
                  :initform nil
                  :type (or null string)
@@ -142,7 +147,8 @@
                    :qlot-version (qlot-version job)
                    :qlfile-template (when (qlfile job)
                                       (dedent (qlfile job)))
+                   :dynamic-space-size (dynamic-space-size job)
                    :cache (if *use-cache*
-                              "true"
-                              "false")))
+                            "true"
+                            "false")))
           (call-next-method)))
