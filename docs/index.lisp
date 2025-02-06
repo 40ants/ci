@@ -9,7 +9,7 @@
                 #:docs-config)
   (:import-from #:40ants-doc/autodoc
                 #:defautodoc)
-  (:import-from #:40ants-logging-docs/changelog
+  (:import-from #:40ants-ci-docs/changelog
                 #:@changelog)
   (:export #:@index
            #:@readme
@@ -624,6 +624,7 @@ these task you can provide custom steps using BEFORE-STEPS argument or AFTER-STE
 Here is an example where we are installing system package libunaq1-dev before running the testsuite:
 
 
+```lisp
 (defparameter *required-steps*
   (list (sh \"Install libunac\"
             \"sudo apt-get install -y libunac1-dev\")))
@@ -634,6 +635,7 @@ Here is an example where we are installing system package libunaq1-dev before ru
   :jobs ((run-tests
           :steps-before *required-steps*
           :asdf-system \"my-asdf-system\")))
+```
 ")
 
 

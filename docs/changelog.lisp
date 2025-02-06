@@ -7,7 +7,10 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
+                              "CI"
+                              "secrets.DEPLOY_TRIGGER_TOKEN"
 			      "DEPLOY_TRIGGER_TOKEN"
+                              "secrets.GITHUB_TOKEN"
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
@@ -56,8 +59,8 @@ step. For this case an argument DYNAMIC-SPACE-SIZE can be given:
 New
 ===
 
-* Now you can specify ENV argument to 40ANTS-CI:DEFWORKFLOW and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in 40ANTS-CI-DOCS/INDEX::@ENV section.
-* 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG function now ignores TOKEN-PATTERN argument if ENV argument was given and has GITHUB_TOKEN value for whole job.
+* Now you can specify ENV argument to 40ANTS-CI/WORKFLOW:DEFWORKFLOW and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in 40ANTS-CI-DOCS/INDEX::@ENV section.
+* Also, 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG function now ignores TOKEN-PATTERN argument if ENV argument was given and has `GITHUB_TOKEN` value for whole job.
 
 Backward incompatible changes
 =============================
@@ -140,7 +143,7 @@ Class 40ANTS-CI/JOBS/CRITIC:CRITIC was fixed for case when there are multiple cr
             renames to the IGNORE-CRITIQUES argument.")
   (0.6.0 2022-02-21
          "- New job type \"critic\" was added. It advices how to make you Lisp code better.
-            Learn more about this job type at 40ANTS-CI::@CRITIC section.")
+            Learn more about this job type at 40ANTS-CI-DOCS/INDEX::@CRITIC section.")
   (0.5.0 2022-01-28
          "- Move the actions/checkout action from v1 to v2.")
   (0.4.0 2022-01-28
