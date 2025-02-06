@@ -44,7 +44,7 @@
                steps
                steps-before
                steps-after
-               permission
+               permissions
                ;; Settings from base LISP-JOB class
                roswell-version
                asdf-version
