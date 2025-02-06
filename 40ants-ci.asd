@@ -11,7 +11,8 @@
                "40ants-ci/jobs/linter"
                "40ants-ci/jobs/critic"
                "40ants-ci/jobs/run-tests"
-               "40ants-ci/jobs/autotag")
+               "40ants-ci/jobs/autotag"
+               "40ants-ci/workflow")
   :description "A tool simplify continuous deployment for Common Lisp projects."
   :homepage "https://40ants.com/ci/"
   :source-control (:git "https://github.com/40ants/ci")

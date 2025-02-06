@@ -22,7 +22,9 @@
            #:make-permissions
            #:explicit-steps
            #:exclude
-           #:job-env))
+           #:job-env
+           #:steps-before
+           #:steps-after))
 (in-package #:40ants-ci/jobs/job)
 
 
@@ -46,6 +48,14 @@
           :initarg :steps
           :documentation "This slot holds steps given as a STEPS argument to a job constructor. Depending on a job class, it might add additional steps around these explicit steps."
           :reader explicit-steps)
+   (steps-before :initform nil
+                 :initarg :steps-before
+                 :documentation "This slot holds steps given as a STEPS-BEFORE argument to a job constructor. These steps will be prepended to steps returned by the JOB class."
+                 :reader steps-before)
+   (steps-after :initform nil
+                :initarg :steps-after
+                :documentation "This slot holds steps given as a STEPS-AFTER argument to a job constructor. These steps will be appended to steps returned by the JOB class."
+                :reader steps-after)
    (permissions :initform nil
                 :initarg :permissions
                 :documentation "A plist of permissions need for running the job.
@@ -92,8 +102,11 @@
     (explicit-steps job))
   
   (:method :around ((job job))
-    (uiop:ensure-list
-     (call-next-method))))
+    (append
+     (steps-before job)
+     (uiop:ensure-list
+      (call-next-method))
+     (steps-after job))))
 
 
 (defmethod exclude :around ((job job))

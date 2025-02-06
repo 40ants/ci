@@ -1,4 +1,4 @@
-(defpackage #:40ants-ci/jobs/run-tests
+(uiop:define-package #:40ants-ci/jobs/run-tests
   (:use #:cl)
   (:import-from #:40ants-ci/steps/action
                 #:action)
@@ -26,20 +26,36 @@
   (:documentation "This job test runs tests for a given ASDF system."))
 
 
-(defun run-tests (&rest rest &key coverage
-                               qlfile
-                               asdf-system
-                               asdf-version
-                               os
-                               quicklisp
-                               lisp
-                               exclude
-                               custom
-                               env)
+(defun run-tests (&rest rest &key
+                             coverage
+                             custom
+                             ;; Settings from base JOB class
+                             os
+                             permissions
+                             steps
+                             steps-before
+                             steps-after
+                             env
+                             ;; Settings from base LISP-JOB class
+                             roswell-version
+                             asdf-version
+                             qlot-version
+                             lisp
+                             exclude
+                             qlfile
+                             quicklisp
+                             asdf-system
+                             dynamic-space-size)
   "Creates a job step of class RUN-TESTS."
-  (declare (ignore coverage qlfile os quicklisp lisp
-                   asdf-system asdf-version exclude
-                   env))
+  (declare (ignore coverage qlfile
+                   os
+                   permissions
+                   steps
+                   steps-before
+                   steps-after
+                   env
+                   roswell-version asdf-version qlot-version lisp
+                   exclude qlfile quicklisp asdf-system dynamic-space-size))
   (check-type custom
               (or null string list))
   (apply #'make-instance 'run-tests

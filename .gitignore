@@ -3,3 +3,4 @@
 /.qlot
 *.fasl
 .DS_Store
+*.~undo-tree~

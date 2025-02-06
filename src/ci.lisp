@@ -49,6 +49,8 @@
                       "ultralisp")
           :lisp ("sbcl-bin"
                  "ccl-bin")
+          ;; CCL does not work on arm64 architecture yet
+          :exclude ((:os "macos-latest" :lisp "ccl-bin"))
           :coverage t
           :qlfile "{% ifequal quicklisp_dist \"ultralisp\" %}
                    dist ultralisp http://dist.ultralisp.org

@@ -7,23 +7,65 @@
 
 (defchangelog (:ignore-words ("40ANTS-DOC"
                               "ASDF"
+                              "CI"
+                              "secrets.DEPLOY_TRIGGER_TOKEN"
 			      "DEPLOY_TRIGGER_TOKEN"
+                              "secrets.GITHUB_TOKEN"
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.17.0 2025-02-06
+          "
+Added
+=====
+
+Functions for creation jobs now accept two new arguments:
+
+- STEPS-BEFORE argument allows to specify a list of steps to be performed before the job. For example, this can be used to install some system packages required for loading ASDF systems during the job execution.
+- STEPS-AFTER argument is the same as previous one, but executes steps after the job.
+")
+  (0.16.0 2024-12-14
+          "
+Added
+=====
+
+Now dynamic space size can be given for lisp steps.
+
+There are two ways to set it:
+
+```
+(build-docs
+  :asdf-system \"cl-telegram-bot-docs\"
+  :env ((\"DYNAMIC_SPACE_SIZE\" . \"4Gb\")))
+```
+
+This way it will be applied only to the step of the documentation building,
+because [docs-builder script](https://github.com/40ants/docs-builder) allows to use
+such environment variable.
+
+But if you CI process fails to compile the ASDF system because of the memory limit,
+then you need to set dynamic space size on the earlier state - during \"Setup Lisp\"
+step. For this case an argument DYNAMIC-SPACE-SIZE can be given:
+
+```
+(build-docs
+ :asdf-system \"cl-telegram-bot-docs\"
+ :dynamic-space-size \"4gb\")
+```
+
+")
   (0.15.0 2024-03-02
           "
 New
 ===
 
-* Now you can specify ENV argument to 40ANTS-CI:DEFWORKFLOW and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in 40ANTS-CI-DOCS/INDEX::@ENV section.
-* 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG function now ignores TOKEN-PATTERN argument if ENV argument was given and has GITHUB_TOKEN value for whole job.
+* Now you can specify ENV argument to 40ANTS-CI/WORKFLOW:DEFWORKFLOW and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in 40ANTS-CI-DOCS/INDEX::@ENV section.
+* Also, 40ANTS-CI/JOBS/AUTOTAG:AUTOTAG function now ignores TOKEN-PATTERN argument if ENV argument was given and has `GITHUB_TOKEN` value for whole job.
 
 Backward incompatible changes
 =============================
 
 * When additional keyword arguments to 40ANTS-CI/STEPS/SH:SH function are given, they are transformed into env variables. Previously, their names were taken as is. Now they are uppercased and dash symbols are replaced with underscores.
-
 
 ")
   (0.14.0 2024-02-25
@@ -101,7 +143,7 @@ Class 40ANTS-CI/JOBS/CRITIC:CRITIC was fixed for case when there are multiple cr
             renames to the IGNORE-CRITIQUES argument.")
   (0.6.0 2022-02-21
          "- New job type \"critic\" was added. It advices how to make you Lisp code better.
-            Learn more about this job type at 40ANTS-CI::@CRITIC section.")
+            Learn more about this job type at 40ANTS-CI-DOCS/INDEX::@CRITIC section.")
   (0.5.0 2022-01-28
          "- Move the actions/checkout action from v1 to v2.")
   (0.4.0 2022-01-28
