@@ -11,6 +11,16 @@
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.17.0 2025-02-06
+          "
+Added
+=====
+
+Functions for creation jobs now accept two new arguments:
+
+- STEPS-BEFORE argument allows to specify a list of steps to be performed before the job. For example, this can be used to install some system packages required for loading ASDF systems during the job execution.
+- STEPS-AFTER argument is the same as previous one, but executes steps after the job.
+")
   (0.16.0 2024-12-14
           "
 Added

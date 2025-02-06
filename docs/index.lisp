@@ -35,6 +35,7 @@
                                    "JSON"
                                    "OS"
                                    "SBL"
+                                   "SBCL"
                                    "BSD"
                                    "TODO"
                                    "ASD"
@@ -96,7 +97,9 @@ of the package inferred ASDF system `EXAMPLE/CI`. A file should have the followi
 ```
 "
   (@job-types section)
-  (@caching section))
+  (@caching section)
+  (@env section)
+  (@running-custom-steps section))
 
 
 (defsection @job-types (:title "Job Types")
@@ -610,6 +613,27 @@ the same way it can be specified on a custom step:
 
 Note - environment variable names are always transformed to uppercase and dashes are replaced with underscores.
 
+")
+
+
+(defsection @running-custom-steps (:title "Running custom steps")
+  "
+Sometimes you might need to install custom system packages or do something before the job will finish. To accomplish
+these task you can provide custom steps using BEFORE-STEPS argument or AFTER-STEPS argument.
+
+Here is an example where we are installing system package libunaq1-dev before running the testsuite:
+
+
+(defparameter *required-steps*
+  (list (sh \"Install libunac\"
+            \"sudo apt-get install -y libunac1-dev\")))
+
+(defworkflow ci
+  :on-pull-request t
+  :cache t
+  :jobs ((run-tests
+          :steps-before *required-steps*
+          :asdf-system \"my-asdf-system\")))
 ")
 
 

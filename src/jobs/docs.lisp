@@ -28,6 +28,8 @@
                    exclude
                    env
                    steps
+                   steps-before
+                   steps-after
                    ;; Settings from base LISP-JOB class
                    roswell-version
                    asdf-version
@@ -40,6 +42,7 @@
   "Creates a job of class BUILD-DOCS."
   (declare (ignore asdf-system error-on-warnings
                    os permissions exclude env steps
+                   steps-before steps-after
                    roswell-version asdf-version qlot-version
                    quicklisp lisp qlfile dynamic-space-size))
   (apply #'make-instance

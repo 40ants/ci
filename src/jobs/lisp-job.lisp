@@ -21,7 +21,8 @@
            #:qlfile
            #:asdf-version
            #:roswell-version
-           #:qlot-version))
+           #:qlot-version
+           #:dynamic-space-size))
 (in-package 40ants-ci/jobs/lisp-job)
 
 

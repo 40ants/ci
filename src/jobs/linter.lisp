@@ -41,6 +41,10 @@
                permissions
                exclude
                env
+               steps
+               steps-before
+               steps-after
+               permission
                ;; Settings from base LISP-JOB class
                roswell-version
                asdf-version
@@ -54,6 +58,7 @@
    If no ASD files given, it will use all ASD files from
    the current ASDF system."
   (declare (ignore check-imports os permissions exclude env
+                   steps steps-before steps-after permissions
                    roswell-version asdf-version qlot-version
                    quicklisp lisp qlfile dynamic-space-size))
   

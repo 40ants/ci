@@ -32,6 +32,9 @@
                              ;; Settings from base JOB class
                              os
                              permissions
+                             steps
+                             steps-before
+                             steps-after
                              env
                              ;; Settings from base LISP-JOB class
                              roswell-version
@@ -47,6 +50,9 @@
   (declare (ignore coverage qlfile
                    os
                    permissions
+                   steps
+                   steps-before
+                   steps-after
                    env
                    roswell-version asdf-version qlot-version lisp
                    exclude qlfile quicklisp asdf-system dynamic-space-size))
