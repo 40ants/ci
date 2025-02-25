@@ -22,7 +22,8 @@
            #:asdf-version
            #:roswell-version
            #:qlot-version
-           #:dynamic-space-size))
+           #:dynamic-space-size
+           #:checkout-submodules))
 (in-package 40ants-ci/jobs/lisp-job)
 
 
