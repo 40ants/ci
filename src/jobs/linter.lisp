@@ -51,6 +51,7 @@
                quicklisp
                lisp
                qlfile
+               checkout-submodules
                dynamic-space-size)
   "Creates a job which will run SBLint for given ASDF systems.
 
@@ -59,7 +60,8 @@
   (declare (ignore check-imports os permissions exclude env
                    steps steps-before steps-after permissions
                    roswell-version asdf-version qlot-version
-                   quicklisp lisp qlfile dynamic-space-size))
+                   quicklisp lisp qlfile dynamic-space-size
+                   checkout-submodules))
   
   (apply #'make-instance
          'linter

@@ -59,7 +59,12 @@
                  :initform nil
                  :type (or null string)
                  :documentation "Qlot version to use when setting up Lisp environment. If NIL, then will be used version, pinned in `setup-lisp` github action."
-                 :reader qlot-version))
+                 :reader qlot-version)
+   (checkout-submodules :initarg :checkout-submodules
+                        :initform nil
+                        :type (or null boolean)
+                        :documentation "If this flag is true, then we will command actions/checkout action to checkout submodules."
+                        :reader checkout-submodules))
   (:documentation "This job checkouts the sources, installs Roswell and Qlot. Also, it caches results between runs."))
 
 
@@ -138,7 +143,9 @@
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
   (append (list
            (action "Checkout Code"
-                   "actions/checkout@v4"))
+                   "actions/checkout@v4"
+                   :submodules (when (checkout-submodules job)
+                                 t)))
           (list
            (action "Setup Common Lisp Environment"
                    "40ants/setup-lisp@v4"

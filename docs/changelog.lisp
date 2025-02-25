@@ -14,6 +14,14 @@
 			      "GITHUB_TOKEN"
                               "OSX")
                :external-docs ("https://40ants.com/40ants-asdf-system/"))
+  (0.18.0 2025-02-25
+          "
+Added
+=====
+
+New argument CHECKOUT-SUBMODULES was added to jobs. By default it is NIL, but if you set this argument to T, then `actions/checkout` action will also download git submodules.
+
+")
   (0.17.0 2025-02-06
           "
 Added
