@@ -140,6 +140,7 @@
       (write-string "${{ hashFiles('qlfile.lock', '*.asd') }}" s))))
 
 
+;; ignore-critiques: needless-when
 (defmethod 40ants-ci/jobs/job:steps ((job lisp-job))
   (append (list
            (action "Checkout Code"
@@ -157,6 +158,6 @@
                                       (dedent (qlfile job)))
                    :dynamic-space-size (dynamic-space-size job)
                    :cache (if *use-cache*
-                            "true"
-                            "false")))
+                              "true"
+                              "false")))
           (call-next-method)))
