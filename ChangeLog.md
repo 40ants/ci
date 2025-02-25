@@ -2,6 +2,16 @@
 
 # ChangeLog
 
+<a id="x-2840ANTS-CI-DOCS-2FCHANGELOG-3A-3A-7C0-2E18-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
+
+## 0.18.0 (2025-02-25)
+
+<a id="added"></a>
+
+### Added
+
+New argument `CHECKOUT-SUBMODULES` was added to jobs. By default it is `NIL`, but if you set this argument to T, then `actions/checkout` action will also download git submodules.
+
 <a id="x-2840ANTS-CI-DOCS-2FCHANGELOG-3A-3A-7C0-2E17-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
 ## 0.17.0 (2025-02-06)
@@ -168,7 +178,7 @@ if `:cache t` was given to a job running on `OSX` and Roswell was restored from 
 
 ## 0.7.0 (2022-03-13)
 
-* `40ants-ci/jobs/critic:critic` ([`1`][cd00] [`2`][484a]) function's argument `IGNORE-CRITICUES` was
+* `40ants-ci/jobs/critic:critic` ([`1`][484a] [`2`][cd00]) function's argument `IGNORE-CRITICUES` was
 renames to the `IGNORE-CRITIQUES` argument.
 
 <a id="x-2840ANTS-CI-DOCS-2FCHANGELOG-3A-3A-7C0-2E6-2E0-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
@@ -195,7 +205,7 @@ Learn more about this job type at [`Critic`][371b] section.
 
 ## 0.3.0 (2021-10-24)
 
-* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][8918] [`2`][523a]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][6cb7] [`2`][e35d]) and `40ants-ci/jobs/docs:build-docs` ([`1`][1ddb] [`2`][13b8])
+* Now jobs `40ants-ci/jobs/linter:linter` ([`1`][523a] [`2`][8918]), `40ants-ci/jobs/run-tests:run-tests` ([`1`][e35d] [`2`][6cb7]) and `40ants-ci/jobs/docs:build-docs` ([`1`][13b8] [`2`][1ddb])
 support `ASDF-VERSION` argument.
 
 <a id="x-2840ANTS-CI-DOCS-2FCHANGELOG-3A-3A-7C0-2E2-2E2-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
