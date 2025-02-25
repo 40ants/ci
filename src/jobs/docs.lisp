@@ -38,13 +38,15 @@
                    lisp
                    asdf-system
                    qlfile
+                   checkout-submodules
                    dynamic-space-size)
   "Creates a job of class BUILD-DOCS."
   (declare (ignore asdf-system error-on-warnings
                    os permissions exclude env steps
                    steps-before steps-after
                    roswell-version asdf-version qlot-version
-                   quicklisp lisp qlfile dynamic-space-size))
+                   quicklisp lisp qlfile dynamic-space-size
+                   checkout-submodules))
   (apply #'make-instance
          'build-docs args))
 

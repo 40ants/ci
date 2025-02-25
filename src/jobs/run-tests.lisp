@@ -45,6 +45,7 @@
                              qlfile
                              quicklisp
                              asdf-system
+                             checkout-submodules
                              dynamic-space-size)
   "Creates a job step of class RUN-TESTS."
   (declare (ignore coverage qlfile
@@ -55,7 +56,8 @@
                    steps-after
                    env
                    roswell-version asdf-version qlot-version lisp
-                   exclude qlfile quicklisp asdf-system dynamic-space-size))
+                   exclude qlfile quicklisp asdf-system dynamic-space-size
+                   checkout-submodules))
   (check-type custom
               (or null string list))
   (apply #'make-instance 'run-tests

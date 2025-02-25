@@ -34,8 +34,11 @@
   (append
    `(("uses" . ,(uses action)))
    (when (action-args action)
-     `(("with" . ,(loop for (name value) on (action-args action) by #'cddr
-                        when value
-                          collect (cons
-                                   (string-downcase name)
-                                   value)))))))
+     (let ((collected-args
+             (loop for (name value) on (action-args action) by #'cddr
+                   when value
+                   collect (cons
+                            (string-downcase name)
+                            value))))
+       (when collected-args
+         `(("with" . ,collected-args)))))))
