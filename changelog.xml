@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0">
+    <channel>
+        <title>40ants-ci-docs ChangeLog</title>
+        <link>https://40ants.com/ci/</link>
+        <generator>xml-emitter</generator>
+        <language>en-us</language>
+        <item>
+            <title>0.18.0  (2025-02-25)</title>
+            <description>&lt;h1 id=&quot;added&quot;&gt;Added&lt;/h1&gt;&lt;p&gt;New argument &lt;code&gt;CHECKOUT-SUBMODULES&lt;/code&gt; was added to jobs. By default it is &lt;code&gt;NIL&lt;/code&gt;, but if you set this argument to T, then &lt;code&gt;actions/checkout&lt;/code&gt; action will also download git submodules.&lt;/p&gt;</description>
+            <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.17.0  (2025-02-06)</title>
+            <description>&lt;h1 id=&quot;added&quot;&gt;Added&lt;/h1&gt;&lt;p&gt;Functions for creation jobs now accept two new arguments:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;STEPS-BEFORE&lt;/code&gt; argument allows to specify a list of steps to be performed before the job. For example, this can be used to install some system packages required for loading &lt;code&gt;ASDF&lt;/code&gt; systems during the job execution.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;STEPS-AFTER&lt;/code&gt; argument is the same as previous one, but executes steps after the job.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 06 Feb 2025 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.16.0  (2024-12-14)</title>
+            <description>&lt;h1 id=&quot;added&quot;&gt;Added&lt;/h1&gt;&lt;p&gt;Now dynamic space size can be given for lisp steps.&lt;/p&gt;&lt;p&gt;There are two ways to set it:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;&quot;&gt;(build-docs
+  :asdf-system &amp;quot;cl-telegram-bot-docs&amp;quot;
+  :env ((&amp;quot;DYNAMIC_SPACE_SIZE&amp;quot; . &amp;quot;4Gb&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This way it will be applied only to the step of the documentation building,
+because &lt;a href=&quot;https://github.com/40ants/docs-builder&quot;&gt;docs-builder script&lt;/a&gt; allows to use
+such environment variable.&lt;/p&gt;&lt;p&gt;But if you &lt;code&gt;CI&lt;/code&gt; process fails to compile the &lt;code&gt;ASDF&lt;/code&gt; system because of the memory limit,
+then you need to set dynamic space size on the earlier state - during &amp;quot;Setup Lisp&amp;quot;
+step. For this case an argument &lt;code&gt;DYNAMIC-SPACE-SIZE&lt;/code&gt; can be given:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;&quot;&gt;(build-docs
+ :asdf-system &amp;quot;cl-telegram-bot-docs&amp;quot;
+ :dynamic-space-size &amp;quot;4gb&amp;quot;)&lt;/code&gt;&lt;/pre&gt;</description>
+            <pubDate>Sat, 14 Dec 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.15.0  (2024-03-02)</title>
+            <description>&lt;h1 id=&quot;new&quot;&gt;New&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now you can specify &lt;code&gt;ENV&lt;/code&gt; argument to &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FWORKFLOW-3ADEFWORKFLOW-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FWORKFLOW-3ADEFWORKFLOW-20-2840ANTS-DOC-2FLOCATIVES-3AMACRO-29-29&quot;&gt;&lt;code&gt;40ants-ci/workflow:defworkflow&lt;/code&gt;&lt;/a&gt; and any job. This should be an alist where keys are strings and values are evaluated during GitHub workflow generation phase. Read more in &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40ENV-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40ENV-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29&quot;&gt;&lt;code&gt;Adding env variables&lt;/code&gt;&lt;/a&gt; section.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Also, &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20FUNCTION-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/autotag:autotag&lt;/code&gt;&lt;/a&gt; function now ignores &lt;code&gt;TOKEN-PATTERN&lt;/code&gt; argument if &lt;code&gt;ENV&lt;/code&gt; argument was given and has &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; value for whole job.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h1 id=&quot;backward-incompatible-changes&quot;&gt;Backward incompatible changes&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;When additional keyword arguments to &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FSTEPS-2FSH-3ASH-20FUNCTION-29&quot;&gt;&lt;code&gt;40ants-ci/steps/sh:sh&lt;/code&gt;&lt;/a&gt; function are given, they are transformed into env variables. Previously, their names were taken as is. Now they are uppercased and dash symbols are replaced with underscores.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sat, 02 Mar 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.14.0  (2024-02-25)</title>
+            <description>&lt;h1 id=&quot;changed&quot;&gt;Changed&lt;/h1&gt;&lt;p&gt;All jobs now use setup-lisp@v4 where internal caching was implemented.&lt;/p&gt;&lt;p&gt;Also all jobs were switched to from &lt;code&gt;actions/checkout@v3&lt;/code&gt; to &lt;code&gt;actions/checkout@v4&lt;/code&gt; action.&lt;/p&gt;</description>
+            <pubDate>Sun, 25 Feb 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.13.0  (2023-12-14)</title>
+            <description>&lt;h1 id=&quot;changed&quot;&gt;Changed&lt;/h1&gt;&lt;p&gt;Jobs now use setup-lisp@v3 action where a fix to quicklisp-client is applied.
+This fix makes ql:quickload work with package-inferred systems.&lt;/p&gt;&lt;p&gt;If you want to use this fix in your own environments, you can find
+it &lt;a href=&quot;https://github.com/40ants/quicklisp-client-fix&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
+            <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.12.0  (2023-12-11)</title>
+            <description>&lt;h1 id=&quot;changed&quot;&gt;Changed&lt;/h1&gt;&lt;p&gt;Use &lt;code&gt;secrets.GITHUB_TOKEN&lt;/code&gt; instead of &lt;code&gt;secrets.DEPLOY_TRIGGER_TOKEN&lt;/code&gt; and set required scopes for the token.
+This way you don&apos;t have to setup a special secret for each repository or an organization.&lt;/p&gt;</description>
+            <pubDate>Mon, 11 Dec 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.11.0  (2023-12-01)</title>
+            <description>&lt;h1 id=&quot;added&quot;&gt;Added&lt;/h1&gt;&lt;p&gt;New job class &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FAUTOTAG-3AAUTOTAG-20CLASS-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/autotag:autotag&lt;/code&gt;&lt;/a&gt; was added.&lt;/p&gt;&lt;p&gt;Use it like this:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;lisp&quot;&gt;(defworkflow release
+  :on-push-to &amp;quot;master&amp;quot;
+  :jobs ((40ants-ci/jobs/autotag:autotag)))&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and it will search for new semver tags in the ChangeLog.md file and push them to the git.&lt;/p&gt;&lt;h1 id=&quot;changed&quot;&gt;Changed&lt;/h1&gt;&lt;p&gt;Slots &lt;code&gt;quicklisp&lt;/code&gt; and &lt;code&gt;lisp&lt;/code&gt; were moved from class &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FJOB-3AJOB-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FJOB-3AJOB-20CLASS-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/job:job&lt;/code&gt;&lt;/a&gt; to &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FLISP-JOB-3ALISP-JOB-20CLASS-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/lisp-job:lisp-job&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;h1 id=&quot;fixed&quot;&gt;Fixed&lt;/h1&gt;&lt;p&gt;Class &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/critic:critic&lt;/code&gt;&lt;/a&gt; was fixed for case when there are multiple critiques to ignore.&lt;/p&gt;</description>
+            <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.10.1  (2023-03-08)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed installation of the Linter. Now it depends on &lt;a href=&quot;/home/runner/work/40ants-asdf-system/40ants-asdf-system/docs/build/#x-28-23A-28-2818-29-20BASE-CHAR-20-2E-20-2240ants-asdf-system-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29&quot;&gt;&lt;code&gt;40ants-asdf-system&lt;/code&gt;&lt;/a&gt; system.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Wed, 08 Mar 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.10.0  (2022-11-10)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now Linter does &lt;code&gt;qlot install --no-deps&lt;/code&gt; and quickloads only those systems, which should be linted.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Also, &lt;a href=&quot;https://40ants.com/ci/#x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ants-ci-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-28-23A-28-289-29-20BASE-CHAR-20-2E-20-2240ants-ci-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29&quot;&gt;&lt;code&gt;40ants-ci&lt;/code&gt;&lt;/a&gt; system now inherits from &lt;a href=&quot;/home/runner/work/40ants-asdf-system/40ants-asdf-system/docs/build/#x-28-23A-28-2818-29-20BASE-CHAR-20-2E-20-2240ants-asdf-system-22-29-20ASDF-2FSYSTEM-3ASYSTEM-29&quot;&gt;&lt;code&gt;40ants-asdf-system&lt;/code&gt;&lt;/a&gt; system.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.9.0  (2022-11-10)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed warnings about &lt;code&gt;set-output&lt;/code&gt; and &lt;a href=&quot;https://github.blog/changelog/2022-09-22-github-actions-all-actions-will-begin-running-on-node16-instead-of-node12/&quot;&gt;outdated Node.js versions&lt;/a&gt; in checkout and cache actions.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.8.1  (2022-09-18)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed default value of asdf-systems slot of &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29&quot;&gt;&lt;code&gt;40ants-ci/jobs/linter:linter&lt;/code&gt;&lt;/a&gt; class.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Also, now linter accepts &lt;code&gt;CHECK-IMPORTS&lt;/code&gt; argument and is able to warn on unused or missing imports in package-inferred systems.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sun, 18 Sep 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.8.0  (2022-03-21)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed caching on &lt;code&gt;OSX&lt;/code&gt;. Previously, job failed with
+&lt;code&gt;/Users/runner/.roswell/bin/qlot: line 4: exec: ros: not found&lt;/code&gt; error
+if &lt;code&gt;:cache t&lt;/code&gt; was given to a job running on &lt;code&gt;OSX&lt;/code&gt; and Roswell was restored from a cache.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.7.0  (2022-03-13)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;code&gt;40ants-ci/jobs/critic:critic&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FCRITIC-3ACRITIC-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;) function&apos;s argument &lt;code&gt;IGNORE-CRITICUES&lt;/code&gt; was
+renames to the &lt;code&gt;IGNORE-CRITIQUES&lt;/code&gt; argument.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sun, 13 Mar 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.6.0  (2022-02-21)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;New job type &amp;quot;critic&amp;quot; was added. It advices how to make you Lisp code better.
+Learn more about this job type at &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-DOCS-2FINDEX-3A-3A-40CRITIC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29&quot;&gt;&lt;code&gt;Critic&lt;/code&gt;&lt;/a&gt; section.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.5.0  (2022-01-28)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Move the actions/checkout action from v1 to v2.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.4.0  (2022-01-28)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now multiple jobs of the same type can be listed in the same workflow.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Also, you can change a job&apos;s name using &lt;code&gt;:NAME&lt;/code&gt; argument.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 28 Jan 2022 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.3.0  (2021-10-24)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Now jobs &lt;code&gt;40ants-ci/jobs/linter:linter&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FLINTER-3ALINTER-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;), &lt;code&gt;40ants-ci/jobs/run-tests:run-tests&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FRUN-TESTS-3ARUN-TESTS-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;) and &lt;code&gt;40ants-ci/jobs/docs:build-docs&lt;/code&gt; (&lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20FUNCTION-29&quot;&gt;&lt;code&gt;1&lt;/code&gt;&lt;/a&gt; &lt;a href=&quot;https://40ants.com/ci/#x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29&quot; data-document=&quot;https://40ants.com/ci/&quot; data-node=&quot;x-2840ANTS-CI-2FJOBS-2FDOCS-3ABUILD-DOCS-20CLASS-29&quot;&gt;&lt;code&gt;2&lt;/code&gt;&lt;/a&gt;)
+support &lt;code&gt;ASDF-VERSION&lt;/code&gt; argument.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.2.2  (2021-06-18)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed an occasional failure on &lt;code&gt;qlot update&lt;/code&gt; inside linter workflow.
+Usually it happed when quicklisp distribution was updated and &lt;code&gt;qlfile.lock&lt;/code&gt;
+changed.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 18 Jun 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.2.1  (2021-04-22)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Linter step was fixed to use default
+&lt;code&gt;ASDF&lt;/code&gt; system if it wasn&apos;t specified explicitly.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.2.0  (2021-04-15)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Supported &lt;code&gt;ERROR-ON-WARNINGS&lt;/code&gt; argument for documentation builder.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Argument &lt;code&gt;ASD-SYSTEM&lt;/code&gt; was renamed to &lt;code&gt;ASDF-SYSTEM&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Moved this project&apos;s documentation to &lt;code&gt;40ANTS-DOC&lt;/code&gt; system.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.1.1  (2021-03-08)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Fixed the cache key to use &lt;code&gt;*.asd&lt;/code&gt; files.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>0.1.0  (2021-02-26)</title>
+            <description>&lt;ul&gt;&lt;li&gt;&lt;p&gt;Initial version.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+        </item>
+    </channel>
+</rss>
